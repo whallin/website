@@ -79,12 +79,6 @@ const clientsCollection = defineCollection({
                 sv: z.string().min(1, "Swedish title is required"),
               }),
             }),
-            featured: z.boolean().default(false),
-            featuredOrder: z
-              .number()
-              .int()
-              .positive("Featured order must be a positive integer")
-              .optional(),
           })
           .optional(),
       })
