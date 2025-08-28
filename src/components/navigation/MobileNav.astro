@@ -1,0 +1,132 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsClose from "../icons/PixelarticonsClose.astro";
+import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
+import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
+import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
+import SimpleIconsThreads from "../icons/SimpleIconsThreads.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+
+const navigationLinks = [
+  { href: "/", label: { en: "Home", sv: "Hem" } },
+  { href: "portfolio", label: { en: "Portfolio", sv: "Portfölj" } },
+  { href: "blog", label: { en: "Blog", sv: "Blogg" } },
+  { href: "clients", label: { en: "Clients", sv: "Kunder" } },
+  { href: "contact", label: { en: "Contact", sv: "Kontakt" } },
+  { href: "about", label: { en: "About", sv: "Om" } },
+];
+
+const socialLinks = [
+  {
+    href: "https://www.instagram.com/w.hlln",
+    label: "Instagram",
+    icon: SimpleIconsInstagram,
+  },
+  {
+    href: "https://www.threads.com/@w.hlln",
+    label: "Threads",
+    icon: SimpleIconsThreads,
+  },
+  {
+    href: "https://github.com/whallin",
+    label: "GitHub",
+    icon: SimpleIconsGithub,
+  },
+  {
+    href: "https://www.linkedin.com/in/whallin/",
+    label: "LinkedIn",
+    icon: SimpleIconsLinkedIn,
+  },
+];
+
+const translations = {
+  en: {
+    heading: "Menu",
+    ariaLabelClose: "Close navigation menu",
+    ariaLabelNav: "Main navigation",
+    ariaLabelSocial: "Social media links",
+    ariaLabelVisitProfile: "Visit profile on",
+  },
+  sv: {
+    heading: "Meny",
+    ariaLabelClose: "Stäng navigeringsmenyn",
+    ariaLabelNav: "Huvudnavigering",
+    ariaLabelSocial: "Länkar till sociala medier",
+    ariaLabelVisitProfile: "Besök profil på",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<aside
+  id="mobile-nav"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="mobile-nav-title"
+  class="fixed inset-0 z-50 hidden bg-stone-100 p-8 dark:bg-stone-900"
+>
+  <div class="flex h-full flex-col gap-6">
+    <header
+      class="flex items-center justify-between text-stone-800 dark:text-stone-100"
+    >
+      <h2 id="mobile-nav-title" class="font-serif text-2xl">
+        {translations[locale].heading}
+      </h2>
+      <button
+        id="mobile-nav-close"
+        aria-label={translations[locale].ariaLabelClose}
+        aria-expanded="true"
+        aria-controls="mobile-nav"
+      >
+        <PixelarticonsClose aria-hidden="true" />
+      </button>
+    </header>
+
+    <nav aria-label={translations[locale].ariaLabelNav} class="flex-1">
+      <ul class="divide-y divide-stone-300 dark:divide-stone-700">
+        {
+          navigationLinks.map((link) => (
+            <li>
+              <a
+                href={getRelativeLocaleUrl(locale, link.href)}
+                class="text-md flex items-center justify-between py-4 tracking-tight text-stone-800 dark:text-stone-100"
+              >
+                {link.label[locale]}
+                <PixelarticonsArrowRight class="h-6 w-6" aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex flex-wrap-reverse items-center justify-between gap-4">
+      <nav aria-label={translations[locale].ariaLabelSocial}>
+        <ul class="flex flex-row gap-4 text-stone-700 dark:text-stone-300">
+          {
+            socialLinks.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${translations[locale].ariaLabelVisitProfile} ${social.label}`}
+                >
+                  <social.icon aria-hidden="true" class="h-5 w-5" />
+                  <span class="sr-only">{social.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <LanguageSwitcher />
+    </div>
+  </div>
+</aside>
+
+<script>
+  import "./MobileNav";
+</script>

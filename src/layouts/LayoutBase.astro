@@ -1,0 +1,49 @@
+---
+import Advert from "../components/Advert.astro";
+import HtmlHead from "../components/HtmlHead.astro";
+import Footer from "../components/navigation/Footer.astro";
+import Navbar from "../components/navigation/Navbar.astro";
+import "../styles/global.css";
+
+const { schema, adId } = Astro.props;
+---
+
+<html lang={Astro.currentLocale}>
+  <head>
+    <HtmlHead />
+    {
+      schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
+  </head>
+
+  <body class="bg-stone-50 dark:bg-stone-900">
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TC372RTT"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <div
+      class="relative mx-auto flex max-w-5xl flex-col selection:bg-red-400 selection:text-stone-100 md:flex-row"
+    >
+      <Navbar />
+      <slot name="sidebar" />
+
+      <div class="flex w-full flex-col justify-between p-8">
+        <main>
+          <slot name="content" />
+        </main>
+
+        <div class="my-16 md:hidden">
+          <Advert adId={adId} />
+        </div>
+
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>

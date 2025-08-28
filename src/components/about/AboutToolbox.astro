@@ -1,0 +1,197 @@
+---
+import SvgAdobeAe from "../../assets/tools/adobe-ae.svg";
+import SvgAffinityDesigner from "../../assets/tools/affinity-designer.svg";
+import SvgAffinityPhoto from "../../assets/tools/affinity-photo.svg";
+import SvgAffinityPublisher from "../../assets/tools/affinity-publisher.svg";
+import SvgCavalry from "../../assets/tools/cavalry.svg";
+import SvgDavinci from "../../assets/tools/davinci.svg";
+import SvgDxoPhotolab from "../../assets/tools/dxo-photolab.svg";
+import SvgFigma from "../../assets/tools/figma.svg";
+import SvgFlStudio from "../../assets/tools/fl-studio.svg";
+import SvgGit from "../../assets/tools/git.svg";
+import SvgPolypane from "../../assets/tools/polypane.svg";
+import SvgSonarworks from "../../assets/tools/sonarworks.svg";
+import SvgTailwindCss from "../../assets/tools/tailwindcss.svg";
+import SvgVsCode from "../../assets/tools/vscode.svg";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+
+const toolCategories = [
+  {
+    name: { en: "Design & Graphics", sv: "Design & Grafik" },
+    tools: [
+      {
+        name: "Figma",
+        icon: SvgFigma,
+        description: { en: "UI/UX Design", sv: "UI/UX-design" },
+        hoverClass: "hover:border-[#F24E1E]",
+      },
+      {
+        name: "Affinity Designer",
+        icon: SvgAffinityDesigner,
+        description: { en: "Vector Graphics", sv: "Vektorgrafik" },
+        hoverClass: "hover:border-[#62DAFB]",
+      },
+      {
+        name: "Affinity Publisher",
+        icon: SvgAffinityPublisher,
+        description: { en: "Layout Design", sv: "Layoutdesign" },
+        hoverClass: "hover:border-[#FFA96B]",
+      },
+    ],
+  },
+  {
+    name: { en: "Video & Motion", sv: "Video & Rörelse" },
+    tools: [
+      {
+        name: "DaVinci Resolve",
+        icon: SvgDavinci,
+        description: { en: "Video Editing", sv: "Videoredigering" },
+        hoverClass: "hover:border-[#FF4D5E]",
+      },
+      {
+        name: "Adobe After Effects",
+        icon: SvgAdobeAe,
+        description: { en: "Motion Graphics", sv: "Motion graphics" },
+        hoverClass: "hover:border-[#9999FF]",
+      },
+      {
+        name: "Cavalry",
+        icon: SvgCavalry,
+        description: { en: "Motion Graphics", sv: "Motion graphics" },
+        hoverClass: "hover:border-[#4FFD7A]",
+      },
+    ],
+  },
+  {
+    name: { en: "Photography", sv: "Fotografi" },
+    tools: [
+      {
+        name: "DxO PhotoLab",
+        icon: SvgDxoPhotolab,
+        description: { en: "RAW Processing", sv: "RAW-bearbetning" },
+        hoverClass: "hover:border-[#008CFF]",
+      },
+      {
+        name: "Affinity Photo",
+        icon: SvgAffinityPhoto,
+        description: { en: "Photo Editing", sv: "Fotoredigering" },
+        hoverClass: "hover:border-[#F69BFF]",
+      },
+    ],
+  },
+  {
+    name: { en: "Audio Production", sv: "Ljudproduktion" },
+    tools: [
+      {
+        name: "FL Studio",
+        icon: SvgFlStudio,
+        description: { en: "Music Production", sv: "Musikproduktion" },
+        hoverClass: "hover:border-[#FF7629]",
+      },
+      {
+        name: "Sonarworks",
+        icon: SvgSonarworks,
+        description: { en: "Audio Calibration", sv: "Ljudkalibrering" },
+        hoverClass: "hover:border-black dark:hover:border-white",
+      },
+    ],
+  },
+  {
+    name: { en: "Development", sv: "Utveckling" },
+    tools: [
+      {
+        name: "Visual Studio Code",
+        icon: SvgVsCode,
+        description: { en: "Code Editing", sv: "Kodredigering" },
+        hoverClass: "hover:border-[#087ECE]",
+      },
+      {
+        name: "Git",
+        icon: SvgGit,
+        description: { en: "Version Control", sv: "Versionskontroll" },
+        hoverClass: "hover:border-[#F05032]",
+      },
+      {
+        name: "Tailwind CSS",
+        icon: SvgTailwindCss,
+        description: { en: "CSS Framework", sv: "CSS-ramverk" },
+        hoverClass: "hover:border-[#06B6D4]",
+      },
+      {
+        name: "Polypane",
+        icon: SvgPolypane,
+        description: { en: "Responsive Design", sv: "Responsiv design" },
+        hoverClass: "hover:border-[#16C58D]",
+      },
+    ],
+  },
+];
+
+const translations = {
+  en: {
+    heading: "My daily toolbox",
+    description:
+      "What's working without any tools? Below are my most commonly used tools for a variety of different workloads. Get an insight into how I work and what helps me stay productive, organized, and focused.",
+  },
+  sv: {
+    heading: "Min verktygslåda",
+    description:
+      "Hur jobbar man utan verktyg? Här hittar du de verktyg jag använder mest i mitt arbete. Få en inblick i hur jag jobbar och vad som hjälper mig att vara produktiv, organiserad och fokuserad.",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section>
+  <div class="mt-8 space-y-8">
+    <header class="max-w-lg space-y-2">
+      <h2 class="font-serif text-2xl text-stone-800 dark:text-stone-100">
+        <PixelarticonsBriefcase
+          aria-hidden="true"
+          class="mr-1 mb-1 inline-block"
+        />
+        {translations[locale].heading}
+      </h2>
+      <p class="leading-relaxed text-stone-500">
+        {translations[locale].description}
+      </p>
+    </header>
+
+    <div class="space-y-8" role="region" aria-label="Tool categories">
+      {
+        toolCategories.map((category) => (
+          <article class="space-y-4">
+            <h3 class="font-serif text-lg text-stone-800 dark:text-stone-100">
+              {category.name[locale]}
+            </h3>
+            <ul
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              role="list"
+            >
+              {category.tools.map((tool) => (
+                <li
+                  class={`group border border-stone-300 p-4 transition-colors duration-200 dark:border-stone-700 ${tool.hoverClass}`}
+                >
+                  <div class="flex items-center space-x-3">
+                    <div class="overflow-hidden rounded-full">
+                      <tool.icon aria-hidden="true" class="h-10 w-10" />
+                    </div>
+                    <div class="min-w-0">
+                      <h4 class="truncate font-medium text-stone-800 dark:text-stone-100">
+                        {tool.name}
+                      </h4>
+                      <p class="truncate text-sm text-stone-500">
+                        {tool.description[locale]}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

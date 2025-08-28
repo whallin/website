@@ -1,0 +1,126 @@
+---
+import PixelarticonsExternalLink from "../icons/PixelarticonsExternalLink.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import SimpleIconsDiscord from "../icons/SimpleIconsDiscord.astro";
+import SimpleIconsFacebook from "../icons/SimpleIconsFacebook.astro";
+import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
+import SimpleIconsThreads from "../icons/SimpleIconsThreads.astro";
+import SimpleIconsWhatsapp from "../icons/SimpleIconsWhatsapp.astro";
+import SimpleIconsYoutube from "../icons/SimpleIconsYoutube.astro";
+
+const socialLinks = [
+  {
+    name: "Threads",
+    username: "@w.hlln",
+    href: "https://www.threads.com/@w.hlln",
+    icon: SimpleIconsThreads,
+    class:
+      "hover:border-black hover:text-black dark:hover:border-white dark:hover:text-white",
+  },
+  {
+    name: "GitHub",
+    username: "@whallin",
+    href: "https://github.com/whallin",
+    icon: SimpleIconsGithub,
+    class:
+      "hover:border-gray-800 hover:text-gray-800 dark:hover:border-gray-200 dark:hover:text-gray-200",
+  },
+  {
+    name: "YouTube",
+    username: "@hallinmedia",
+    href: "https://www.youtube.com/@hallinmedia",
+    icon: SimpleIconsYoutube,
+    class: "hover:border-red-600 hover:text-red-600",
+  },
+  {
+    name: "Discord",
+    username: "@whallin",
+    href: "https://discord.com/",
+    icon: SimpleIconsDiscord,
+    class: "hover:border-indigo-500 hover:text-indigo-500",
+  },
+  {
+    name: "Facebook",
+    username: "@whalln",
+    href: "https://www.facebook.com/whalln/",
+    icon: SimpleIconsFacebook,
+    class: "hover:border-blue-600 hover:text-blue-600",
+  },
+  {
+    name: "WhatsApp",
+    username: "+46706159279",
+    href: "https://wa.me/46706159279",
+    icon: SimpleIconsWhatsapp,
+    class: "hover:border-green-500 hover:text-green-500",
+  },
+];
+
+const translations = {
+  en: {
+    heading: "Find me online",
+    description:
+      "Looking for real me on other platforms? Below are my official profiles in a handful of places online. Why and how I use them? Take a look for yourself and find out!",
+  },
+  sv: {
+    heading: "Hitta mig online",
+    description:
+      "Letar du efter mig på andra ställen? Nedan finns mina profiler på några platser online. Varför och hur jag använder dem? Ta en titt!",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section aria-labelledby="social-heading">
+  <div class="mt-8">
+    <header class="max-w-lg space-y-2">
+      <h2
+        id="social-heading"
+        class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+      >
+        <PixelarticonsHumanHandsup
+          aria-hidden="true"
+          class="mr-1 mb-1 inline-block"
+        />
+        {translations[locale].heading}
+      </h2>
+      <p class="leading-relaxed text-stone-500">
+        {translations[locale].description}
+      </p>
+    </header>
+
+    <nav aria-label="Social media links" class="mt-8">
+      <ul role="list" class="grid gap-4 sm:grid-cols-2">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`group flex items-center justify-between border border-stone-300 px-3 py-2 tracking-tight text-stone-800 transition active:scale-[0.97] active:opacity-50 dark:border-stone-700 dark:text-stone-100 ${link.class}`}
+              >
+                <div class="flex items-center gap-2">
+                  <link.icon aria-hidden="true" class="h-5 w-5" />
+                  {link.username ? (
+                    <span class="relative overflow-y-clip">
+                      <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full">
+                        {link.name}
+                      </span>
+                      <span class="absolute left-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+                        {link.username}
+                      </span>
+                    </span>
+                  ) : (
+                    <span>{link.name}</span>
+                  )}
+                </div>
+                <PixelarticonsExternalLink aria-hidden="true" class="h-4 w-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</section>

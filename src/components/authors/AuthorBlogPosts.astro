@@ -1,0 +1,122 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  calculateReadTime,
+  formatDateISO,
+  formatDateShort,
+  getAllPublishedPosts,
+} from "../../utils/blog";
+import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
+
+const translations = {
+  en: {
+    heading: "Published posts",
+    readAriaLabel: "Read blog post",
+    minRead: "min read",
+    noPosts: "No published posts yet.",
+  },
+  sv: {
+    heading: "Publicerade inlägg",
+    readAriaLabel: "Läs blogginlägg",
+    minRead: "min läsning",
+    noPosts: "Inga publicerade inlägg än.",
+  },
+};
+
+const { author } = Astro.props;
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
+  return id.startsWith(`${locale}/`);
+});
+
+const authorPosts = allBlogPosts.filter((post) =>
+  post.data.author.some((authorRef) => authorRef.id === author.id),
+);
+
+const publishedPosts = getAllPublishedPosts(authorPosts);
+---
+
+<section aria-labelledby="author-posts-heading">
+  <h2
+    id="author-posts-heading"
+    class="mb-8 font-serif text-xl text-stone-800 dark:text-stone-100"
+  >
+    {translations[locale].heading}
+  </h2>
+
+  {
+    publishedPosts.length === 0 ? (
+      <p class="text-sm text-stone-500">{translations[locale].noPosts}</p>
+    ) : (
+      <ul class="grid gap-8 md:grid-cols-2">
+        {publishedPosts.map((post) => {
+          const readTime = calculateReadTime(post.body || "");
+          const formattedDate = formatDateShort(post.data.publishedDate);
+          const isoDate = formatDateISO(post.data.publishedDate);
+
+          return (
+            <li>
+              <article class="flex flex-col gap-4">
+                <a
+                  href={getRelativeLocaleUrl(
+                    locale,
+                    `blog/${post.id.replace(`${locale}/`, "")}`,
+                  )}
+                  aria-label={`${translations[locale].readAriaLabel}: ${post.data.title}`}
+                >
+                  <figure class="relative">
+                    <Picture
+                      src={post.data.thumbnailImg}
+                      alt={post.data.thumbnailImgAlt}
+                      width={1200}
+                      height={620}
+                      quality={80}
+                      formats={["avif"]}
+                      layout="constrained"
+                      fit="cover"
+                      position="center"
+                      class="select-none"
+                    />
+
+                    <figcaption class="absolute bottom-2 left-2 flex flex-col flex-wrap gap-1 rounded bg-stone-50/75 px-2 py-1 text-xs text-stone-500 backdrop-blur-sm sm:flex-row sm:items-center">
+                      <time
+                        datetime={isoDate}
+                        class="flex items-center gap-1 text-xs"
+                      >
+                        <PixelarticonsClock
+                          aria-hidden="true"
+                          class="h-4 w-4"
+                        />{" "}
+                        {formattedDate}
+                      </time>
+                      <span aria-hidden="true" class="hidden sm:block">
+                        •
+                      </span>
+                      <span class="flex items-center gap-1">
+                        {readTime} {translations[locale].minRead}
+                      </span>
+                    </figcaption>
+                  </figure>
+                </a>
+
+                <h3 class="w-fit font-serif text-lg text-stone-800 decoration-from-font underline-offset-2 hover:underline active:opacity-50 dark:text-stone-100">
+                  <a
+                    href={getRelativeLocaleUrl(
+                      locale,
+                      `blog/${post.id.replace(`${locale}/`, "")}`,
+                    )}
+                  >
+                    {post.data.title}
+                  </a>
+                </h3>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+</section>

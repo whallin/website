@@ -1,0 +1,104 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getNextAdId } from "../utils/adDistribution";
+
+const { adId } = Astro.props;
+const allAds = await getCollection("adsCollection");
+
+if (allAds.length === 0) {
+  return;
+}
+
+let selectedAd = adId ? allAds.find((ad) => ad.id === adId) : null;
+
+if (!selectedAd) {
+  const availableAdIds = allAds.map((ad) => ad.id);
+  const nextAdId = getNextAdId(availableAdIds, Astro.url.pathname);
+  selectedAd = allAds.find((ad) => ad.id === nextAdId) || allAds[0];
+}
+
+const translations = {
+  en: {
+    ariaLabelAdvertisement: "Advertisement",
+    ariaLabelViewAd: "View advertisement",
+    hateAds: "Hate ads?",
+    seeMore: "See more, you'll love it",
+  },
+  sv: {
+    ariaLabelAdvertisement: "Annons",
+    ariaLabelViewAd: "Visa annons",
+    hateAds: "Hatar annonser?",
+    seeMore: "Se mer",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<aside
+  transition:name="advertisment"
+  aria-labelledby="advertisement-label"
+  class="flex flex-col items-center gap-4 text-stone-500 sm:px-0"
+>
+  <h3 id="advertisement-label" class="sr-only">
+    {translations[locale].ariaLabelAdvertisement}
+  </h3>
+
+  <a
+    href={selectedAd?.data.href.external
+      ? selectedAd.data.href.link
+      : getRelativeLocaleUrl(locale, selectedAd?.data.href.link || "#")}
+    target={selectedAd?.data.href.external ? "_blank" : undefined}
+    rel={selectedAd?.data.href.external ? "noopener noreferrer" : undefined}
+    aria-label={translations[locale].ariaLabelViewAd}
+    class="transition-opacity select-none hover:opacity-75 active:opacity-50"
+  >
+    <Picture
+      src={selectedAd.data.image.desktop}
+      alt={selectedAd.data.alt[locale]}
+      width={250}
+      height={250}
+      quality={80}
+      formats={["avif"]}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="hidden md:block"
+    />
+    <Picture
+      src={selectedAd.data.image.tablet}
+      alt={selectedAd.data.alt[locale]}
+      width={468}
+      height={60}
+      quality={80}
+      formats={["avif"]}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="xs:block hidden md:hidden"
+    />
+    <Picture
+      src={selectedAd.data.image.mobile}
+      alt={selectedAd.data.alt[locale]}
+      width={300}
+      height={50}
+      quality={80}
+      formats={["avif"]}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="xs:hidden"
+    />
+  </a>
+
+  <p class="text-center text-xs">
+    {translations[locale].hateAds}
+    <a
+      href={getRelativeLocaleUrl(locale, "ads")}
+      class="underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-red-400 hover:text-stone-100 hover:no-underline active:opacity-50"
+      >{translations[locale].seeMore}</a
+    >
+  </p>
+</aside>

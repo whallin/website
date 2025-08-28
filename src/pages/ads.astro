@@ -1,0 +1,23 @@
+---
+import AdvertGallery from "../components/AdvertGallery.astro";
+import SidebarBase from "../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headingText="Advertisement Collection"
+      headingItalic={false}
+      descriptionText="You like the advertisements you're seeing across the site? How about you see them all at once? Check out the full ad collection."
+      btnText="Get your own ad"
+      btnHref="/hire"
+      btnAriaLabel="Go to the hire page to get your own advertisement"
+    />
+
+    <AdvertGallery />
+  </div>
+</LayoutBase>

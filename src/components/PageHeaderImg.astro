@@ -1,0 +1,64 @@
+---
+import { Picture } from "astro:assets";
+import PixelarticonsArrowRight from "../components/icons/PixelarticonsArrowRight.astro";
+
+const {
+  headerImgSrc,
+  headerImgAlt,
+  headingText,
+  headingItalic = true,
+  descriptionText,
+  showBtn = true,
+  btnText,
+  btnHref,
+  btnAriaLabel,
+} = Astro.props;
+---
+
+<article>
+  {
+    headerImgSrc && (
+      <Picture
+        src={headerImgSrc}
+        alt={headerImgAlt}
+        quality={80}
+        formats={["avif"]}
+        layout="full-width"
+        fit="cover"
+        position="center"
+        transition:name="pageheader-img"
+        class="mb-8 max-h-48 select-none sm:max-h-72"
+      />
+    )
+  }
+
+  <div class="flex flex-col justify-between gap-4 lg:flex-row">
+    <header transition:name="pageheader-header" class="max-w-md space-y-2">
+      <h1
+        class={`font-serif text-3xl text-stone-800 dark:text-stone-100 ${headingItalic ? "italic" : ""}`}
+      >
+        {headingText}
+      </h1>
+      <p class="leading-relaxed text-stone-500">
+        {descriptionText}
+      </p>
+    </header>
+
+    {
+      showBtn && (
+        <a
+          href={btnHref}
+          aria-label={btnAriaLabel || btnText}
+          transition:name="pageheader-btn"
+          class="group flex h-fit w-full items-center justify-between gap-1 rounded-full border border-stone-500 px-4 py-2 text-sm font-medium tracking-tight text-stone-800 transition hover:border-stone-400/0 hover:bg-red-400 hover:text-stone-100 active:scale-[0.97] active:opacity-50 sm:w-fit dark:text-stone-100"
+        >
+          {btnText}
+          <PixelarticonsArrowRight
+            aria-hidden="true"
+            class="w-4 transition-transform group-hover:translate-x-0.5"
+          />
+        </a>
+      )
+    }
+  </div>
+</article>

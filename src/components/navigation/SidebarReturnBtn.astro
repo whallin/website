@@ -1,0 +1,36 @@
+---
+import PixelarticonsArrowLeft from "../icons/PixelarticonsArrowLeft.astro";
+
+const translations = {
+  en: {
+    ariaLabelReturn: "Go back to previous page",
+    return: "Return",
+  },
+  sv: {
+    ariaLabelReturn: "Gå tillbaka till föregående sida",
+    return: "Tillbaka",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<button
+  id="return-button"
+  type="button"
+  aria-label={translations[locale].ariaLabelReturn}
+  transition:name="sidebar-return-btn"
+  class="group flex cursor-pointer items-center gap-1 px-px text-sm text-stone-800 hover:bg-red-400 hover:text-stone-100 active:opacity-50 dark:text-stone-100"
+>
+  <PixelarticonsArrowLeft
+    aria-hidden="true"
+    class="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
+  />
+  {translations[locale].return}
+</button>
+
+<script>
+  import { ReturnButtonHandler } from "./SidebarReturnBtn";
+
+  ReturnButtonHandler.init();
+</script>

@@ -1,0 +1,53 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const authors = await getCollection("authorCollection");
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section aria-labelledby="authors-heading">
+  <h2 id="authors-heading" class="sr-only">All authors</h2>
+
+  <ul class="grid gap-8 sm:grid-cols-2" role="list">
+    {
+      authors.map((author) => (
+        <li class="sm:max-w-xs">
+          <article>
+            <a
+              href={getRelativeLocaleUrl(locale, `/authors/${author.id}`)}
+              aria-labelledby={`author-${author.id}`}
+              class="group block space-y-1 transition-opacity active:opacity-50"
+            >
+              <Picture
+                src={author.data.avatar}
+                alt={author.data.name}
+                width={48}
+                height={48}
+                quality={80}
+                formats={["avif"]}
+                layout="constrained"
+                fit="cover"
+                position="center"
+                transition:name={`avatar-${author.id}`}
+                class="rounded-full select-none"
+              />
+
+              <h3
+                id={`author-${author.id}`}
+                class="mt-4 font-serif text-lg text-stone-800 group-hover:underline dark:text-stone-100"
+              >
+                {author.data.name}
+              </h3>
+
+              <p class="line-clamp-2 leading-relaxed text-stone-500">
+                {author.data.bio[locale]}
+              </p>
+            </a>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</section>

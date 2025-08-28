@@ -1,0 +1,31 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import TwemojiFlagSweden from "./icons/TwemojiFlagSweden.astro";
+import TwemojiFlagUnitedKingdom from "./icons/TwemojiFlagUnitedKingdom.astro";
+
+const locale = Astro.currentLocale ?? "en";
+const targetLocale = locale === "en" ? "sv" : "en";
+const currentPath = Astro.url.pathname.replace(`/${locale}`, "") || "/";
+const href = getRelativeLocaleUrl(targetLocale, currentPath);
+
+const languageSwitch = {
+  sv: {
+    ariaLabel: "Visa sidan på svenska",
+    FlagComponent: TwemojiFlagSweden,
+  },
+  en: {
+    ariaLabel: "View this page in English",
+    FlagComponent: TwemojiFlagUnitedKingdom,
+  },
+}[targetLocale];
+---
+
+<a
+  href={href}
+  hreflang={targetLocale}
+  rel="alternate"
+  aria-label={languageSwitch.ariaLabel}
+  class="transition-opacity hover:opacity-75 active:opacity-50"
+>
+  <languageSwitch.FlagComponent aria-hidden="true" class="h-6 w-6" />
+</a>

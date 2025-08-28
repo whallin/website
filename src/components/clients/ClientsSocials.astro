@@ -1,0 +1,127 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import SimpleIconsFacebook from "../icons/SimpleIconsFacebook.astro";
+import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
+import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
+import SimpleIconsYoutube from "../icons/SimpleIconsYoutube.astro";
+
+const translations = {
+  en: {
+    navAriaLabel: "Client social links and website",
+    socialAriaLabel: "Social media links",
+    socialLinks: {
+      youtube: "Visit client on YouTube",
+      linkedin: "Visit client on LinkedIn",
+      instagram: "Visit client on Instagram",
+      facebook: "Visit client on Facebook",
+      website: "Visit clients website",
+    },
+    visit: "Visit ",
+  },
+  sv: {
+    navAriaLabel: "Kundens sociala länkar och webbplats",
+    socialAriaLabel: "Sociala medier länkar",
+    socialLinks: {
+      youtube: "Besök kunden på YouTube",
+      linkedin: "Besök kunden på LinkedIn",
+      instagram: "Besök kunden på Instagram",
+      facebook: "Besök kunden på Facebook",
+      website: "Besök kundens webbplats",
+    },
+    visit: "Besök ",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const { client } = Astro.props;
+---
+
+<nav
+  aria-label={translations[locale].navAriaLabel}
+  class="flex flex-wrap items-center justify-between gap-4 text-stone-700 sm:gap-6 dark:text-stone-300"
+>
+  <ul
+    class="flex items-center gap-4"
+    aria-label={translations[locale].socialAriaLabel}
+  >
+    {
+      client.data.socialLinks?.youtube && (
+        <li>
+          <a
+            href={client.data.socialLinks.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={translations[locale].socialLinks.youtube}
+            class="transition-opacity hover:opacity-75 active:opacity-50"
+          >
+            <SimpleIconsYoutube />
+          </a>
+        </li>
+      )
+    }
+    {
+      client.data.socialLinks?.linkedin && (
+        <li>
+          <a
+            href={client.data.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={translations[locale].socialLinks.linkedin}
+            class="transition-opacity hover:opacity-75 active:opacity-50"
+          >
+            <SimpleIconsLinkedIn />
+          </a>
+        </li>
+      )
+    }
+    {
+      client.data.socialLinks?.instagram && (
+        <li>
+          <a
+            href={client.data.socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={translations[locale].socialLinks.instagram}
+            class="transition-opacity hover:opacity-75 active:opacity-50"
+          >
+            <SimpleIconsInstagram />
+          </a>
+        </li>
+      )
+    }
+    {
+      client.data.socialLinks?.facebook && (
+        <li>
+          <a
+            href={client.data.socialLinks.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={translations[locale].socialLinks.facebook}
+            class="transition-opacity hover:opacity-75 active:opacity-50"
+          >
+            <SimpleIconsFacebook />
+          </a>
+        </li>
+      )
+    }
+  </ul>
+
+  {
+    client.data.websiteUrl && (
+      <a
+        href={client.data.websiteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={translations[locale].socialLinks.website}
+        class="group px-px hover:bg-red-400 hover:text-stone-100 active:opacity-50"
+      >
+        {translations[locale].visit}
+        {client.data.websiteUrl
+          .replace(/(^\w+:|^)\/\//, "")
+          .replace(/\/$/, "")
+          .replace("www.", "")}
+        <PixelarticonsArrowRight class="mb-1 inline-block h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </a>
+    )
+  }
+</nav>

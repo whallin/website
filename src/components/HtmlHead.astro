@@ -1,0 +1,265 @@
+---
+import { Font } from "astro:assets";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+import { ClientRouter } from "astro:transitions";
+
+const locale = Astro.currentLocale || "en";
+const ogLocaleMap: Record<string, string> = { en: "en_US", sv: "sv_SE" };
+const ogLocale = ogLocaleMap[locale] ?? "en_US";
+
+const {
+  title = "Skellefteå-based Designer and Producer",
+  description = "William Hallin is a designer, photographer, and content producer based in Skellefteå, Sweden. From concept to creation, I bring ideas to life through visuals and engaging narratives.",
+  keywords = [],
+  article = false,
+} = Astro.props;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#AAFF01" />
+<meta name="generator" content={Astro.generator} />
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+<meta name="googlebot" content="index, follow" />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+<meta name="application-name" content="HallinMedia" />
+<title>{title} | HallinMedia</title>
+
+<!-- Resource Hints -->
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+<link rel="dns-prefetch" href="//www.googletagmanager.com" />
+<link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin />
+<link rel="dns-prefetch" href="//challenges.cloudflare.com" />
+
+<!-- Fonts -->
+<Font cssVariable="--font-geist" preload />
+<Font cssVariable="--font-instrument-serif" preload />
+<Font cssVariable="--font-geist-mono" preload />
+<Font cssVariable="--font-schoolbell" preload />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="HallinMedia" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Client Router -->
+<ClientRouter />
+
+<!-- Meta -->
+<meta name="description" content={description} />
+<meta name="author" content="HallinMedia" />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="canonical" href={Astro.url} />
+{
+  ["en", "sv"].map((lang) => (
+    <link
+      rel="alternate"
+      hreflang={lang}
+      href={getAbsoluteLocaleUrl(
+        lang,
+        Astro.url.pathname.replace(`/${Astro.currentLocale}`, ""),
+      )}
+    />
+  ))
+}
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={getAbsoluteLocaleUrl(
+    "sv",
+    Astro.url.pathname.replace(`/${Astro.currentLocale}`, ""),
+  )}
+/>
+
+<!-- Open Graph -->
+<meta property="og:type" content={article ? "article" : "website"} />
+<meta property="og:site_name" content="HallinMedia" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content="https://hallin.media/meta.png" />
+<meta property="og:image:width" content="1280" />
+<meta property="og:image:height" content="640" />
+<meta property="og:image:alt" content={description} />
+<meta property="og:locale" content={ogLocale} />
+{
+  ["en", "sv"]
+    .filter((l) => l !== locale)
+    .map((l) => (
+      <meta
+        property="og:locale:alternate"
+        content={ogLocaleMap[l] ?? "en_US"}
+      />
+    ))
+}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content="https://hallin.media/meta.png" />
+<meta name="twitter:image:alt" content={description} />
+
+<!-- Schema Markup - Organization -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Corporation",
+    "name": "HallinMedia",
+    "alternateName": "William Hallin",
+    "url": "https://hallin.media/",
+    "logo": "https://hallin.media/meta.png",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "customer service",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "technical support",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "billing support",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "sales",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "reservations",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+46706159279",
+        "contactType": "credit card support",
+        "areaServed": ["SE", "NO", "FI", "DK", "150"],
+        "availableLanguage": ["en", "Swedish"]
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100082821755832",
+      "https://www.instagram.com/w.hlln",
+      "https://www.youtube.com/@hallinmedia",
+      "https://www.linkedin.com/in/whallin",
+      "https://github.com/whallin",
+      "https://hallin.media/"
+    ]
+  }
+</script>
+
+<!-- Schema Markup - Local Business -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "HallinMedia",
+    "image": "https://hallin.media/meta.png",
+    "@id": "https://hallin.media/",
+    "url": "https://hallin.media/",
+    "telephone": "+46706159279",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Bleckslagargatan 16",
+      "addressLocality": "Kåge",
+      "postalCode": "934 31",
+      "addressCountry": "SE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 64.8303689,
+      "longitude": 20.990464
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "15:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100082821755832",
+      "https://www.instagram.com/w.hlln",
+      "https://www.youtube.com/@hallinmedia",
+      "https://www.linkedin.com/in/whallin",
+      "https://github.com/whallin",
+      "https://hallin.media/"
+    ]
+  }
+</script>
+
+<!-- Schema Markup - Person -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Person",
+    "name": "William Hallin",
+    "url": "https://hallin.media/",
+    "image": "https://hallin.media/mw.png",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100082821755832",
+      "https://www.instagram.com/w.hlln",
+      "https://www.youtube.com/@hallinmedia",
+      "https://www.linkedin.com/in/whallin",
+      "https://github.com/whallin",
+      "https://hallin.media/"
+    ],
+    "jobTitle": "Creative Director",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "HallinMedia"
+    }
+  }
+</script>
+
+<!-- Cloudflare Turnstile -->
+<script
+  is:inline
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+  defer></script>
+
+<!-- Google Tag Manager -->
+<script is:inline>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-TC372RTT");
+</script>

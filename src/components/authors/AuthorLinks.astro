@@ -1,0 +1,119 @@
+---
+import PixelarticonsExternalLink from "../icons/PixelarticonsExternalLink.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
+import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
+
+const translations = {
+  en: {
+    heading: "Links",
+    ariaLinkedIn: "Visit {name}'s LinkedIn profile",
+    ariaGitHub: "Visit {name}'s GitHub profile",
+    ariaWebsite: "Visit {name}'s website",
+    website: "Website",
+    ariaEmail: "Send an email to {name}",
+    email: "Email",
+  },
+  sv: {
+    heading: "Länkar",
+    ariaLinkedIn: "Besök {name}'s LinkedIn-profil",
+    ariaGitHub: "Besök {name}'s GitHub-profil",
+    ariaWebsite: "Besök {name}'s webbplats",
+    website: "Webbplats",
+    ariaEmail: "Skicka ett e-postmeddelande till {name}",
+    email: "E-post",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const { author } = Astro.props;
+---
+
+{
+  author.data.socialLinks && (
+    <div class="space-y-4">
+      <h2 class="text-sm font-medium tracking-wide text-stone-800 uppercase dark:text-stone-100">
+        {translations[locale].heading}
+      </h2>
+      <ul class="flex flex-wrap gap-3" role="list">
+        {author.data.socialLinks.linkedin && (
+          <li>
+            <a
+              href={author.data.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-800 transition hover:border-stone-400/0 hover:bg-red-400 hover:text-stone-100 active:scale-[0.97] active:opacity-50 dark:border-stone-700 dark:text-stone-100"
+              aria-label={translations[locale].ariaLinkedIn.replace(
+                "{name}",
+                author.data.name,
+              )}
+            >
+              <SimpleIconsLinkedIn aria-hidden="true" class="h-4 w-4" />
+              LinkedIn
+              <PixelarticonsExternalLink
+                aria-hidden="true"
+                class="h-3 w-3 opacity-50 transition-opacity group-hover:opacity-100"
+              />
+            </a>
+          </li>
+        )}
+
+        {author.data.socialLinks.github && (
+          <li>
+            <a
+              href={author.data.socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-800 transition hover:border-stone-400/0 hover:bg-red-400 hover:text-stone-100 active:scale-[0.97] active:opacity-50 dark:border-stone-700 dark:text-stone-100"
+              aria-label={translations[locale].ariaGitHub.replace(
+                "{name}",
+                author.data.name,
+              )}
+            >
+              <SimpleIconsGithub aria-hidden="true" class="h-4 w-4" />
+              GitHub
+              <PixelarticonsExternalLink
+                aria-hidden="true"
+                class="h-3 w-3 opacity-50 transition-opacity group-hover:opacity-100"
+              />
+            </a>
+          </li>
+        )}
+
+        {author.data.socialLinks.website && (
+          <li>
+            <a
+              href={author.data.socialLinks.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-800 transition hover:border-stone-400/0 hover:bg-red-400 hover:text-stone-100 active:scale-[0.97] active:opacity-50 dark:border-stone-700 dark:text-stone-100"
+              aria-label={translations[locale].ariaWebsite.replace(
+                "{name}",
+                author.data.name,
+              )}
+            >
+              <PixelarticonsExternalLink aria-hidden="true" class="h-4 w-4" />
+              {translations[locale].website}
+            </a>
+          </li>
+        )}
+
+        {author.data.email && (
+          <li>
+            <a
+              href={`mailto:${author.data.email}`}
+              class="group flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-800 transition hover:border-stone-400/0 hover:bg-red-400 hover:text-stone-100 active:scale-[0.97] active:opacity-50 md:hidden dark:border-stone-700 dark:text-stone-100"
+              aria-label={translations[locale].ariaEmail.replace(
+                "{name}",
+                author.data.name,
+              )}
+            >
+              <PixelarticonsMail aria-hidden="true" class="h-4 w-4" />
+              {translations[locale].email}
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+  )
+}

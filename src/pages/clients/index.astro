@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import ImgHeaderClients from "../../assets/header/headerClients.jpg";
+import ClientsAllClients from "../../components/clients/ClientsAllClients.astro";
+import PixelarticonsFlag from "../../components/icons/PixelarticonsFlag.astro";
+import PixelarticonsHeart from "../../components/icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
+import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+
+const clients = await getCollection("clientsCollection");
+const clientCount = clients.length;
+
+const stats = [
+  {
+    label: "Clients served",
+    value: clientCount.toString(),
+    Icon: PixelarticonsHeart,
+  },
+  { label: "Represented countries", value: "4", Icon: PixelarticonsFlag },
+  {
+    label: "Newest client",
+    value: "The Wood Hotel by Elite",
+    Icon: PixelarticonsHumanHandsup,
+  },
+];
+---
+
+<LayoutBase>
+  <SidebarBase showLogo showReturn slot="sidebar">
+    <div slot="content">
+      <aside class="space-y-4 text-xs text-stone-500">
+        {
+          stats.map((stat) => (
+            <div class="space-y-0.5">
+              <span class="mb-1 flex items-center gap-1">
+                <stat.Icon aria-hidden="true" class="h-4 w-4" />
+                {stat.label}
+              </span>
+              <span class="font-mono text-stone-800 dark:text-stone-300">
+                {stat.value}
+              </span>
+            </div>
+          ))
+        }
+      </aside>
+    </div>
+  </SidebarBase>
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderClients}
+      headerImgAlt="Picture of William Hallin"
+      headingText="The awesome client collection"
+      headingItalic={false}
+      descriptionText="There are plenty of brands I've had the honour to work with. Below is the full catalog of clients I've collaborated with."
+      btnText="Become a client"
+      btnHref="/hire"
+      btnAriaLabel="Go to the hire page to become a client"
+    />
+
+    <ClientsAllClients />
+  </div>
+</LayoutBase>

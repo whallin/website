@@ -1,0 +1,113 @@
+---
+import { Image } from "astro:assets";
+import ImgFeaturedWorkAtlas from "../../assets/featuredwork/featuredwork-atlas.jpg";
+import ImgFeaturedWorkDud from "../../assets/featuredwork/featuredwork-dud.jpg";
+import ImgFeaturedWorkEclean from "../../assets/featuredwork/featuredwork-eclean.jpg";
+import ImgFeaturedWorkNewgent from "../../assets/featuredwork/featuredwork-newgent.jpg";
+import ImgFeaturedWorkRat from "../../assets/featuredwork/featuredwork-rat.jpg";
+import ImgFeaturedWorkSkift from "../../assets/featuredwork/featuredwork-skift.jpg";
+import ImgFeaturedWorkTrastockfestivalen from "../../assets/featuredwork/featuredwork-trastockfestivalen.jpg";
+
+const translations = {
+  en: {
+    ariaLabelPortfolio: "Portfolio Gallery",
+  },
+  sv: {
+    ariaLabelPortfolio: "Portföljgalleri",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section aria-labelledby="portfolio-heading">
+  <h2 id="portfolio-heading" class="sr-only">
+    {translations[locale].ariaLabelPortfolio}
+  </h2>
+  <div class="flex flex-wrap gap-2">
+    <Image
+      src={ImgFeaturedWorkTrastockfestivalen}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkDud}
+      alt=""
+      width={600}
+      height={400}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkNewgent}
+      alt=""
+      width={600}
+      height={400}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkAtlas}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkRat}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkSkift}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkEclean}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+  </div>
+</section>

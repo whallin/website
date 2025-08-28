@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-geist-mono);
+  --font-handwrite: var(--font-schoolbell);
+  --breakpoint-xs: 30rem;
+}
+
+html {
+  scrollbar-gutter: stable;
+}

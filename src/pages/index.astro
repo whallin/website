@@ -1,0 +1,25 @@
+---
+import ImgHeaderHome from "../assets/header/headerHome.jpg";
+import SidebarBase from "../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import PortfolioHomeGrid from "../components/portfolio/PortfolioHomeGrid.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+---
+
+<LayoutBase adId="2">
+  <SidebarBase showLogo showNav adId="2" slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderHome}
+      headerImgAlt="Picture of William Hallin"
+      headingText="All-in-one creative from Skellefteå"
+      descriptionText="Capturing, designing, and developing digital media — all in one place, whenever and wherever you need me."
+      btnText='Say "Hej!"'
+      btnHref="/contact"
+      btnAriaLabel="Open the contact page to say hello"
+    />
+
+    <PortfolioHomeGrid />
+  </div>
+</LayoutBase>

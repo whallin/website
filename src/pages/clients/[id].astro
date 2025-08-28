@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import ClientsSocials from "../../components/clients/ClientsSocials.astro";
+import ClientsTestimonial from "../../components/clients/ClientsTestimonial.astro";
+import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+
+export async function getStaticPaths() {
+  const clients = await getCollection("clientsCollection");
+  return clients.map((client) => ({
+    params: { id: client.id },
+    props: { client },
+  }));
+}
+
+const { client } = Astro.props;
+---
+
+<LayoutBase>
+  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+
+  <main slot="content" class="space-y-12">
+    <header class="flex justify-center">
+      <Image
+        src={client.data.logo.light}
+        alt={`${client.data.name} logo`}
+        width={120}
+        height={60}
+        format="avif"
+        quality={80}
+        layout="constrained"
+        fit="contain"
+        position="center"
+        class={`max-h-10 w-fit select-none ${client.data.logo.dark ? "dark:hidden" : ""}`}
+      />
+      {
+        client.data.logo.dark && (
+          <Image
+            src={client.data.logo.dark}
+            alt={`${client.data.name} logo`}
+            width={120}
+            height={60}
+            format="avif"
+            quality={80}
+            layout="constrained"
+            fit="contain"
+            position="center"
+            class="hidden max-h-10 w-fit select-none dark:block"
+          />
+        )
+      }
+    </header>
+
+    <PageHeaderImg
+      headingText={client.data.name}
+      headingItalic={false}
+      descriptionText={client.data.description.en}
+      btnText="Get in contact"
+      btnHref="/contact"
+      btnAriaLabel="Open the contact page to say hello"
+    />
+
+    {
+      (client.data.website || client.data.socialLinks) && (
+        <ClientsSocials client={client} />
+      )
+    }
+
+    {client.data.testimonial && <ClientsTestimonial client={client} />}
+  </main>
+</LayoutBase>

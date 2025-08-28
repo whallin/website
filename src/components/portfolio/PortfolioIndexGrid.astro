@@ -1,0 +1,96 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const translations = {
+  en: {
+    ariaLabelPortfolio: "Portfolio Projects",
+    featured: "Featured",
+  },
+  sv: {
+    ariaLabelPortfolio: "Portföljprojekt",
+    featured: "Utvald",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const allPortfolioEntries = await getCollection(
+  "portfolioCollection",
+  ({ id, data }) => {
+    return id.startsWith(`${locale}/`) && !data.draft;
+  },
+);
+
+const portfolioProjects = allPortfolioEntries.map((entry, index) => ({
+  id: index + 1,
+  title: entry.data.title,
+  category: entry.data.category,
+  description: entry.data.description,
+  image: entry.data.thumbnailImg,
+  imageAlt: entry.data.thumbnailImgAlt,
+  href: `/portfolio/${entry.id.replace(`${locale}/`, "")}`,
+  featured: entry.data.featured,
+}));
+---
+
+<section aria-labelledby="portfolio-heading">
+  <h2 id="portfolio-heading" class="sr-only">
+    {translations[locale].ariaLabelPortfolio}
+  </h2>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      portfolioProjects.map((project) => (
+        <article
+          class={`group relative border border-stone-200 transition hover:border-stone-300 dark:border-stone-700 dark:bg-stone-800 dark:hover:border-stone-600 ${
+            project.featured ? "sm:col-span-2 lg:col-span-2" : ""
+          }`}
+        >
+          <a
+            href={getRelativeLocaleUrl(locale, project.href)}
+            aria-label={`View ${project.title} project details`}
+            class="block h-full"
+          >
+            <figure class="overflow-hidden">
+              <Picture
+                src={project.image}
+                alt={project.imageAlt}
+                width={400}
+                height={300}
+                quality={80}
+                formats={["avif"]}
+                layout="constrained"
+                fit="cover"
+                position="center"
+                class="aspect-[4/3] h-full w-full transition group-hover:scale-105 group-hover:brightness-90"
+              />
+            </figure>
+
+            <div class="p-6">
+              <header class="mb-1 flex items-center justify-between">
+                <span class="text-xs font-medium tracking-wider text-red-400 uppercase">
+                  {project.category}
+                </span>
+                {project.featured && (
+                  <span class="rounded-full bg-red-100 px-2 py-1 text-xs font-medium tracking-tight text-red-700 dark:bg-red-900/50 dark:text-red-400">
+                    {translations[locale].featured}
+                  </span>
+                )}
+              </header>
+
+              <h3 class="mb-2 font-serif text-xl text-stone-800 transition-colors group-hover:text-red-700 dark:text-stone-100 dark:group-hover:text-red-400">
+                {project.title}
+              </h3>
+
+              <p class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                {project.description}
+              </p>
+            </div>
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>

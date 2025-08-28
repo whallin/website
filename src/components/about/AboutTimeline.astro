@@ -1,0 +1,105 @@
+---
+import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
+import Timeline from "./Timeline.astro";
+
+const timelineItems = [
+  {
+    year: "2016",
+    title: {
+      en: "The intro to it all",
+      sv: "Början på allt",
+    },
+    description: {
+      en: 'I got recommended a Minecraft intro template by "TGODdesigns" on YouTube and thought, <span class="font-medium">"I want to create stuff like that!"</span>. I then started playing with animation & motion graphics in <span class="line-through">legitimate</span> copies of Maxon Cinema 4D + Adobe After Effects CS6.',
+      sv: 'Jag fick en Minecraft intro template av "TGODDesigns" i mitt flöde på YouTube och tänkte, <span class="font-medium">"Jag vill göra sånt där!"</span>. Då började jag leka med animation och motion graphics i <span class="line-through">äkta</span> kopior av Maxon Cinema 4D + Adobe After Effects CS6.',
+    },
+    highlight: false,
+  },
+  {
+    year: "2018",
+    title: {
+      en: "Designing for fun over Skype",
+      sv: "Designa för skojs skull över Skype",
+    },
+    description: {
+      en: 'After I was done playing games with my friends for the day, I\'d stay in our Skype calls and <span class="font-medium">design avatars, team graphics, and edit CS:GO montages or Minecraft videos</span> with footage I had recorded. This drove my passion for creative work even further.',
+      sv: 'Efter att jag spelat klart med vännerna för dagen, brukade jag sitta kvar i våra Skype-samtal och <span class="font-medium">designa profilbilder, team-grafik och redigera CS:GO-montage eller Minecraft-videor</span> med mitt material. Detta drev mitt intresse för kreativt arbete ännu mer.',
+    },
+    highlight: false,
+  },
+  {
+    year: "2019",
+    title: { en: "The Minecraft era", sv: "Minecraft-eran" },
+    description: {
+      en: 'Minecraft never truly left. I continued producing <span class="font-medium">server trailers, motion graphics, and other graphic designs</span> for a variety of Minecraft server networks and content creators. At this point, I truly knew that design was what I wanted to pursue.',
+      sv: 'Minecraft försvann aldrig riktigt. Jag fortsatte skapa <span class="font-medium">server trailers, motion graphics och andra grafiker</span> för en mängd olika Minecraft-servernätverk och influencers. Vid det här läget visste jag att design var vad jag ville satsa på.',
+    },
+    highlight: false,
+  },
+  {
+    year: "2022",
+    title: {
+      en: "Freelancing seriously this time",
+      sv: "Frilansande på riktigt",
+    },
+    description: {
+      en: 'During my high school years, I landed my first real-world freelancing gig with <span class="font-medium">Producenterna</span> during <span class="font-medium">Brännbollsyran 2022</span>. This experience was my gateway to professional freelancing and helped me get connected with the world of video production.',
+      sv: 'Under mina gymnasieår fick jag mitt första riktiga frilansuppdrag med <span class="font-medium">Producenterna</span> under <span class="font-medium">Brännbollsyran 2022</span>. Denna erfarenhet var min väg in i professionellt frilansarbete och hjälpte mig få kontakt med videoproduktionsvärlden.',
+    },
+    highlight: false,
+  },
+  {
+    year: "2023",
+    title: {
+      en: "Finding myself & brand",
+      sv: "Hitta mig själv & varumärket",
+    },
+    description: {
+      en: 'Towards the end of my high school years, balancing studies and freelancing became a challenge. I started slowing down in an attempt to <span class="font-medium">find what I truly wanted to work as</span>, and how I wanted to make that definition to others.',
+      sv: 'Mot slutet av mina gymnasieår blev det svårt att balansera studier och frilansarbetet. Jag började sakta ner i ett försök att <span class="font-medium">hitta vad jag verkligen ville arbeta som</span>, och hur jag ville definiera det för andra.',
+    },
+    highlight: false,
+  },
+  {
+    year: "2025",
+    title: { en: "HallinMedia", sv: "HallinMedia" },
+    description: {
+      en: 'Today, I\'ve established myself as a creative professional under the brand <span class="font-medium">HallinMedia</span>, focusing on <span class="font-medium">design and photo-&-video production</span>. I try to take on whatever projects are thrown my way, helping out anyone in any way I can.',
+      sv: 'Idag har jag etablerat mig i den kreativa branschen under varumärket <span class="font-medium">HallinMedia</span>, med fokus på <span class="font-medium">design och foto-&-videoproduktion</span>. Jag försöker ta på mig alla projekt som kommer och hjälpa alla så gott jag kan.',
+    },
+    highlight: true,
+  },
+];
+
+const translations = {
+  en: {
+    heading: "Where and how did I begin?",
+    description:
+      'I\'ve many times gotten the question: <span class="font-medium text-stone-700 dark:text-stone-300">"You\'re so young, how have you achieved so much?"</span>. Most of the time, this is a tricky question to answer on the spot.That\'s why I created this neat timeline to tell the story for me!',
+  },
+  sv: {
+    heading: "Var och hur började jag?",
+    description:
+      'Jag har många gånger fått frågan: <span class="font-medium text-stone-700 dark:text-stone-300">"Du är så ung, hur har du hunnit allt?"</span>. Oftast är det svårt att svara på direkten. Därför har jag denna fina tidslinje för att berätta historien åt mig!',
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section>
+  <div class="mt-8 space-y-8">
+    <header class="max-w-lg space-y-2">
+      <h2 class="font-serif text-2xl text-stone-800 dark:text-stone-100">
+        <PixelarticonsFlag aria-hidden="true" class="mr-1 mb-1 inline-block" />
+        {translations[locale].heading}
+      </h2>
+      <p
+        set:html={translations[locale].description}
+        class="leading-relaxed text-stone-500"
+      />
+    </header>
+
+    <Timeline items={timelineItems} />
+  </div>
+</section>

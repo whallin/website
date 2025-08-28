@@ -1,0 +1,62 @@
+---
+import ImgHeaderAbout from "../assets/header/headerAbout.jpg";
+import AboutTimeline from "../components/about/AboutTimeline.astro";
+import AboutToolbox from "../components/about/AboutToolbox.astro";
+import ContactMessageForm from "../components/contact/ContactMessageForm.astro";
+import PixelarticonsBriefcase from "../components/icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHeart from "../components/icons/PixelarticonsHeart.astro";
+import SimpleIconsFigma from "../components/icons/SimpleIconsFigma.astro";
+import SidebarBase from "../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+
+const stats = [
+  { label: "Primary role", value: "Designer", Icon: PixelarticonsBriefcase },
+  { label: "Favorite candy", value: "Djungelvrål", Icon: PixelarticonsHeart },
+  { label: "Most used tool", value: "Figma", Icon: SimpleIconsFigma },
+];
+---
+
+<LayoutBase adId="6">
+  <SidebarBase showLogo showReturn slot="sidebar">
+    <div slot="content">
+      <aside class="space-y-4 text-xs text-stone-500">
+        {
+          stats.map((stat) => (
+            <div class="space-y-0.5">
+              <span class="mb-1 flex items-center gap-1">
+                <stat.Icon aria-hidden="true" class="h-4 w-4" />
+                {stat.label}
+              </span>
+              <span class="font-mono text-stone-800 dark:text-stone-300">
+                {stat.value}
+              </span>
+            </div>
+          ))
+        }
+      </aside>
+    </div>
+  </SidebarBase>
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderAbout}
+      headerImgAlt="Picture of William Hallin"
+      headingText="About William Hallin"
+      descriptionText="I'm William, a 20-year-old designer & photographer based in Skellefteå, Sweden. I specialize in creating visually stunning and user-friendly content for brands and businesses."
+      btnText="Let's work together"
+      btnHref="/hire"
+      btnAriaLabel="Go to the hire page to collaborate"
+    />
+
+    <AboutTimeline />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <AboutToolbox />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <ContactMessageForm />
+  </div>
+</LayoutBase>

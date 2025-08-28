@@ -1,0 +1,125 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  calculateReadTime,
+  formatDateISO,
+  formatDateShort,
+  getFeaturedPost,
+} from "../../utils/blog";
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
+import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
+
+const translations = {
+  en: {
+    heading: "Featured post",
+    ariaLabel: "Read featured blog post",
+    readThePost: "Read the post",
+    minRead: " min read",
+  },
+  sv: {
+    heading: "Utvald artikel",
+    ariaLabel: "Läs utvalt blogginlägg",
+    readThePost: "Läs inlägget",
+    minRead: " min läsning",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
+  return id.startsWith(`${locale}/`);
+});
+const featuredPost = getFeaturedPost(allBlogPosts);
+
+if (!featuredPost) {
+  return null;
+}
+
+const readTime = calculateReadTime(featuredPost.body || "");
+const formattedDate = formatDateShort(featuredPost.data.publishedDate);
+const isoDate = formatDateISO(featuredPost.data.publishedDate);
+---
+
+{
+  featuredPost && (
+    <section aria-labelledby="featured-post-heading">
+      <h2
+        id="featured-post-heading"
+        class="mb-8 flex items-center gap-2 border-b border-stone-300 pb-6 font-serif text-xl text-stone-800 dark:border-stone-700 dark:text-stone-100"
+      >
+        <PixelarticonsFlag aria-hidden="true" class="h-5 w-5" />
+        {translations[locale].heading}
+      </h2>
+
+      <article class="flex flex-col gap-2">
+        <a
+          href={getRelativeLocaleUrl(
+            locale,
+            `blog/${featuredPost.id.replace(`${locale}/`, "")}`,
+          )}
+          aria-label={`${translations[locale].ariaLabel}: ${featuredPost.data.title}`}
+        >
+          <Picture
+            src={featuredPost.data.thumbnailImg}
+            alt={featuredPost.data.thumbnailImgAlt}
+            width={1200}
+            height={620}
+            quality={80}
+            formats={["avif"]}
+            layout="constrained"
+            fit="cover"
+            position="center"
+            class="select-none"
+          />
+        </a>
+
+        <header class="space-y-1.5">
+          <div class="mt-4 mb-2 flex flex-wrap gap-1 text-xs text-stone-500">
+            <time datetime={isoDate} class="flex items-center gap-1">
+              <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />{" "}
+              {formattedDate}
+            </time>
+            <span aria-hidden="true">•</span>
+            <span class="flex items-center gap-1">
+              {readTime} {translations[locale].minRead}
+            </span>
+          </div>
+
+          <h3 class="w-fit font-serif text-xl text-stone-800 decoration-from-font underline-offset-2 hover:underline active:opacity-50 dark:text-stone-100">
+            <a
+              href={getRelativeLocaleUrl(
+                locale,
+                `blog/${featuredPost.id.replace(`${locale}/`, "")}`,
+              )}
+            >
+              {" "}
+              {featuredPost.data.title}
+            </a>
+          </h3>
+
+          <p class="line-clamp-2 text-sm leading-relaxed text-stone-700 dark:text-stone-400">
+            {featuredPost.data.description}
+          </p>
+        </header>
+
+        <footer>
+          <a
+            href={getRelativeLocaleUrl(
+              locale,
+              `blog/${featuredPost.id.replace(`${locale}/`, "")}`,
+            )}
+            class="group w-fit px-px text-sm tracking-tight text-stone-500 underline decoration-dashed decoration-from-font underline-offset-2 transition-colors hover:bg-red-400 hover:text-stone-100 active:opacity-50"
+          >
+            {translations[locale].readThePost}
+            <PixelarticonsArrowRight
+              aria-hidden="true"
+              class="mb-1 ml-0.5 inline-block h-4 w-4 transition-transform group-hover:translate-x-0.5"
+            />
+          </a>
+        </footer>
+      </article>
+    </section>
+  )
+}

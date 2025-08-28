@@ -1,0 +1,120 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import SvgWordmarkDark from "../../assets/wordmark-dark.svg";
+import SvgWordmarkLight from "../../assets/wordmark-light.svg";
+import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
+import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
+import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
+import SimpleIconsThreads from "../icons/SimpleIconsThreads.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+import ThemeSwitcher from "../ThemeSwitcher.astro";
+
+const socialLinks = [
+  {
+    href: "https://www.instagram.com/w.hlln",
+    label: "Instagram",
+    icon: SimpleIconsInstagram,
+  },
+  {
+    href: "https://www.threads.com/@w.hlln",
+    label: "Threads",
+    icon: SimpleIconsThreads,
+  },
+  {
+    href: "https://github.com/whallin",
+    label: "GitHub",
+    icon: SimpleIconsGithub,
+  },
+  {
+    href: "https://www.linkedin.com/in/whallin/",
+    label: "LinkedIn",
+    icon: SimpleIconsLinkedIn,
+  },
+];
+
+const translations = {
+  en: {
+    allRights: "All rights reserved.",
+    ariaSocialMedia: "Social media and settings",
+    visitProfile: "Visit profile on",
+  },
+  sv: {
+    allRights: "Alla rättigheter förbehållna.",
+    ariaSocialMedia: "Sociala medier och inställningar",
+    visitProfile: "Besök profil på",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<div transition:name="footer" class="md:mt-16">
+  <footer
+    class="flex flex-col items-center justify-between gap-4 border-t border-stone-300 pt-8 md:flex-row dark:border-stone-700"
+  >
+    <div class="flex flex-col items-center gap-4 text-stone-500 md:flex-row">
+      <a
+        href={getRelativeLocaleUrl(locale, "/")}
+        class="transition hover:opacity-75 active:scale-[0.97]"
+      >
+        <SvgWordmarkDark width="64" aria-hidden="true" class="dark:hidden" />
+        <SvgWordmarkLight
+          width="64"
+          aria-hidden="true"
+          class="hidden dark:block"
+        />
+      </a>
+
+      <div
+        class="flex flex-col items-center gap-0.5 text-center text-xs md:items-start md:text-left"
+      >
+        <span>
+          © 2025 <a
+            href="https://newgent.digital/?utm_source=hallinmedia&utm_medium=footer&utm_campaign=website"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:bg-sky-500 hover:text-stone-100 active:opacity-50"
+            >NWG Digital AB</a
+          >. {translations[locale].allRights}
+        </span>
+        <a
+          href="https://github.com/whallin/website"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-fit underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-black hover:text-white hover:no-underline active:opacity-50 dark:hover:bg-white dark:hover:text-black"
+        >
+          abcd123
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label={translations[locale].ariaSocialMedia}>
+      <ul
+        class="flex flex-row items-center gap-4 text-stone-700 dark:text-stone-300"
+      >
+        {
+          socialLinks.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="transition-opacity hover:opacity-75 active:opacity-50"
+                aria-label={`${translations[locale].visitProfile} ${social.label}`}
+              >
+                <social.icon class="h-4 w-4" aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+
+        <li>
+          <LanguageSwitcher />
+        </li>
+        <li>
+          <ThemeSwitcher />
+        </li>
+      </ul>
+    </nav>
+  </footer>
+</div>

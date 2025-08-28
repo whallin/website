@@ -1,0 +1,15 @@
+{
+  "image": {
+    "mobile": "/src/assets/ads/4-mobile.jpg",
+    "tablet": "/src/assets/ads/4-tablet.jpg",
+    "desktop": "/src/assets/ads/4-desktop.jpg"
+  },
+  "alt": {
+    "en": "Advertisment for hiring William Hallin",
+    "sv": "Annons för att anställa William Hallin"
+  },
+  "href": {
+    "external": false,
+    "link": "contact"
+  }
+}

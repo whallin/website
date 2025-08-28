@@ -1,0 +1,134 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const translations = {
+  en: {
+    sectionAriaLabel: "Advertisment gallery",
+    desktop: "Desktop (250x250)",
+    tablet: "Tablet (468x60)",
+    mobile: "Mobile (300x50)",
+  },
+  sv: {
+    sectionAriaLabel: "Annonsgalleri",
+    desktop: "Skrivbord (250x250)",
+    tablet: "Surfplatta (468x60)",
+    mobile: "Mobil (300x50)",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const ads = (await getCollection("adsCollection")).sort((a, b) => {
+  const ai = Number(a.id);
+  const bi = Number(b.id);
+  if (!Number.isNaN(ai) && !Number.isNaN(bi)) return ai - bi;
+  return String(a.id).localeCompare(String(b.id), undefined, { numeric: true });
+});
+---
+
+<section aria-label={translations[locale].sectionAriaLabel}>
+  <div class="space-y-12 divide-y divide-stone-300 dark:divide-stone-700">
+    {
+      ads.map((ad, index) => (
+        <article class="flex flex-wrap gap-6 pb-14">
+          <div class="min-w-0">
+            <h3
+              id={`desktop-label-${index}`}
+              class="mb-2 block font-mono text-xs tracking-widest text-stone-500 uppercase"
+            >
+              #{ad.id} {translations[locale].desktop}
+            </h3>
+            <a
+              href={
+                ad.data.href.external
+                  ? ad.data.href.link
+                  : getRelativeLocaleUrl(locale, ad.data.href.link)
+              }
+              target={ad.data.href.external ? "_blank" : undefined}
+              rel={ad.data.href.external ? "noopener noreferrer" : undefined}
+              class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
+              aria-describedby={`desktop-label-${index}`}
+            >
+              <Picture
+                src={ad.data.image.desktop}
+                alt={ad.data.alt[locale]}
+                width={250}
+                height={250}
+                quality={80}
+                formats={["avif"]}
+                layout="constrained"
+                fit="cover"
+                position="center"
+              />
+            </a>
+          </div>
+
+          <div class="min-w-0">
+            <h3
+              id={`tablet-label-${index}`}
+              class="mb-2 block font-mono text-xs tracking-widest text-stone-500 uppercase"
+            >
+              #{ad.id} {translations[locale].tablet}
+            </h3>
+            <a
+              href={
+                ad.data.href.external
+                  ? ad.data.href.link
+                  : getRelativeLocaleUrl(locale, ad.data.href.link)
+              }
+              target={ad.data.href.external ? "_blank" : undefined}
+              rel={ad.data.href.external ? "noopener noreferrer" : undefined}
+              class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
+              aria-describedby={`tablet-label-${index}`}
+            >
+              <Picture
+                src={ad.data.image.tablet}
+                alt={ad.data.alt[locale]}
+                width={468}
+                height={60}
+                quality={80}
+                formats={["avif"]}
+                layout="constrained"
+                fit="cover"
+                position="center"
+              />
+            </a>
+          </div>
+
+          <div class="min-w-0">
+            <h3
+              id={`mobile-label-${index}`}
+              class="mb-2 block font-mono text-xs tracking-widest text-stone-500 uppercase"
+            >
+              #{ad.id} {translations[locale].mobile}
+            </h3>
+            <a
+              href={
+                ad.data.href.external
+                  ? ad.data.href.link
+                  : getRelativeLocaleUrl(locale, ad.data.href.link)
+              }
+              target={ad.data.href.external ? "_blank" : undefined}
+              rel={ad.data.href.external ? "noopener noreferrer" : undefined}
+              class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
+              aria-describedby={`mobile-label-${index}`}
+            >
+              <Picture
+                src={ad.data.image.mobile}
+                alt={ad.data.alt[locale]}
+                width={300}
+                height={50}
+                quality={80}
+                formats={["avif"]}
+                layout="constrained"
+                fit="cover"
+                position="center"
+              />
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

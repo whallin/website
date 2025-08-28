@@ -1,0 +1,78 @@
+---
+interface TimelineItem {
+  year: string;
+  title: Record<string, string>;
+  description: Record<string, string>;
+  highlight?: boolean;
+}
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const translations = {
+  en: {
+    ariaLabel: "Timeline",
+  },
+  sv: {
+    ariaLabel: "Tidslinje",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const { items } = Astro.props;
+---
+
+<section class="relative" aria-label={translations[locale].ariaLabel}>
+  <div
+    class="absolute top-0 left-1.25 h-full w-px bg-stone-300 dark:bg-stone-700"
+    aria-hidden="true"
+  >
+  </div>
+
+  <ol class="space-y-8">
+    {
+      items.map((item, index) => (
+        <li class="relative flex items-start gap-4">
+          <div
+            aria-hidden="true"
+            class={`relative z-10 mt-2 flex h-3 w-3 rounded-full border-2 bg-stone-50 dark:bg-stone-800 ${
+              item.highlight
+                ? "border-stone-800 dark:border-stone-300"
+                : "border-stone-300 dark:border-stone-700"
+            }`}
+          />
+
+          <article class="mb-4 flex-1 space-y-1">
+            <header class="flex flex-wrap items-center gap-2">
+              <time
+                datetime={item.year}
+                class={`font-mono text-sm ${
+                  item.highlight
+                    ? "text-stone-800 dark:text-stone-200"
+                    : "text-stone-500"
+                }`}
+              >
+                {item.year}
+              </time>
+              <h3
+                class={`font-serif text-lg ${
+                  item.highlight
+                    ? "text-stone-800 dark:text-stone-100"
+                    : "text-stone-700 dark:text-stone-300"
+                }`}
+              >
+                {item.title[locale]}
+              </h3>
+            </header>
+
+            <p
+              class="text-sm leading-relaxed text-stone-600 dark:text-stone-400"
+              set:html={item.description[locale]}
+            />
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+</section>

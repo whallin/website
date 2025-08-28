@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const clients = (await getCollection("clientsCollection")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, undefined, { sensitivity: "base" }),
+);
+---
+
+<section>
+  <div class="grid gap-4 md:grid-cols-2">
+    {
+      clients.map((client) => {
+        const dominantColor = {
+          light: client.data.dominantColor.light,
+          dark:
+            client.data.dominantColor.dark || client.data.dominantColor.light,
+        };
+
+        return (
+          <a
+            href={getRelativeLocaleUrl(locale, `clients/${client.id}`)}
+            class="group transition active:scale-[0.97] active:opacity-50"
+          >
+            <article
+              class="relative flex h-36 flex-col items-center justify-between overflow-hidden border border-stone-300 p-4 transition-colors group-hover:border-[var(--dominant-color)] dark:border-stone-700 dark:group-hover:border-[var(--dominant-color-dark)]"
+              style={`--dominant-color:${dominantColor.light};--dominant-color-dark:${dominantColor.dark};`}
+            >
+              <div class="absolute inset-x-0 -bottom-4 -z-10 h-3/4 bg-[radial-gradient(ellipse_at_bottom,var(--dominant-color)_0%,transparent_75%)] opacity-10 transition-opacity group-hover:opacity-25 dark:bg-[radial-gradient(ellipse_at_bottom,var(--dominant-color-dark)_0%,transparent_75%)]" />
+
+              <div class="flex h-full justify-center overflow-hidden">
+                <Image
+                  src={client.data.logo.light}
+                  alt={`${client.data.name} logo`}
+                  width={120}
+                  height={60}
+                  format="avif"
+                  quality={80}
+                  layout="constrained"
+                  fit="contain"
+                  position="center"
+                  class={`max-h-14 select-none ${client.data.logo.dark ? "dark:hidden" : ""}`}
+                />
+                {client.data.logo.dark && (
+                  <Image
+                    src={client.data.logo.dark}
+                    alt={`${client.data.name} logo`}
+                    width={120}
+                    height={60}
+                    format="avif"
+                    quality={80}
+                    layout="constrained"
+                    fit="contain"
+                    position="center"
+                    class="hidden max-h-14 select-none dark:block"
+                  />
+                )}
+              </div>
+
+              <h3 class="flex w-full items-center justify-between font-serif text-lg text-stone-900 dark:text-stone-50">
+                {client.data.name}
+                <PixelarticonsArrowRight
+                  aria-hidden="true"
+                  class="transition-transform group-hover:translate-x-0.5"
+                />
+              </h3>
+            </article>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>

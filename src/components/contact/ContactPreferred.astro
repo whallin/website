@@ -1,0 +1,134 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsHeart from "../icons/PixelarticonsHeart.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
+import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
+
+const contactMethods = [
+  {
+    name: { en: "Email", sv: "E-post" },
+    description: {
+      en: "Best for casual talks and project collaboration.",
+      sv: "Bäst för vanliga samtal och projektarbete.",
+    },
+    url: "mailto:william@hallin.media?subject=Hey+William!",
+    handle: "william@hallin.media",
+    textColor: "text-amber-500",
+    hoverBg: "hover:bg-amber-500",
+    icon: PixelarticonsMail,
+    ariaLabel: {
+      en: "Send an email to William Hallin",
+      sv: "Skicka e-post till William Hallin",
+    },
+  },
+  {
+    name: { en: "Instagram", sv: "Instagram" },
+    description: {
+      en: "Best for visual content and quick work updates.",
+      sv: "Bäst för visuellt innehåll och snabba arbetsuppdateringar.",
+    },
+    url: "https://www.instagram.com/w.hlln",
+    handle: "@w.hlln",
+    textColor: "text-pink-500",
+    hoverBg: "hover:bg-pink-500",
+    icon: SimpleIconsInstagram,
+    ariaLabel: {
+      en: "Visit William Hallin on Instagram",
+      sv: "Besök William Hallin på Instagram",
+    },
+    external: true,
+  },
+  {
+    name: { en: "LinkedIn", sv: "LinkedIn" },
+    description: {
+      en: "Best for networking and the corporate talks.",
+      sv: "Bäst för nätverkande och professionella samtal.",
+    },
+    url: "https://www.linkedin.com/in/whallin/",
+    handle: "@whallin",
+    textColor: "text-sky-500",
+    hoverBg: "hover:bg-sky-500",
+    icon: SimpleIconsLinkedIn,
+    ariaLabel: {
+      en: "Visit William Hallin on LinkedIn",
+      sv: "Besök William Hallin på LinkedIn",
+    },
+    external: true,
+  },
+];
+
+const translations = {
+  en: {
+    heading: "Preferred methods",
+    description:
+      "I've got my preferences, you've got yours. Below are the easiest ways to get in contact with me. So, choose your preferred channel and we'll talk soon!",
+  },
+  sv: {
+    heading: "Föredragna metoder",
+    description:
+      "Jag har mina preferenser, du har dina. Nedan är de enklaste sätten att komma i kontakt med mig. välj din föredragna kanal så hörs vi snart!",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<section>
+  <div class="mt-8 space-y-8">
+    <header class="max-w-lg space-y-2">
+      <h2 class="font-serif text-2xl text-stone-800 dark:text-stone-100">
+        <PixelarticonsHeart aria-hidden="true" class="mr-1 mb-1 inline-block" />
+        {translations[locale].heading}
+      </h2>
+      <p class="leading-relaxed text-stone-500">
+        {translations[locale].description}
+      </p>
+    </header>
+
+    <ul
+      role="list"
+      class="flex flex-col gap-8 lg:flex-row lg:justify-between lg:gap-4"
+    >
+      {
+        contactMethods.map((method) => {
+          const Icon = method.icon;
+
+          return (
+            <li class="flex flex-col gap-2">
+              <a
+                href={method.url}
+                aria-label={method.ariaLabel[locale]}
+                {...(method.external && {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                })}
+                class={`space-y-2 ${method.textColor} w-fit transition-opacity hover:opacity-75 active:opacity-50`}
+              >
+                <Icon aria-hidden="true" />
+                <h3 class="font-serif text-xl">{method.name[locale]}</h3>
+              </a>
+
+              <p class="text-stone-500">{method.description[locale]}</p>
+
+              <a
+                href={method.url}
+                {...(method.external && {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                })}
+                class={`group w-fit px-px tracking-tight text-stone-800 transition-transform ${method.hoverBg} hover:text-stone-100 active:opacity-50 dark:text-stone-100`}
+              >
+                {method.handle}
+                <PixelarticonsArrowRight
+                  aria-hidden="true"
+                  class="mb-1 inline-block h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

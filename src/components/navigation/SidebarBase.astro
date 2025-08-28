@@ -1,0 +1,130 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import SvgWordmarkDark from "../../assets/wordmark-dark.svg";
+import SvgWordmarkLight from "../../assets/wordmark-light.svg";
+import Advert from "../Advert.astro";
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHeart from "../icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
+import SidebarReturnBtn from "./SidebarReturnBtn.astro";
+
+const navigationLinks = [
+  {
+    href: "portfolio",
+    icon: PixelarticonsBriefcase,
+    label: { en: "Portfolio", sv: "Portfölj" },
+  },
+  {
+    href: "blog",
+    icon: PixelarticonsScriptText,
+    label: { en: "Blog", sv: "Blogg" },
+  },
+  {
+    href: "clients",
+    icon: PixelarticonsHeart,
+    label: { en: "Clients", sv: "Kunder" },
+  },
+  {
+    href: "contact",
+    icon: PixelarticonsMail,
+    label: { en: "Contact me", sv: "Kontakta mig" },
+  },
+  {
+    href: "about",
+    icon: PixelarticonsHumanHandsup,
+    label: { en: "About me", sv: "Om mig" },
+  },
+];
+
+const translations = {
+  en: {
+    ariaLabelMainNav: "Huvudnavigering",
+  },
+  sv: {
+    ariaLabelMainNav: "Huvudnavigering",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const {
+  showLogo = false,
+  showReturn = false,
+  showNav = false,
+  adId,
+} = Astro.props;
+---
+
+<div
+  class="sticky top-0 hidden h-screen w-full max-w-3xs flex-col justify-between p-8 md:flex"
+>
+  <div class="space-y-8">
+    {
+      (showLogo || showReturn) && (
+        <div class="flex items-center justify-between gap-4">
+          {showLogo && (
+            <a
+              href={getRelativeLocaleUrl(locale, "/")}
+              transition:name="sidebar-logo"
+              class="transition hover:opacity-75 active:scale-[0.97]"
+            >
+              <SvgWordmarkDark
+                width="64"
+                aria-hidden="true"
+                class="dark:hidden"
+              />
+              <SvgWordmarkLight
+                width="64"
+                aria-hidden="true"
+                class="hidden dark:block"
+              />
+            </a>
+          )}
+
+          {showReturn && <SidebarReturnBtn />}
+        </div>
+      )
+    }
+
+    <slot name="content" transition:name="sidebar-content" />
+
+    {
+      showNav && (
+        <nav
+          aria-label={translations[locale].ariaLabelMainNav}
+          transition:name="sidebar-nav"
+        >
+          <ul class="space-y-2">
+            {navigationLinks.map((link) => (
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(locale, link.href)}
+                  class="group flex items-center justify-between px-px text-sm text-stone-700 hover:bg-red-400 hover:text-stone-100 active:opacity-50 dark:text-stone-300"
+                >
+                  <span class="inline-flex items-center gap-2">
+                    <link.icon aria-hidden="true" class="h-4 w-4" />
+                    {link.label[locale]}
+                  </span>
+                  <PixelarticonsArrowRight
+                    aria-hidden="true"
+                    class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+  </div>
+
+  <Advert adId={adId} />
+</div>
+
+<script>
+  import { PageHistoryTracker } from "./SidebarBase";
+
+  PageHistoryTracker.init();
+</script>

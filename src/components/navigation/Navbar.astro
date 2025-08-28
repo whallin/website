@@ -1,0 +1,55 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import SvgWordmarkDark from "../../assets/wordmark-dark.svg";
+import SvgWordmarkLight from "../../assets/wordmark-light.svg";
+import PixelarticonsMenu from "../icons/PixelarticonsMenu.astro";
+import MobileNav from "./MobileNav.astro";
+
+const translations = {
+  en: {
+    ariaLabelMain: "Main navigation",
+    ariaLabelGoHome: "Go to homepage",
+    ariaLabelOpenNav: "Open navigation menu",
+  },
+  sv: {
+    ariaLabelMain: "Huvudnavigering",
+    ariaLabelGoHome: "Gå till hemsida",
+    ariaLabelOpenNav: "Öppna navigeringsmeny",
+  },
+};
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+---
+
+<MobileNav />
+
+<header class="md:hidden">
+  <nav
+    aria-label={translations[locale].ariaLabelMain}
+    class="flex w-full flex-wrap-reverse items-center justify-between gap-4 p-8"
+  >
+    <a
+      href={getRelativeLocaleUrl(locale, "/")}
+      aria-label={translations[locale].ariaLabelGoHome}
+      transition:name="navbar-logo"
+    >
+      <SvgWordmarkDark width="64" aria-hidden="true" class="dark:hidden" />
+      <SvgWordmarkLight
+        width="64"
+        aria-hidden="true"
+        class="hidden dark:block"
+      />
+    </a>
+
+    <button
+      id="mobile-nav-toggle"
+      transition:name="navbar-mobile-menu-btn"
+      aria-label={translations[locale].ariaLabelOpenNav}
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      class="text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsMenu aria-hidden="true" />
+    </button>
+  </nav>
+</header>
