@@ -83,7 +83,7 @@ export const server = {
       try {
         const { data, error } = await resend.emails.send({
           from: "Contact via Website <www@re.hallin.media>",
-          to: ["delivered@resend.dev"],
+          to: ["william@hallin.media"],
           subject: `New contact message from ${name}`,
           html: createEmailContactTemplate(name, email, message),
           replyTo: email,
