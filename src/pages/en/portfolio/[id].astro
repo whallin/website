@@ -1,11 +1,11 @@
 ---
 import { Picture } from "astro:assets";
 import { getCollection, render } from "astro:content";
-import PixelarticonsCalendar from "../../components/icons/PixelarticonsCalendar.astro";
-import PixelarticonsClock from "../../components/icons/PixelarticonsClock.astro";
-import PixelarticonsFlag from "../../components/icons/PixelarticonsFlag.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
+import PixelarticonsCalendar from "../../../components/icons/PixelarticonsCalendar.astro";
+import PixelarticonsClock from "../../../components/icons/PixelarticonsClock.astro";
+import PixelarticonsFlag from "../../../components/icons/PixelarticonsFlag.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
 
 const { project } = Astro.props;
 const { Content } = await render(project);
@@ -14,7 +14,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 export async function getStaticPaths() {
   const projects = await getCollection(
     "portfolioCollection",
-    ({ data, id }) => !data.draft && id.includes("sv/"),
+    ({ data, id }) => !data.draft && id.includes("en/"),
   );
   return projects.map((project) => {
     const id = project.id.includes("/")
@@ -74,7 +74,7 @@ const articleSchema = {
             <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
             <span>
               {calculateReadTime(project.body || "")}
-              min läsning
+              min read
             </span>
           </div>
 
@@ -90,7 +90,7 @@ const articleSchema = {
         <div class="space-y-2">
           <div class="flex items-center gap-1 text-stone-500">
             <PixelarticonsFlag aria-hidden="true" class="h-4 w-4" />
-            <span class="text-sm"> Kategori </span>
+            <span class="text-sm"> Category </span>
           </div>
 
           <div
@@ -120,7 +120,7 @@ const articleSchema = {
           <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
           <span class="text-sm">
             {calculateReadTime(project.body || "")}
-            min läsning
+            min read
           </span>
         </div>
 

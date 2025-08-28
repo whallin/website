@@ -1,23 +1,23 @@
 ---
-import ImgHeaderAuthors from "../../assets/header/headerAuthors.jpg";
-import AuthorsAllAuthors from "../../components/authors/AuthorsAllAuthors.astro";
-import PixelarticonsHeart from "../../components/icons/PixelarticonsHeart.astro";
-import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import PageHeaderImg from "../../components/PageHeaderImg.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
-import { calculateAuthorStats } from "../../utils/authorStats";
+import ImgHeaderAuthors from "../../../assets/header/headerAuthors.jpg";
+import AuthorsAllAuthors from "../../../components/authors/AuthorsAllAuthors.astro";
+import PixelarticonsHeart from "../../../components/icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../../../components/icons/PixelarticonsHumanHandsup.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
+import { calculateAuthorStats } from "../../../utils/authorStats";
 
 const authorStats = await calculateAuthorStats();
 
 const stats = [
   {
-    label: "Topp författare",
+    label: "Total authors",
     value: authorStats.totalAuthors.toString(),
     Icon: PixelarticonsHumanHandsup,
   },
   {
-    label: "Topp bidragsgivare",
+    label: "Top contributor",
     value: authorStats.topContributor,
     Icon: PixelarticonsHeart,
   },
@@ -49,12 +49,12 @@ const stats = [
     <PageHeaderImg
       headerImgSrc={ImgHeaderAuthors}
       headerImgAlt=""
-      headingText="Alla författare"
+      headingText="All content authors"
       headingItalic={false}
-      descriptionText="Möt människorna bakom orden - författare, partners och vänner som hjälper till att forma det du läser här och nu."
-      btnText="Kontakta William"
+      descriptionText="Meet the people behind the words — featured authors, collaborators, and friends who help shape what you're reading on the site."
+      btnText="Contact William"
       btnHref="/contact"
-      btnAriaLabel="Kontakta William angående författare"
+      btnAriaLabel="Contact William about authors"
     />
 
     <AuthorsAllAuthors />

@@ -1,0 +1,23 @@
+---
+import BlogAllPosts from "../../../components/blog/BlogAllPosts.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headingText="All blog posts"
+      headingItalic={false}
+      descriptionText="Unsure if you've read all blog posts? Below are all the published posts, collected in a neat list sorted by publication date."
+      btnText="Send a message"
+      btnHref="/contact"
+      btnAriaLabel="Contact William about the blog"
+    />
+
+    <BlogAllPosts />
+  </div>
+</LayoutBase>

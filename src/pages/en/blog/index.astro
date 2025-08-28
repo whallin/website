@@ -1,30 +1,30 @@
 ---
-import ImgHeaderBlog from "../../assets/header/headerBlog.jpg";
-import BlogFeaturedPost from "../../components/blog/BlogFeaturedPost.astro";
-import BlogRecentPosts from "../../components/blog/BlogRecentPosts.astro";
-import PixelarticonsAlignLeft from "../../components/icons/PixelarticonsAlignLeft.astro";
-import PixelarticonsClock from "../../components/icons/PixelarticonsClock.astro";
-import PixelarticonsScriptText from "../../components/icons/PixelarticonsScriptText.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import PageHeaderImg from "../../components/PageHeaderImg.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
-import { calculateBlogStats } from "../../utils/blogStats";
+import ImgHeaderBlog from "../../../assets/header/headerBlog.jpg";
+import BlogFeaturedPost from "../../../components/blog/BlogFeaturedPost.astro";
+import BlogRecentPosts from "../../../components/blog/BlogRecentPosts.astro";
+import PixelarticonsAlignLeft from "../../../components/icons/PixelarticonsAlignLeft.astro";
+import PixelarticonsClock from "../../../components/icons/PixelarticonsClock.astro";
+import PixelarticonsScriptText from "../../../components/icons/PixelarticonsScriptText.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
+import { calculateBlogStats } from "../../../utils/blogStats";
 
 const blogStats = await calculateBlogStats();
 
 const stats = [
   {
-    label: "Inlägg publicerade",
+    label: "Posts published",
     value: blogStats.totalPosts.toString(),
     Icon: PixelarticonsScriptText,
   },
   {
-    label: "Totalt antal ord",
+    label: "Total words",
     value: blogStats.totalWords,
     Icon: PixelarticonsAlignLeft,
   },
   {
-    label: "Total lästid",
+    label: "Total time to read",
     value: blogStats.totalReadTime,
     Icon: PixelarticonsClock,
   },
@@ -56,12 +56,12 @@ const stats = [
     <PageHeaderImg
       headerImgSrc={ImgHeaderBlog}
       headerImgAlt=""
-      headingText="Hallin-bloggen"
+      headingText="The Hallin Blog"
       headingItalic={false}
-      descriptionText="En samling av tankar, idéer, insikter och åsikter - författade av mig själv eller med gäststjärnor."
-      btnText="Skicka ett meddelande"
+      descriptionText="A collection of thoughts, ideas, insights, and opinions — authored by myself or featuring guest stars."
+      btnText="Send a message"
       btnHref="/contact"
-      btnAriaLabel="Kontakta William angående bloggen"
+      btnAriaLabel="Contact William about the blog"
     />
 
     <BlogFeaturedPost />

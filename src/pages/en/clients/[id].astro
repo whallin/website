@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import ClientsSocials from "../../components/clients/ClientsSocials.astro";
-import ClientsTestimonial from "../../components/clients/ClientsTestimonial.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import PageHeaderImg from "../../components/PageHeaderImg.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
+import ClientsSocials from "../../../components/clients/ClientsSocials.astro";
+import ClientsTestimonial from "../../../components/clients/ClientsTestimonial.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
 
 export async function getStaticPaths() {
   const clients = await getCollection("clientsCollection");
@@ -56,10 +56,10 @@ const { client } = Astro.props;
     <PageHeaderImg
       headingText={client.data.name}
       headingItalic={false}
-      descriptionText={client.data.description.sv}
-      btnText="Kom i kontakt"
+      descriptionText={client.data.description.en}
+      btnText="Get in contact"
       btnHref="/contact"
-      btnAriaLabel="Öppna kontakt sidan för att säga hej"
+      btnAriaLabel="Open the contact page to say hello"
     />
 
     {

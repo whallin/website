@@ -2,11 +2,11 @@
 import { Picture } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import PixelarticonsCalendar from "../../components/icons/PixelarticonsCalendar.astro";
-import PixelarticonsClock from "../../components/icons/PixelarticonsClock.astro";
-import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
+import PixelarticonsCalendar from "../../../components/icons/PixelarticonsCalendar.astro";
+import PixelarticonsClock from "../../../components/icons/PixelarticonsClock.astro";
+import PixelarticonsHumanHandsup from "../../../components/icons/PixelarticonsHumanHandsup.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
 
 const { post } = Astro.props;
 const { Content } = await render(post);
@@ -15,7 +15,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 export async function getStaticPaths() {
   const posts = await getCollection(
     "blogCollection",
-    ({ data, id }) => !data.draft && id.includes("sv/"),
+    ({ data, id }) => !data.draft && id.includes("en/"),
   );
   return posts.map((post) => {
     const id = post.id.includes("/")
@@ -82,7 +82,7 @@ const articleSchema = {
             <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
             <span>
               {calculateReadTime(post.body || "")}
-              min läsning
+              min read
             </span>
           </div>
 
@@ -98,7 +98,7 @@ const articleSchema = {
         <div class="space-y-2">
           <div class="flex items-center gap-1 text-stone-500">
             <PixelarticonsHumanHandsup aria-hidden="true" class="h-4 w-4" />
-            <span class="text-sm"> Publicerad av </span>
+            <span class="text-sm"> Published by </span>
           </div>
 
           <div class="space-y-2">
@@ -157,7 +157,7 @@ const articleSchema = {
           <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
           <span class="text-sm">
             {calculateReadTime(post.body || "")}
-            min läsning
+            min read
           </span>
         </div>
 
@@ -198,7 +198,7 @@ const articleSchema = {
       <hr class="mb-12 border-stone-300 dark:border-stone-700" />
       <div class="mb-2 flex items-center gap-1 text-stone-500">
         <PixelarticonsHumanHandsup aria-hidden="true" class="h-4 w-4" />
-        <span class="text-sm"> Publicerad av </span>
+        <span class="text-sm"> Published by </span>
       </div>
 
       <div class="flex flex-wrap gap-2">

@@ -1,0 +1,36 @@
+---
+import ImgHeaderContact from "../../assets/header/headerContact.jpg";
+import ContactElsewhere from "../../components/contact/ContactElsewhere.astro";
+import ContactMessageForm from "../../components/contact/ContactMessageForm.astro";
+import ContactPreferred from "../../components/contact/ContactPreferred.astro";
+import SidebarContact from "../../components/navigation/sidebars/SidebarContact.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarContact slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderContact}
+      headerImgAlt="Picture of William Hallin"
+      headingText="Contact William Hallin"
+      headingItalic={false}
+      descriptionText="No spam, no nonsense — just a quick and simple way to get in touch with me for a quick coffee or your next big project."
+      btnText="Leave a message"
+      btnHref="#contact-form-section"
+      btnAriaLabel="Jump to the contact form"
+    />
+
+    <ContactPreferred />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <ContactMessageForm />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <ContactElsewhere />
+  </div>
+</LayoutBase>

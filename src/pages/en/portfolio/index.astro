@@ -1,13 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import ImgHeaderPortfolio from "../../assets/header/headerPortfolio.jpg";
-import PixelarticonsBriefcase from "../../components/icons/PixelarticonsBriefcase.astro";
-import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
-import PixelarticonsScriptText from "../../components/icons/PixelarticonsScriptText.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import PageHeaderImg from "../../components/PageHeaderImg.astro";
-import PortfolioIndexGrid from "../../components/portfolio/PortfolioIndexGrid.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
+import ImgHeaderPortfolio from "../../../assets/header/headerPortfolio.jpg";
+import PixelarticonsBriefcase from "../../../components/icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHumanHandsup from "../../../components/icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsScriptText from "../../../components/icons/PixelarticonsScriptText.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import PortfolioIndexGrid from "../../../components/portfolio/PortfolioIndexGrid.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
 
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 
@@ -32,17 +32,17 @@ const portfolioStats = {
 
 const stats = [
   {
-    label: "Antal projekt",
+    label: "Projects showcased",
     value: allPortfolioEntries.length.toString(),
     Icon: PixelarticonsBriefcase,
   },
   {
-    label: "Längsta projektartikel",
+    label: "Longest project article",
     value: `${Math.ceil((portfolioStats.longestArticle?.body?.length || 0) / 250)}k`,
     Icon: PixelarticonsScriptText,
   },
   {
-    label: "Senaste projektet",
+    label: "Most recent project",
     value: portfolioStats.mostRecentProject?.data.title || "N/A",
     Icon: PixelarticonsHumanHandsup,
   },
@@ -74,12 +74,12 @@ const stats = [
     <PageHeaderImg
       headerImgSrc={ImgHeaderPortfolio}
       headerImgAlt=""
-      headingText="Arbetsportfölj"
+      headingText="Work Showcase"
       headingItalic={false}
-      descriptionText="Alla mina mest stolta arbeten - samlade på ett ställe. Utforska varje projekt, processen bakom det och det slutliga resultatet."
-      btnText="Starta ditt projekt"
+      descriptionText="All my most proudest work — collected in one place. Explore each project, the process behind it, and the final results."
+      btnText="Start your project"
       btnHref="/hire"
-      btnAriaLabel="Starta ditt projekt på anställningssidan"
+      btnAriaLabel="Start your project on the hire page"
     />
 
     <PortfolioIndexGrid />

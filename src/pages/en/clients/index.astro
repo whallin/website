@@ -1,26 +1,26 @@
 ---
 import { getCollection } from "astro:content";
-import ImgHeaderClients from "../../assets/header/headerClients.jpg";
-import ClientsAllClients from "../../components/clients/ClientsAllClients.astro";
-import PixelarticonsFlag from "../../components/icons/PixelarticonsFlag.astro";
-import PixelarticonsHeart from "../../components/icons/PixelarticonsHeart.astro";
-import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
-import PageHeaderImg from "../../components/PageHeaderImg.astro";
-import LayoutBase from "../../layouts/LayoutBase.astro";
+import ImgHeaderClients from "../../../assets/header/headerClients.jpg";
+import ClientsAllClients from "../../../components/clients/ClientsAllClients.astro";
+import PixelarticonsFlag from "../../../components/icons/PixelarticonsFlag.astro";
+import PixelarticonsHeart from "../../../components/icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../../../components/icons/PixelarticonsHumanHandsup.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
 
 const clients = await getCollection("clientsCollection");
 const clientCount = clients.length;
 
 const stats = [
   {
-    label: "Betjänade kunder",
+    label: "Clients served",
     value: clientCount.toString(),
     Icon: PixelarticonsHeart,
   },
-  { label: "Representerade länder", value: "4", Icon: PixelarticonsFlag },
+  { label: "Represented countries", value: "4", Icon: PixelarticonsFlag },
   {
-    label: "Senaste kunden",
+    label: "Newest client",
     value: "The Wood Hotel by Elite",
     Icon: PixelarticonsHumanHandsup,
   },
@@ -52,12 +52,12 @@ const stats = [
     <PageHeaderImg
       headerImgSrc={ImgHeaderClients}
       headerImgAlt=""
-      headingText="Den grymma kundsamlingen"
+      headingText="The awesome client collection"
       headingItalic={false}
-      descriptionText="Det finns många varumärken jag har haft äran att arbeta med. Nedan finns hela katalogen av kunder jag har samarbetat med."
-      btnText="Bli kund"
+      descriptionText="There are plenty of brands I've had the honour to work with. Below is the full catalog of clients I've collaborated with."
+      btnText="Become a client"
       btnHref="/hire"
-      btnAriaLabel="Gå till anställningssidan för att bli kund"
+      btnAriaLabel="Go to the hire page to become a client"
     />
 
     <ClientsAllClients />
