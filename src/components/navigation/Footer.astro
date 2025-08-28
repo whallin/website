@@ -32,6 +32,17 @@ const socialLinks = [
   },
 ];
 
+async function safeExec(cmd: string) {
+  try {
+    const { execSync } = await import("child_process");
+    return execSync(cmd, { encoding: "utf-8" }).trim();
+  } catch {
+    return "unknown";
+  }
+}
+
+const commitHash = await safeExec("git rev-parse --short HEAD");
+
 const translations = {
   en: {
     allRights: "All rights reserved.",
@@ -83,7 +94,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
           rel="noopener noreferrer"
           class="w-fit underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-black hover:text-white hover:no-underline active:opacity-50 dark:hover:bg-white dark:hover:text-black"
         >
-          abcd123
+          {commitHash}
         </a>
       </div>
     </div>
