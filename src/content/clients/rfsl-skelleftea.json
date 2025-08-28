@@ -1,0 +1,19 @@
+{
+  "name": "RFSL Skellefteå",
+  "description": {
+    "en": "RFSL Skellefteå is a local branch of the national LGBTQ+ organization RFSL, working to promote the rights and well-being of LGBTQ+ individuals.",
+    "sv": "RFSL Skellefteå är en lokalavdelning av den nationella LGBTQ+-organisationen RFSL, som arbetar för rättigheterna och välbefinnandet för LGBTQ+-personer."
+  },
+  "logo": {
+    "light": "/src/assets/clients/rfsl.svg",
+    "dark": "/src/assets/clients/rfsl-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#e81d24"
+  },
+  "website": "https://skelleftea.rfsl.se/",
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/rfsl.skelleftea/",
+    "facebook": "https://www.facebook.com/groups/610434459013356/"
+  }
+}

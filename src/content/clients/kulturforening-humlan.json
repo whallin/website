@@ -1,0 +1,19 @@
+{
+  "name": "Kulturförening Humlan",
+  "description": {
+    "en": "Kulturförening Humlan is a cultural association based in Umeå, Sweden, focusing on promoting local culture and arts.",
+    "sv": "Kulturförening Humlan är en kulturförening baserad i Umeå som fokuserar på att främja lokal kultur och konst."
+  },
+  "logo": {
+    "light": "/src/assets/clients/kulturforening-humlan.svg"
+  },
+  "dominantColor": {
+    "light": "#8895cb"
+  },
+  "website": "https://www.humlan.org/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@humlansessions",
+    "instagram": "https://www.instagram.com/humlanumea/",
+    "facebook": "https://www.facebook.com/humlanumeakulturforening/"
+  }
+}

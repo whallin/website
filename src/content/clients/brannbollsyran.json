@@ -1,0 +1,21 @@
+{
+  "name": "Brännbollsyran",
+  "description": {
+    "en": "Brännbollsyran is a  sports and music festival held annually in Umeå, Sweden.",
+    "sv": "Brännbollsyran är en  sport- och musikfestival som hålls årligen i Umeå."
+  },
+  "logo": {
+    "light": "/src/assets/clients/brannbollsyran.svg"
+  },
+  "dominantColor": {
+    "light": "#19202a",
+    "dark": "#ffffff"
+  },
+  "website": "https://www.brannbollsyran.com/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@Brannbollsyran",
+    "linkedin": "https://www.linkedin.com/company/br%C3%A4nnbollsyran",
+    "instagram": "https://www.instagram.com/brannbollsyran/",
+    "facebook": "https://www.facebook.com/brannbollsyran/"
+  }
+}

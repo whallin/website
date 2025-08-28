@@ -1,0 +1,15 @@
+{
+  "name": "Skåne Cars",
+  "description": {
+    "en": "Skåne Cars is a car dealership in Hässleholm that offers cars, motorhomes, and boats.",
+    "sv": "Skåne Cars är en bilhandlare i Hässleholm som erbjuder bilar, husbilar och båtar."
+  },
+  "logo": {
+    "light": "/src/assets/clients/skane-cars.svg",
+    "dark": "/src/assets/clients/skane-cars-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#eb9420"
+  },
+  "website": "https://skanecars.se/"
+}

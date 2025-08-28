@@ -1,0 +1,34 @@
+{
+  "name": "Trästockfestivalen",
+  "description": {
+    "en": "Trästockfestivalen is Sweden's largest free music festival, held annually in Skellefteå.",
+    "sv": "Trästockfestivalen är Sveriges största fria musikfestival och arrangeras årligen i Skellefteå."
+  },
+  "logo": {
+    "light": "/src/assets/clients/trastockfestivalen.svg"
+  },
+  "dominantColor": {
+    "light": "#f5dd5c"
+  },
+  "website": "https://www.trastockfestivalen.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/user/Trastockfestivalen",
+    "linkedin": "https://www.linkedin.com/company/trastockfestivalen/",
+    "instagram": "https://www.instagram.com/trastockfestivalen",
+    "facebook": "https://www.facebook.com/trastockfestivalen/"
+  },
+  "testimonial": {
+    "quote": {
+      "en": "Reliable, careful, independent & friendly. Highly recommend!",
+      "sv": "Trygg, noggran, självgående & trevlig. Rekommenderar starkt!"
+    },
+    "author": {
+      "avatar": "/src/assets/clients/avatars/trastockfestivalen-manna.png",
+      "name": "Manna Bergström",
+      "title": {
+        "en": "Media Manager",
+        "sv": "Medieansvarig"
+      }
+    }
+  }
+}

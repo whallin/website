@@ -1,0 +1,20 @@
+{
+  "name": "Buena Vida",
+  "description": {
+    "en": "Buena Vida is a car rental service specializing in luxury and exotic cars.",
+    "sv": "Buena Vida är en biluthyrningstjänst som specialiserar sig på lyx- och exotiska bilar."
+  },
+  "logo": {
+    "light": "/src/assets/clients/buena-vida.svg"
+  },
+  "dominantColor": {
+    "light": "#a3958f"
+  },
+  "website": "https://buenavida.nl/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@supercarhuren/",
+    "linkedin": "https://www.linkedin.com/company/buena-vida-supercars/",
+    "instagram": "https://www.instagram.com/supercarhuren/",
+    "facebook": "https://www.facebook.com/BuenaVidaAutoverhuur/"
+  }
+}

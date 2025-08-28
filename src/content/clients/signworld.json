@@ -1,0 +1,18 @@
+{
+  "name": "Signworld",
+  "description": {
+    "en": "Signworld offers signage applications and printing services for various types of marketing and brand profiling.",
+    "sv": "Signworld erbjuder skyltapplikationer och trycktjänster för olika typer av marknadsföring och varumärkesprofilering."
+  },
+  "logo": {
+    "light": "/src/assets/clients/signworld.svg",
+    "dark": "/src/assets/clients/signworld-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#0089cb"
+  },
+  "website": "https://www.signworld.se/",
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/signworldsweden/"
+  }
+}

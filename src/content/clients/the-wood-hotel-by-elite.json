@@ -1,0 +1,22 @@
+{
+  "name": "The Wood Hotel by Elite",
+  "description": {
+    "en": "The Wood Hotel by Elite is a hotel in central Skellefteå, located under the same roof as Sara Kulturhus, Skellefteå's cultural center.",
+    "sv": "The Wood Hotel by Elite är ett hotell i centrala Skellefteå, placerat i samma hus som Sara Kulturhus, Skellefteås kulturhus."
+  },
+  "logo": {
+    "light": "/src/assets/clients/the-wood-hotel-by-elite.svg",
+    "dark": "/src/assets/clients/the-wood-hotel-by-elite-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#000000",
+    "dark": "#ffffff"
+  },
+  "website": "https://www.elite.se/hotell/skelleftea/the-wood-hotel-by-elite-skelleftea/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@TheWoodHotelbyElite",
+    "linkedin": "https://www.linkedin.com/company/elite-hotels-of-sweden-ab/",
+    "instagram": "https://www.instagram.com/thewoodhotelbyelite/",
+    "facebook": "https://www.facebook.com/thewoodhotelbyelite/"
+  }
+}

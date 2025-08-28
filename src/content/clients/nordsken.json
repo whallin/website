@@ -1,0 +1,19 @@
+{
+  "name": "Nordsken",
+  "description": {
+    "en": "Nordsken is a recurring gaming festival in Skellefteå that brings together game developers, e-sports enthusiasts, and gamers from the Nordic region.",
+    "sv": "Nordsken är en återkommande spelfestival i Skellefteå som samlar spelutvecklare, e-sportentusiaster och gamers i Norden."
+  },
+  "logo": {
+    "light": "/src/assets/clients/nordsken.svg"
+  },
+  "dominantColor": {
+    "light": "#d24440"
+  },
+  "website": "https://www.nordsken.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@Nordsken1",
+    "instagram": "https://www.instagram.com/nordsken.se/",
+    "facebook": "https://www.facebook.com/nordsken"
+  }
+}

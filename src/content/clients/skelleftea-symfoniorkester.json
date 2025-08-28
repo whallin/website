@@ -1,0 +1,20 @@
+{
+  "name": "Skellefteå Symfoniorkester",
+  "description": {
+    "en": "Skellefteå Symphony Orchestra consists of active musicians who support and engage in the music life of Skellefteå.",
+    "sv": "Skellefteå Symfoniorkester består av aktiva musiker som stödjer och engagerar sig i Skellefteås musikliv."
+  },
+  "logo": {
+    "light": "/src/assets/clients/skelleftea-symfoniorkester.svg",
+    "dark": "/src/assets/clients/skelleftea-symfoniorkester-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#000000",
+    "dark": "#ffffff"
+  },
+  "website": "https://www.orkester.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@skellefteasymfoniorkester388",
+    "facebook": "https://www.facebook.com/skellefteasymfoniorkester/"
+  }
+}

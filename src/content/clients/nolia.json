@@ -1,0 +1,20 @@
+{
+  "name": "Nolia",
+  "description": {
+    "en": "Nolia is one of Sweden's largest organizers of trade fairs, events, and conferences.",
+    "sv": "Nolia är en av Sveriges största arrangörer av mässor, event och konferenser."
+  },
+  "logo": {
+    "light": "/src/assets/clients/nolia.svg"
+  },
+  "dominantColor": {
+    "light": "#eb663c"
+  },
+  "website": "https://www.nolia.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@noliaAB",
+    "linkedin": "https://www.linkedin.com/company/nolia",
+    "instagram": "https://www.instagram.com/noliaab/",
+    "facebook": "https://www.facebook.com/NoliaAB/"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "ExtenseIT",
+  "description": {
+    "en": "ExtenseIT is a web agency based in Härnösand, Sweden, specializing in websites and web solutions.",
+    "sv": "ExtenseIT är en webbyrå baserad i Härnösand som specialiserar sig på hemsidor och webb-lösningar."
+  },
+  "logo": {
+    "light": "/src/assets/clients/extenseit.svg"
+  },
+  "dominantColor": {
+    "light": "#2f84ff"
+  },
+  "website": "https://extenseit.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/channel/UCs1mdRHkTq9TXH6QDSbll3A",
+    "linkedin": "https://www.linkedin.com/company/extenseit-ab",
+    "instagram": "https://www.instagram.com/extenseit/",
+    "facebook": "https://www.facebook.com/people/Extenseit-AB/61551503837384/"
+  },
+  "testimonial": {
+    "quote": {
+      "en": "A pleasure to work with William, fast, serious, and always exceeds my expectations.",
+      "sv": "En fröjd att jobba med William, snabb, seriös och överträffar alltid mina förväntningar."
+    },
+    "author": {
+      "avatar": "/src/assets/clients/avatars/extenseit-anton.png",
+      "name": "Anton Lundin",
+      "title": {
+        "en": "Chief Financial Officer",
+        "sv": "Finansdirektör"
+      }
+    }
+  }
+}

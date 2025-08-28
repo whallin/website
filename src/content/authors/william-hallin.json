@@ -1,0 +1,15 @@
+{
+  "name": "William Hallin",
+  "avatar": "/src/assets/authors/william-hallin.jpg",
+  "bio": {
+    "en": "Creative freelancer, entrepreneur, and wanna-be developer. The man behind the website you're on.",
+    "sv": "Kreativ frilansare, entreprenör och hittepå utvecklare. Mannen bakom webbplatsen du är på."
+  },
+  "location": "Skellefteå, Sweden",
+  "email": "william@hallin.media",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/in/whallin/",
+    "github": "https://github.com/whallin",
+    "website": "https://hallin.media"
+  }
+}

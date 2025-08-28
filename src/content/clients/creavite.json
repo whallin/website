@@ -1,0 +1,18 @@
+{
+  "name": "Creavite",
+  "description": {
+    "en": "Creavite is a design template platform offering high-quality graphics for online communities and servers.",
+    "sv": "Creavite är en designmallplattform som erbjuder högkvalitativ grafik för onlinegemenskaper och servrar."
+  },
+  "logo": {
+    "light": "/src/assets/clients/creavite.svg"
+  },
+  "dominantColor": {
+    "light": "#0fbcf9"
+  },
+  "website": "https://auto.creavite.co/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/creavite",
+    "instagram": "https://www.instagram.com/creaviteco/"
+  }
+}

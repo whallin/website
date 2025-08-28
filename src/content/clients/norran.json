@@ -1,0 +1,36 @@
+{
+  "name": "Norran",
+  "description": {
+    "en": "Norran is a local newspaper in Västerbotten, Sweden, operating in the Skellefteå region.",
+    "sv": "Norran är en lokal tidning i Västerbotten, med utgångspunkt i Skellefteå."
+  },
+  "logo": {
+    "light": "/src/assets/clients/norran.svg",
+    "dark": "/src/assets/clients/norran-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#1d1d1d",
+    "dark": "#fbfbfb"
+  },
+  "website": "https://norran.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@NorranPlay",
+    "linkedin": "https://www.linkedin.com/company/norran",
+    "instagram": "https://www.instagram.com/norran.se",
+    "facebook": "https://www.facebook.com/norravasterbotten/"
+  },
+  "testimonial": {
+    "quote": {
+      "en": "You did a great job, so happy to hire you again.",
+      "sv": "Du gjorde ett bra jobb, så anlitar dig gärna igen."
+    },
+    "author": {
+      "avatar": "/src/assets/clients/avatars/norran-christoffer.jpg",
+      "name": "Christoffer Åhlund",
+      "title": {
+        "en": "News Editor",
+        "sv": "Nyhetschef"
+      }
+    }
+  }
+}

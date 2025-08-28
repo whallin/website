@@ -1,0 +1,19 @@
+{
+  "name": "Zeller & Co",
+  "description": {
+    "en": "AB Zeller & Co is an international trading company focusing on the automotive and engineering industries, as well as the architecture and construction sectors.",
+    "sv": "AB Zeller & Co är ett internationellt handelshus med inriktning mot fordons-, verkstadsindustrin samt arkitekt- och byggbranschen."
+  },
+  "logo": {
+    "light": "/src/assets/clients/zeller-co.svg",
+    "dark": "/src/assets/clients/zeller-co-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#000000",
+    "dark": "#ffffff"
+  },
+  "website": "https://www.zeller.se/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/ab-zeller-&-co"
+  }
+}

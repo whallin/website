@@ -1,0 +1,34 @@
+{
+  "name": "Mänskliga Rättighetsdagarna",
+  "description": {
+    "en": "Mänskliga Rättighetsdagarna is a Swedish conference focusing on human rights issues.",
+    "sv": "Mänskliga Rättighetsdagarna är en svensk konferens som fokuserar på mänskliga rättighetsfrågor."
+  },
+  "logo": {
+    "light": "/src/assets/clients/manskliga-rattighetsdagarna.svg"
+  },
+  "dominantColor": {
+    "light": "#970e7e"
+  },
+  "website": "https://www.mrdagarna.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/user/MRdagarna",
+    "linkedin": "https://www.linkedin.com/company/manskliga-rattighetsdagarna/",
+    "instagram": "https://www.instagram.com/mrdagarna",
+    "facebook": "https://www.facebook.com/mrdagarna/"
+  },
+  "testimonial": {
+    "quote": {
+      "en": "Thanks a ton for the help William, you're a star!",
+      "sv": "Stort tack för hjälpen William, du är en stjärna!"
+    },
+    "author": {
+      "avatar": "/src/assets/clients/avatars/manskliga-rattighetsdagarna-jocelyn.png",
+      "name": "Jocelyn Hultman",
+      "title": {
+        "en": "Press contact",
+        "sv": "Presskontakt"
+      }
+    }
+  }
+}

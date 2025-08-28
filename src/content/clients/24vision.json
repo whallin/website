@@ -1,0 +1,20 @@
+{
+  "name": "24vision",
+  "description": {
+    "en": "24Vision is a marketing and media agency based in Gothenburg, Sweden.",
+    "sv": "24Vision är en marknadsförings- och media-byrå i Göteborg."
+  },
+  "logo": {
+    "light": "/src/assets/clients/24vision.svg",
+    "dark": "/src/assets/clients/24vision-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#1f893c"
+  },
+  "website": "https://www.24vision.se/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/24vision",
+    "instagram": "https://www.instagram.com/24vision.se/",
+    "facebook": "https://www.facebook.com/people/24vision/100079841281594/"
+  }
+}

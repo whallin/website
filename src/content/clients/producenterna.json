@@ -1,0 +1,20 @@
+{
+  "name": "Producenterna",
+  "description": {
+    "en": "Producenterna in Norrland delivers live and TV productions based in Skellefteå, Sweden.",
+    "sv": "Producenterna i Norrland leverar live- och TV-produktioner med utgångspunkt i Skellefteå."
+  },
+  "logo": {
+    "light": "/src/assets/clients/producenterna.svg"
+  },
+  "dominantColor": {
+    "light": "#096bb3"
+  },
+  "website": "https://producenterna.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/channel/UCFq7rCGMfZwhJ-PgAWZOVUw",
+    "linkedin": "https://www.linkedin.com/company/producenterna-i-norrland",
+    "instagram": "https://www.instagram.com/producenterna",
+    "facebook": "https://www.facebook.com/Producenterna/"
+  }
+}

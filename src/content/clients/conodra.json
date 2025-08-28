@@ -1,0 +1,17 @@
+{
+  "name": "Conodra",
+  "description": {
+    "en": "Condora is a hosting provider specializing in dedicated servers and virtual private servers (VPS).",
+    "sv": "Condora är en hostingleverantör som specialiserar sig på dedikerade servrar och virtuella privata servrar (VPS)."
+  },
+  "logo": {
+    "light": "/src/assets/clients/conodra.svg"
+  },
+  "dominantColor": {
+    "light": "#0a60ff"
+  },
+  "website": "https://conodra.com/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/conodra"
+  }
+}

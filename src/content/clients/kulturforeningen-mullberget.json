@@ -1,0 +1,18 @@
+{
+  "name": "Kulturföreningen Mullberget",
+  "description": {
+    "en": "Kulturföreningen Mullberget is a cultural association based in Skellefteå, Sweden, focusing on promoting local culture and arts.",
+    "sv": "Kulturföreningen Mullberget är en kulturförening baserad i Skellefteå som fokuserar på att främja lokal kultur och konst."
+  },
+  "logo": {
+    "light": "/src/assets/clients/kulturforeningen-mullberget.svg"
+  },
+  "dominantColor": {
+    "light": "#50bf86"
+  },
+  "website": "https://mullberget.se/",
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/kfmullberget/",
+    "facebook": "https://www.facebook.com/mullberget/"
+  }
+}

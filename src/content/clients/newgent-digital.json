@@ -1,0 +1,19 @@
+{
+  "name": "Newgent Digital",
+  "description": {
+    "en": "Newgent Digital is a digital creative agency specializing in creating interactive solutions for businesses and organizations.",
+    "sv": "Newgent Digital är en digital kreativ byrå som specialiserar sig på att skapa interaktiva lösningar för företag och organisationer."
+  },
+  "logo": {
+    "light": "/src/assets/clients/newgent-digital.svg",
+    "dark": "/src/assets/clients/newgent-digital-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#3083ff"
+  },
+  "website": "https://newgent.digital/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@newgentdigital",
+    "linkedin": "https://www.linkedin.com/company/heynewgent/"
+  }
+}

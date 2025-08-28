@@ -1,0 +1,17 @@
+{
+  "name": "AtlasOS",
+  "description": {
+    "en": "AtlasOS is a community-driven modification for Microsoft Windows made for performance and privacy.",
+    "sv": "AtlasOS är en community-driven modifiering av Microsoft Windows skapad för prestanda och integritet."
+  },
+  "logo": {
+    "light": "/src/assets/clients/atlasos.svg"
+  },
+  "dominantColor": {
+    "light": "#1a90ff"
+  },
+  "website": "https://atlasos.net/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@getatlasos"
+  }
+}

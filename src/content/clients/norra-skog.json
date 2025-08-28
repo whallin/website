@@ -1,0 +1,20 @@
+{
+  "name": "Norra Skog",
+  "description": {
+    "en": "Norra Skog is a forestry cooperative owned by its members, focusing on sustainable forest management and timber sales in northern Sweden.",
+    "sv": "Norra Skog är en skogsägarförening som ägs av sina medlemmar och fokuserar på hållbart skogsbruk och virkesförsäljning i norra Sverige."
+  },
+  "logo": {
+    "light": "/src/assets/clients/norra-skog.svg"
+  },
+  "dominantColor": {
+    "light": "#ce7f10"
+  },
+  "website": "https://www.norraskog.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@NorraSkogs",
+    "linkedin": "https://www.linkedin.com/company/norraskog",
+    "instagram": "https://www.instagram.com/norraskogs/",
+    "facebook": "https://www.facebook.com/norraskogs/"
+  }
+}

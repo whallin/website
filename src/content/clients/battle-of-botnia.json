@@ -1,0 +1,19 @@
+{
+  "name": "Battle of Botnia",
+  "description": {
+    "en": "Battle of Botnia is a premier MMA event held annually in Northern Sweden.",
+    "sv": "Battle of Botnia är ett premiär MMA-evenemang som hålls årligen i norra Sverige."
+  },
+  "logo": {
+    "light": "/src/assets/clients/battle-of-botnia.svg"
+  },
+  "dominantColor": {
+    "light": "#e64213"
+  },
+  "website": "https://www.battleofbotnia.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@BattleOfBotniaMMA",
+    "instagram": "https://www.instagram.com/battleofbotnia.mma/",
+    "facebook": "https://www.facebook.com/Battleofbotnia.mma/"
+  }
+}

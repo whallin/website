@@ -1,0 +1,17 @@
+{
+  "name": "Creative Kids",
+  "description": {
+    "en": "Creative Kids Preschool is a bilingual preschool located in Majorna, Gothenburg, Sweden.",
+    "sv": "Creative Kids Föreskola är en tvåspråkig förskola i Majorna, Göteborg."
+  },
+  "logo": {
+    "light": "/src/assets/clients/creative-kids.svg"
+  },
+  "dominantColor": {
+    "light": "#fbc70c"
+  },
+  "website": "https://www.creativekidsforskola.com/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/creative-kids-f%C3%B6rskola-preschool-ab"
+  }
+}

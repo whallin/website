@@ -82,7 +82,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
           <p class="max-w-xl leading-relaxed text-stone-500">
             {author.data.bio[locale]}
           </p>
-          <span class="text-sm text-stone-800 dark:text-stone-300 md:hidden">
+          <span class="text-sm text-stone-800 md:hidden dark:text-stone-300">
             <PixelarticonsFlag aria-hidden="true" class="mr-1 inline h-4 w-4" />
             {author.data.location}
           </span>

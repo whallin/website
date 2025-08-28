@@ -1,0 +1,21 @@
+{
+  "name": "Film i Västerbotten",
+  "description": {
+    "en": "Film i Västerbotten is a regional resource center for film and moving image in Västerbotten County, Sweden.",
+    "sv": "Film i Västerbotten är ett regionalt resurscentrum för film och rörlig bild i Västerbottens län."
+  },
+  "logo": {
+    "light": "/src/assets/clients/film-i-vasterbotten.svg",
+    "dark": "/src/assets/clients/film-i-vasterbotten-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#eb4633"
+  },
+  "website": "https://filmivasterbotten.com/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/film-i-v-sterbotten/",
+    "youtube": "https://www.youtube.com/@filmivasterbotten3866",
+    "instagram": "https://www.instagram.com/filmivasterbotten/",
+    "facebook": "https://www.facebook.com/filmivasterbotten/"
+  }
+}

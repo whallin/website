@@ -1,0 +1,21 @@
+{
+  "name": "Kaffepunkten",
+  "description": {
+    "en": "Kaffepunkten is a provider of coffee solutions for businesses, restaurants, cafes, and hotels.",
+    "sv": "Kaffepunknten är en leverantör av kaffelösningar för företag, restauranger, caféer och hotell."
+  },
+  "logo": {
+    "light": "/src/assets/clients/kaffepunkten.svg",
+    "dark": "/src/assets/clients/kaffepunkten-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#7f3311",
+    "dark": "#c86c43"
+  },
+  "website": "https://kaffepunkten.se/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/kaffepunkten",
+    "instagram": "https://www.instagram.com/kaffepunkten/",
+    "facebook": "https://www.facebook.com/Kaffepunkten/"
+  }
+}

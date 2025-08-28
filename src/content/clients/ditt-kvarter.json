@@ -1,0 +1,18 @@
+{
+  "name": "Ditt Kvarter",
+  "description": {
+    "en": "Ditt Kvarter is a music and culture festival held annually in Umeå, Sweden.",
+    "sv": "Ditt Kvarter är en musik- och kulturfestival som arrangeras årligen i Umeå. "
+  },
+  "logo": {
+    "light": "/src/assets/clients/ditt-kvarter.svg"
+  },
+  "dominantColor": {
+    "light": "#fb83bc"
+  },
+  "website": "https://www.dittkvarter.org/",
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/dittkvarterfestival/",
+    "facebook": "https://www.facebook.com/dittkvarterfestival/"
+  }
+}

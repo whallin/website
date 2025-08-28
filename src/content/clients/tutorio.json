@@ -1,0 +1,20 @@
+{
+  "name": "Tutorio",
+  "description": {
+    "en": "Tutorio provides online educational services. Their platform offers interactive courses designed to cater to learners of all ages and academic levels.",
+    "sv": "Tutorio erbjuder utbildningstjänster online. Deras plattform erbjuder interaktiva kurser utformade för att passa elever i alla åldrar och på alla akademiska nivåer."
+  },
+  "logo": {
+    "light": "/src/assets/clients/tutorio.svg",
+    "dark": "/src/assets/clients/tutorio-dark.svg"
+  },
+  "dominantColor": {
+    "light": "#2a8de1"
+  },
+  "website": "https://tutorio.app/",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/company/tutorioapp",
+    "instagram": "https://www.instagram.com/tutorio_uk/",
+    "facebook": "https://www.facebook.com/profile.php?id=100094729565427"
+  }
+}

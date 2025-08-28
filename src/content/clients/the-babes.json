@@ -1,0 +1,20 @@
+{
+  "name": "The Babes",
+  "description": {
+    "en": "The Babes is a cover band from Sweden, a part of Scandinavian Entertainment Group.",
+    "sv": "The Babes är ett coverband från Sverige, en del av Scandinavian Entertainment Group."
+  },
+  "logo": {
+    "light": "/src/assets/clients/the-babes.svg"
+  },
+  "dominantColor": {
+    "light": "#b9a152"
+  },
+  "website": "https://thebabes.se/",
+  "socialLinks": {
+    "youtube": "https://www.youtube.com/@thebabesshowband",
+    "linkedin": "https://www.linkedin.com/company/the-babes",
+    "instagram": "https://www.instagram.com/thebabesshowband/",
+    "facebook": "https://www.facebook.com/thebabescoverband/"
+  }
+}
