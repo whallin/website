@@ -265,7 +265,7 @@ export const server = {
       try {
         const { data, error } = await resend.emails.send({
           from: "Licensing Request via Website <www@re.hallin.media>",
-          to: ["delivered@resend.dev"],
+          to: ["william@hallin.media"],
           subject: `New licensing request from ${name} (${company})`,
           html: createEmailLicensingTemplate({
             name,
