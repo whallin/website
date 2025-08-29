@@ -1,4 +1,6 @@
 ---
+import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
+
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 
 const guidelines = [
@@ -131,6 +133,10 @@ const translations = {
       id="licensing-guidelines-heading"
       class="font-serif text-2xl text-stone-800 dark:text-stone-100"
     >
+      <PixelarticonsScriptText
+        aria-hidden="true"
+        class="mr-1 mb-1 inline h-6 w-6"
+      />
       {translations[locale].heading}
     </h2>
     <p class="leading-relaxed text-stone-500">

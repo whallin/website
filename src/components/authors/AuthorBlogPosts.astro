@@ -9,6 +9,7 @@ import {
   getAllPublishedPosts,
 } from "../../utils/blog";
 import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
+import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
 
 const translations = {
   en: {
@@ -44,6 +45,10 @@ const publishedPosts = getAllPublishedPosts(authorPosts);
     id="author-posts-heading"
     class="mb-8 font-serif text-xl text-stone-800 dark:text-stone-100"
   >
+    <PixelarticonsScriptText
+      aria-hidden="true"
+      class="mr-1 mb-1 inline h-6 w-6"
+    />
     {translations[locale].heading}
   </h2>
 

@@ -1,4 +1,6 @@
 ---
+import PixelarticonsAlignLeft from "../icons/PixelarticonsAlignLeft.astro";
+
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 
 const comparisonFeatures = [
@@ -88,16 +90,16 @@ const comparisonFeatures = [
   },
 ];
 
-function getValueDisplay(value: string) {
+function getValueDisplay(value: string | { en: string; sv: string }) {
   if (value === "✓") {
     return {
-      text: "Included",
+      text: { en: "Included", sv: "Inkluderad" },
       class: "text-green-600 dark:text-green-400",
       symbol: "✓",
     };
   } else if (value === "✗") {
     return {
-      text: "Not included",
+      text: { en: "Not included", sv: "Ej inkluderad" },
       class: "text-red-500 dark:text-red-400",
       symbol: "✗",
     };
@@ -108,6 +110,13 @@ function getValueDisplay(value: string) {
       symbol: null,
     };
   }
+}
+
+function getLocalizedText(
+  text: string | { en: string; sv: string },
+  locale: "en" | "sv",
+): string {
+  return typeof text === "string" ? text : text[locale];
 }
 
 const translations = {
@@ -146,6 +155,10 @@ const translations = {
       id="licensing-comparison-heading"
       class="font-serif text-2xl text-stone-800 dark:text-stone-100"
     >
+      <PixelarticonsAlignLeft
+        aria-hidden="true"
+        class="mr-1 mb-1 inline h-6 w-6"
+      />
       {translations[locale].heading}
     </h2>
     <p class="max-w-2xl text-stone-500">
@@ -237,11 +250,14 @@ const translations = {
                 return (
                   <span class={`text-sm ${display.class}`}>
                     {display.symbol ? (
-                      <span class="font-mono text-lg" aria-label={display.text}>
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
                         {display.symbol}
                       </span>
                     ) : (
-                      display.text[locale]
+                      getLocalizedText(display.text, locale)
                     )}
                   </span>
                 );
@@ -254,11 +270,14 @@ const translations = {
                 return (
                   <span class={`text-sm ${display.class}`}>
                     {display.symbol ? (
-                      <span class="font-mono text-lg" aria-label={display.text}>
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
                         {display.symbol}
                       </span>
                     ) : (
-                      display.text[locale]
+                      getLocalizedText(display.text, locale)
                     )}
                   </span>
                 );
@@ -271,11 +290,14 @@ const translations = {
                 return (
                   <span class={`text-sm ${display.class}`}>
                     {display.symbol ? (
-                      <span class="font-mono text-lg" aria-label={display.text}>
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
                         {display.symbol}
                       </span>
                     ) : (
-                      display.text[locale]
+                      getLocalizedText(display.text, locale)
                     )}
                   </span>
                 );
@@ -305,11 +327,11 @@ const translations = {
                 </dt>
                 <dd class={`text-sm font-medium ${display.class}`}>
                   {display.symbol ? (
-                    <span class="font-mono" aria-label={display.text}>
+                    <span class="font-mono" aria-label={display.text[locale]}>
                       {display.symbol}
                     </span>
                   ) : (
-                    display.text[locale]
+                    getLocalizedText(display.text, locale)
                   )}
                 </dd>
               </div>
@@ -343,11 +365,11 @@ const translations = {
                 </dt>
                 <dd class={`text-sm font-medium ${display.class}`}>
                   {display.symbol ? (
-                    <span class="font-mono" aria-label={display.text}>
+                    <span class="font-mono" aria-label={display.text[locale]}>
                       {display.symbol}
                     </span>
                   ) : (
-                    display.text[locale]
+                    getLocalizedText(display.text, locale)
                   )}
                 </dd>
               </div>
@@ -374,11 +396,11 @@ const translations = {
                 </dt>
                 <dd class={`text-sm font-medium ${display.class}`}>
                   {display.symbol ? (
-                    <span class="font-mono" aria-label={display.text}>
+                    <span class="font-mono" aria-label={display.text[locale]}>
                       {display.symbol}
                     </span>
                   ) : (
-                    display.text[locale]
+                    getLocalizedText(display.text, locale)
                   )}
                 </dd>
               </div>
