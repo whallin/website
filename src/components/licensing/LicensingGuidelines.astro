@@ -139,7 +139,7 @@ const translations = {
       />
       {translations[locale].heading}
     </h2>
-    <p class="leading-relaxed text-stone-500">
+    <p class="leading-relaxed text-stone-600 dark:text-stone-400">
       {translations[locale].description}
     </p>
   </header>
@@ -166,7 +166,9 @@ const translations = {
 
           <ul class="list-inside list-disc space-y-2 p-4 marker:text-red-400">
             {section.rules[locale].map((rule) => (
-              <li class="text-sm leading-relaxed text-stone-500">{rule}</li>
+              <li class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                {rule}
+              </li>
             ))}
           </ul>
         </article>
@@ -187,7 +189,7 @@ const translations = {
       >
         {translations[locale].supportedFormats}
       </h3>
-      <p class="text-sm text-stone-500">
+      <p class="text-sm text-stone-600 dark:text-stone-400">
         {translations[locale].fileFormatsDescription}
       </p>
     </header>
