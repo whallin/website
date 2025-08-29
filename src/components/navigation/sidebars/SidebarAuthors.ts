@@ -1,15 +1,12 @@
 import { getCollection } from "astro:content";
 
-export interface AuthorStats {
-  totalAuthors: number;
-  topContributor: string;
-}
-
-export async function calculateAuthorStats(): Promise<AuthorStats> {
+export async function calculateAuthorStats() {
   const allAuthors = await getCollection("authorCollection");
   const totalAuthors = allAuthors.length;
+
   const allPosts = await getCollection("blogCollection");
   const publishedPosts = allPosts.filter((post) => !post.data.draft);
+
   const contributionCounts = new Map<string, number>();
 
   for (const post of publishedPosts) {
@@ -20,7 +17,7 @@ export async function calculateAuthorStats(): Promise<AuthorStats> {
     }
   }
 
-  let topContributor = "No posts yet";
+  let topContributor = "N/A";
   let maxContributions = 0;
 
   for (const [authorId, count] of contributionCounts.entries()) {

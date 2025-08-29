@@ -2,7 +2,7 @@
 import { Picture } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { getNextAdId } from "../utils/adDistribution";
+import { getNextAdId } from "./Advert";
 
 const { adId } = Astro.props;
 const allAds = await getCollection("adsCollection");
