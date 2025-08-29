@@ -23,6 +23,50 @@ const adsCollection = defineCollection({
       .strict(),
 });
 
+const authorCollection = defineCollection({
+  loader: glob({ pattern: "*.json", base: "./src/content/authors" }),
+  schema: ({ image }) =>
+    z
+      .object({
+        name: z.string().min(1, "Author name is required"),
+        avatar: image(),
+        bio: z.object({
+          en: z.string().min(1, "English bio is required"),
+          sv: z.string().min(1, "Swedish bio is required"),
+        }),
+        location: z.string().optional(),
+        email: z.string().email("Must be a valid email").optional(),
+        socialLinks: z
+          .object({
+            linkedin: z.string().url("Must be a valid LinkedIn URL").optional(),
+            github: z.string().url("Must be a valid GitHub URL").optional(),
+            website: z.string().url("Must be a valid Website URL").optional(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict(),
+});
+
+const blogCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
+  schema: ({ image }) =>
+    z
+      .object({
+        title: z.string().min(1, "Title is required"),
+        description: z.string().min(1, "Description is required"),
+        author: z
+          .array(reference("authorCollection"))
+          .min(1, "At least one author is required"),
+        publishedDate: z.string().datetime("Invalid date format"),
+        thumbnailImg: image(),
+        thumbnailImgAlt: z.string().min(1, "Image alt text is required"),
+        featured: z.boolean().default(false),
+        draft: z.boolean().default(false),
+      })
+      .strict(),
+});
+
 const clientsCollection = defineCollection({
   loader: glob({ pattern: "*.json", base: "./src/content/clients" }),
   schema: ({ image }) =>
@@ -85,67 +129,6 @@ const clientsCollection = defineCollection({
       .strict(),
 });
 
-const authorCollection = defineCollection({
-  loader: glob({ pattern: "*.json", base: "./src/content/authors" }),
-  schema: ({ image }) =>
-    z
-      .object({
-        name: z.string().min(1, "Author name is required"),
-        avatar: image(),
-        bio: z.object({
-          en: z.string().min(1, "English bio is required"),
-          sv: z.string().min(1, "Swedish bio is required"),
-        }),
-        location: z.string().optional(),
-        email: z.string().email("Must be a valid email").optional(),
-        socialLinks: z
-          .object({
-            linkedin: z.string().url("Must be a valid LinkedIn URL").optional(),
-            github: z.string().url("Must be a valid GitHub URL").optional(),
-            website: z.string().url("Must be a valid Website URL").optional(),
-          })
-          .strict()
-          .optional(),
-      })
-      .strict(),
-});
-
-const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
-  schema: ({ image }) =>
-    z
-      .object({
-        title: z.string().min(1, "Title is required"),
-        description: z.string().min(1, "Description is required"),
-        author: z
-          .array(reference("authorCollection"))
-          .min(1, "At least one author is required"),
-        publishedDate: z.string().datetime("Invalid date format"),
-        thumbnailImg: image(),
-        thumbnailImgAlt: z.string().min(1, "Image alt text is required"),
-        featured: z.boolean().default(false),
-        draft: z.boolean().default(false),
-      })
-      .strict(),
-});
-
-const portfolioCollection = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/portfolio" }),
-  schema: ({ image }) =>
-    z
-      .object({
-        title: z.string().min(1, "Title is required"),
-        description: z.string().min(1, "Description is required"),
-        category: z.string().min(1, "Category is required"),
-        publishedDate: z.string().datetime("Invalid date format"),
-        thumbnailImg: image(),
-        thumbnailImgAlt: z.string().min(1, "Image alt text is required"),
-        featured: z.boolean().default(false),
-        draft: z.boolean().default(false),
-      })
-      .strict(),
-});
-
 const faqCollection = defineCollection({
   loader: glob({ pattern: "*.json", base: "./src/content/faq" }),
   schema: z
@@ -172,11 +155,39 @@ const faqCollection = defineCollection({
     .strict(),
 });
 
+const legalCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/legal" }),
+  schema: z
+    .object({
+      title: z.string().min(1, "Title is required"),
+      lastUpdated: z.string().datetime("Invalid date format"),
+    })
+    .strict(),
+});
+
+const portfolioCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/portfolio" }),
+  schema: ({ image }) =>
+    z
+      .object({
+        title: z.string().min(1, "Title is required"),
+        description: z.string().min(1, "Description is required"),
+        category: z.string().min(1, "Category is required"),
+        publishedDate: z.string().datetime("Invalid date format"),
+        thumbnailImg: image(),
+        thumbnailImgAlt: z.string().min(1, "Image alt text is required"),
+        featured: z.boolean().default(false),
+        draft: z.boolean().default(false),
+      })
+      .strict(),
+});
+
 export const collections = {
   adsCollection,
-  clientsCollection,
   authorCollection,
-  faqCollection,
   blogCollection,
+  clientsCollection,
+  faqCollection,
+  legalCollection,
   portfolioCollection,
 };
