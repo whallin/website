@@ -1,0 +1,210 @@
+---
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const guidelines = [
+  {
+    category: { en: "Usage requirements", sv: "Användningskrav" },
+    rules: {
+      en: [
+        "All licensed content must be used in accordance with the specific license terms.",
+        "Attribution must be provided unless explicitly waived.",
+        "Content cannot be sublicensed or resold unless specified in the agreement.",
+        "Usage must comply with applicable laws and regulations in your jurisdiction.",
+      ],
+      sv: [
+        "Allt licensierat innehåll måste användas i enlighet med de specifika licensvillkoren.",
+        "Attribuering måste ges om det inte uttryckligen avstås från i avtalet.",
+        "Innehåll får inte underlicensieras eller säljas vidare om det inte anges i avtalet.",
+        "Användningen måste följa tillämpliga lagar och förordningar i din jurisdiktion.",
+      ],
+    },
+  },
+  {
+    category: {
+      en: "Attribution guidelines",
+      sv: "Riktlinjer för attribuering",
+    },
+    rules: {
+      en: [
+        "Photo credit format: 'Photo by William Hallin (hallin.media)'",
+        "Design credit format: 'Design by William Hallin (hallin.media)'",
+        "Attribution should be clearly visible and legible in final usage.",
+        "For digital use, attribution can be in metadata or visible credit line.",
+      ],
+      sv: [
+        "Foto attributering: 'Foto av William Hallin (hallin.media)'",
+        "Design attribuering: 'Design av William Hallin (hallin.media)'",
+        "Attribuering bör vara tydligt synlig och läsbar i slutlig användning.",
+        "För digital användning kan attribuering finnas i metadata eller synlig kreditlinje.",
+      ],
+    },
+  },
+  {
+    category: { en: "Prohibited uses", sv: "Förbjudna användningar" },
+    rules: {
+      en: [
+        "Content may not be used for illegal, defamatory, or harmful purposes.",
+        "No use in pornographic, discriminatory, or politically sensitive content.",
+        "Cannot be used to create competing stock photography or design assets.",
+        "No use in ways that could damage the reputation of the original work.",
+      ],
+      sv: [
+        "Innehållet får inte användas för olagliga, förtalande eller skadliga ändamål.",
+        "Ingen användning i pornografiskt, diskriminerande eller politiskt känsligt innehåll.",
+        "Kan inte användas för att skapa konkurrerande stockfotografi eller designresurser.",
+        "Ingen användning på sätt som kan skada det ursprungliga verkets rykte.",
+      ],
+    },
+  },
+  {
+    category: {
+      en: "License Transfer & Termination",
+      sv: "Licensöverföring & uppsägning",
+    },
+    rules: {
+      en: [
+        "Standard and Extended licenses are non-transferable between entities.",
+        "Exclusive licenses may include transfer rights upon agreement.",
+        "License termination requires removal of all licensed content from use.",
+        "Breach of license terms may result in immediate termination and legal action.",
+      ],
+      sv: [
+        "Standard- och utökade licenser är icke-överförbara mellan aktörer.",
+        "Exklusiva licenser kan inkludera överföringsrättigheter efter överenskommelse.",
+        "Licensuppsägning kräver borttagning av allt licensierat innehåll från användning.",
+        "Brott mot licensvillkoren kan leda till omedelbar uppsägning och rättsliga åtgärder.",
+      ],
+    },
+  },
+];
+
+const supportedFormats = [
+  {
+    type: { en: "Photography", sv: "Fotografi" },
+    formats: ["RAW (ARW)", "TIFF", "JPEG", "PNG", "WebP"],
+  },
+  {
+    type: { en: "Graphic Design", sv: "Grafisk design" },
+    formats: ["AI", "PSD", "PDF", "SVG", "PNG", "JPEG"],
+  },
+  {
+    type: { en: "Web Projects", sv: "Webbprojekt" },
+    formats: ["HTML/CSS", "JS/TS", "Figma", "WebP", "SVG"],
+  },
+  {
+    type: { en: "Video & Motion", sv: "Video & rörligt" },
+    formats: [
+      "MP4",
+      "MOV",
+      "AVI",
+      "After Effects (AEP)",
+      "DaVinci Resolve (DRP)",
+    ],
+  },
+];
+
+const translations = {
+  en: {
+    ariaLabel: "Licensing guidelines",
+    heading: "Usage guidelines & terms",
+    description:
+      "Clear guidelines to ensure proper usage of licensed content. These terms protect both your investment and the integrity of the licensed materials.",
+    supportedFormats: "Supported file formats",
+    fileFormatsDescription:
+      "Licensed materials are delivered in standard formats for easy usage and broad compatibility.",
+  },
+  sv: {
+    ariaLabel: "Riktlinjer för licensiering",
+    heading: "Riktlinjer för användning",
+    description:
+      "Tydliga riktlinjer för korrekt användning av licensierat innehåll. Dessa villkor skyddar både din investering och integriteten av det licensierade materialet.",
+    supportedFormats: "Stödda filformat",
+    fileFormatsDescription:
+      "Licensierat material levereras i standardformat för enkel användning och bred kompatibilitet.",
+  },
+};
+---
+
+<section aria-labelledby="licensing-guidelines-heading" class="space-y-8">
+  <header class="space-y-4">
+    <h2
+      id="licensing-guidelines-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      {translations[locale].heading}
+    </h2>
+    <p class="leading-relaxed text-stone-500">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <div
+    class="grid gap-6 lg:grid-cols-2"
+    role="group"
+    aria-label={translations[locale].ariaLabel}
+  >
+    {
+      guidelines.map((section, index) => (
+        <article
+          class="border border-stone-200 dark:border-stone-700"
+          aria-labelledby={`guideline-${index}`}
+        >
+          <header class="border-b border-stone-200 p-4 dark:border-stone-700 dark:bg-stone-800">
+            <h3
+              id={`guideline-${index}`}
+              class="font-medium text-stone-800 dark:text-stone-100"
+            >
+              {section.category[locale]}
+            </h3>
+          </header>
+
+          <ul class="list-inside list-disc space-y-3 p-6 marker:text-red-400">
+            {section.rules[locale].map((rule) => (
+              <li class="text-sm leading-relaxed text-stone-500">{rule}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+
+  <section
+    class="border border-stone-200 dark:border-stone-700"
+    aria-labelledby="supported-formats-heading"
+  >
+    <header
+      class="border-b border-stone-200 p-6 dark:border-stone-700 dark:bg-stone-800"
+    >
+      <h3
+        id="supported-formats-heading"
+        class="mb-2 font-serif text-xl text-stone-800 dark:text-stone-100"
+      >
+        {translations[locale].supportedFormats}
+      </h3>
+      <p class="text-sm text-stone-500">
+        {translations[locale].fileFormatsDescription}
+      </p>
+    </header>
+
+    <div class="p-6">
+      <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          supportedFormats.map((category) => (
+            <div class="space-y-3">
+              <dt class="text-sm font-medium text-stone-800 dark:text-stone-100">
+                {category.type[locale]}
+              </dt>
+              <dd>
+                <ul class="space-y-2">
+                  {category.formats.map((format) => (
+                    <li class="font-mono text-sm text-stone-500">{format}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</section>

@@ -48,6 +48,53 @@ function createEmailContactTemplate(
 }
 
 /**
+ * Creates HTML email template for licensing requests
+ * @param data - The licensing request data
+ * @returns HTML string for the email
+ */
+function createEmailLicensingTemplate(data: {
+  name: string;
+  email: string;
+  company: string;
+  phone?: string;
+  licenseType: string;
+  usageType: string;
+  budgetRange: string;
+  usageScope: string;
+  specificAssets: string;
+  projectDescription: string;
+  additionalRequirements?: string;
+  neededBy: string;
+  duration: string;
+}): string {
+  return `
+    <h2>New Licensing Request</h2>
+    <h3>Contact Information</h3>
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>Email:</strong> ${data.email}</p>
+    <p><strong>Company:</strong> ${data.company}</p>
+    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
+    
+    <h3>Licensing Details</h3>
+    <p><strong>License Type:</strong> ${data.licenseType}</p>
+    <p><strong>Intended Use:</strong> ${data.usageType}</p>
+    <p><strong>Budget Range:</strong> ${data.budgetRange}</p>
+    <p><strong>Usage Scope:</strong> ${data.usageScope}</p>
+    <p><strong>License Duration:</strong> ${data.duration}</p>
+    <p><strong>Needed By:</strong> ${data.neededBy}</p>
+    
+    <h3>Project Details</h3>
+    <p><strong>Specific Assets:</strong></p>
+    <p>${data.specificAssets.replace(/\n/g, "<br>")}</p>
+    
+    <p><strong>Project Description:</strong></p>
+    <p>${data.projectDescription.replace(/\n/g, "<br>")}</p>
+    
+    ${data.additionalRequirements ? `<p><strong>Additional Requirements:</strong></p><p>${data.additionalRequirements.replace(/\n/g, "<br>")}</p>` : ""}
+  `;
+}
+
+/**
  * Server actions for handling form submissions and API requests
  */
 export const server = {
@@ -138,6 +185,104 @@ export const server = {
           email: email,
           unsubscribed: false,
           audienceId: "d08ca3a9-2673-4432-9199-8753384e6eb8",
+        });
+
+        if (error) {
+          throw new ActionError({
+            code: "BAD_REQUEST",
+            message: error.message,
+          });
+        }
+
+        return { success: true, data };
+      } catch (err) {
+        if (err instanceof ActionError) throw err;
+
+        throw new ActionError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to send. Try again later.",
+        });
+      }
+    },
+  }),
+
+  /**
+   * Handles licensing request form submissions with turnstile verification
+   * Validates the form data, verifies turnstile token, and sends email via Resend
+   *
+   * @param input - Form data containing licensing request details and turnstile token
+   * @param context - Astro action context containing request information
+   * @returns Promise resolving to success status and email data
+   * @throws ActionError for validation failures or email sending errors
+   */
+  sendLicensingRequest: defineAction({
+    accept: "form",
+    input: z.object({
+      name: z.string().min(1, "Name is required"),
+      email: z.string().email("Please enter a valid email address"),
+      company: z.string().min(1, "Company is required"),
+      phone: z.string().optional(),
+      license_type: z.string().min(1, "License type is required"),
+      usage_type: z.string().min(1, "Usage type is required"),
+      budget_range: z.string().min(1, "Budget range is required"),
+      usage_scope: z.string().min(1, "Usage scope is required"),
+      specific_assets: z
+        .string()
+        .min(10, "Please provide details about the specific assets"),
+      project_description: z
+        .string()
+        .min(50, "Project description must be at least 50 characters long"),
+      additional_requirements: z.string().optional(),
+      needed_by: z.string().min(1, "Timeline is required"),
+      duration: z.string().min(1, "License duration is required"),
+      "cf-turnstile-response": z
+        .string()
+        .min(1, "Please complete the verification"),
+    }),
+
+    handler: async (
+      {
+        name,
+        email,
+        company,
+        phone,
+        license_type,
+        usage_type,
+        budget_range,
+        usage_scope,
+        specific_assets,
+        project_description,
+        additional_requirements,
+        needed_by,
+        duration,
+        "cf-turnstile-response": turnstileToken,
+      },
+      context,
+    ) => {
+      const clientIp = getClientIp(context.request);
+      await validateTurnstileToken(turnstileToken, clientIp);
+
+      try {
+        const { data, error } = await resend.emails.send({
+          from: "Licensing Request via Website <www@re.hallin.media>",
+          to: ["delivered@resend.dev"],
+          subject: `New licensing request from ${name} (${company})`,
+          html: createEmailLicensingTemplate({
+            name,
+            email,
+            company,
+            phone,
+            licenseType: license_type,
+            usageType: usage_type,
+            budgetRange: budget_range,
+            usageScope: usage_scope,
+            specificAssets: specific_assets,
+            projectDescription: project_description,
+            additionalRequirements: additional_requirements,
+            neededBy: needed_by,
+            duration,
+          }),
+          replyTo: email,
         });
 
         if (error) {

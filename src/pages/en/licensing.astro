@@ -1,0 +1,46 @@
+---
+export const prerender = true;
+
+import ImgHeaderLicensing from "../../assets/header/headerLicensing.jpg";
+import LicensingComparison from "../../components/licensing/LicensingComparison.astro";
+import LicensingContact from "../../components/licensing/LicensingContact.astro";
+import LicensingGuidelines from "../../components/licensing/LicensingGuidelines.astro";
+import LicensingOverview from "../../components/licensing/LicensingOverview.astro";
+import LicensingPricing from "../../components/licensing/LicensingPricing.astro";
+import SidebarLicensing from "../../components/navigation/sidebars/SidebarLicensing.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarLicensing slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderLicensing}
+      headerImgAlt=""
+      headingText="License my work"
+      headingItalic={false}
+      descriptionText="Need visuals for your campaign, site, or product? Secure a clear, hassle-free license to use my ready-to-go photography and easy-to-customize designs."
+      btnText="Request a license"
+      btnHref="#license-form-section"
+      btnAriaLabel="Request a license via the contact form"
+    />
+
+    <LicensingOverview />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingPricing />
+
+    <LicensingComparison />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingGuidelines />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingContact />
+  </div>
+</LayoutBase>

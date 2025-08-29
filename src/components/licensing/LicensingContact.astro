@@ -1,0 +1,617 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+import PixelarticonsMailCheck from "../icons/PixelarticonsMailCheck.astro";
+import PixelarticonsMailDelete from "../icons/PixelarticonsMailDelete.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    heading: "Request a license",
+    description:
+      "Ready to license my work? Fill out the form below with your project details, and I'll get back to you with a quote and license agreement.",
+    optional: "(optional)",
+    contactInformation: "Contact information",
+    name: "Name",
+    namePlaceholder: "Your full name",
+    email: "Email",
+    emailPlaceholder: "your@email.com",
+    company: "Company/Organization",
+    companyPlaceholder: "Your company name",
+    phone: "Phone",
+    phonePlaceholder: "+1 (555) 123-4567",
+    licensingDetails: "Licensing details",
+    licenseType: "License type",
+    licenseTypes: {
+      select: "Select license type",
+      singleUse: "Single Use License",
+      extended: "Extended License",
+      commercial: "Commercial License",
+      exclusive: "Exclusive License",
+      custom: "Custom License",
+    },
+    intendedUse: "Intended use",
+    intendedUses: {
+      select: "Select usage type",
+      digitalMarketing: "Digital Marketing",
+      printMedia: "Print Media",
+      webAppDevelopment: "Web/App Development",
+      socialMedia: "Social Media",
+      editorial: "Editorial",
+      commercialProduct: "Commercial Product",
+      packaging: "Packaging",
+      other: "Other",
+    },
+    budgetRange: "Budget range",
+    budgetRanges: {
+      select: "Select budget range",
+      under1000: "Under SEK 1,000",
+      between10005000: "SEK 1,000 - 5,000",
+      between500010000: "SEK 5,000 - 10,000",
+      between1000025000: "SEK 10,000 - 25,000",
+      over25000: "SEK 25,000+",
+      flexible: "Flexible",
+    },
+    usageScope: "Usage scope",
+    usageScopes: {
+      select: "Select scope",
+      local: "Local/Regional",
+      national: "National",
+      international: "International",
+      worldwide: "Worldwide",
+      onlineOnly: "Online only",
+    },
+    specificAssets: "Specific assets",
+    specificAssetsPlaceholder:
+      "Please specify which images, designs, or other assets you're interested in licensing. Include URLs or descriptions...",
+    projectDescription: "Project description",
+    projectDescriptionPlaceholder:
+      "Describe your project, how you plan to use the licensed content, target audience, distribution channels, and timeline...",
+    additionalRequirements: "Additional requirements",
+    additionalRequirementsPlaceholder:
+      "Any specific licensing terms, exclusivity needs, or other requirements...",
+    neededBy: "License needed by",
+    neededByOptions: {
+      select: "Select timeline",
+      asap: "ASAP",
+      within1Week: "Within 1 week",
+      within2Weeks: "Within 2 weeks",
+      within1Month: "Within 1 month",
+      flexible: "Flexible",
+    },
+    duration: "License duration",
+    durationOptions: {
+      select: "Select duration",
+      oneYear: "1 year",
+      twoYears: "2 years",
+      fiveYears: "5 years",
+      perpetual: "Perpetual",
+      custom: "Custom Duration",
+    },
+    securityVerificationAriaLabel: "Security verification",
+    sendLicensingRequest: "Send licensing request",
+    successMessage:
+      "Licensing request sent successfully! I'll get back within 24 hours.",
+    errorMessage: "Sending failed! Try again.",
+  },
+  sv: {
+    heading: "Begär en licens",
+    description:
+      "Redo att licensiera mitt arbete? Fyll i formuläret nedan med dina projektuppgifter, så återkommer jag med en offert och licensavtal.",
+    optional: "(valfritt)",
+    contactInformation: "Kontaktinformation",
+    name: "Namn",
+    namePlaceholder: "Ditt fullständiga namn",
+    email: "E-post",
+    emailPlaceholder: "din@e-post.se",
+    company: "Företag/Organisation",
+    companyPlaceholder: "Ditt företagsnamn",
+    phone: "Telefon",
+    phonePlaceholder: "070-123 45 67",
+    licensingDetails: "Licensieringsdetaljer",
+    licenseType: "Licenstyp",
+    licenseTypes: {
+      select: "Välj licenstyp",
+      singleUse: "Enkel licens",
+      extended: "Utökad licens",
+      commercial: "Kommersiell licens",
+      exclusive: "Exklusiv licens",
+      custom: "Anpassad licens",
+    },
+    intendedUse: "Avsedd användning",
+    intendedUses: {
+      select: "Välj användningstyp",
+      digitalMarketing: "Digital marknadsföring",
+      printMedia: "Tryckt media",
+      webAppDevelopment: "Webb-/app-utveckling",
+      socialMedia: "Sociala medier",
+      editorial: "Redaktionell",
+      commercialProduct: "Kommersiell produkt",
+      packaging: "Förpackning",
+      other: "Annat",
+    },
+    budgetRange: "Budgetintervall",
+    budgetRanges: {
+      select: "Välj budgetintervall",
+      under1000: "Under 1 000 kr",
+      between10005000: "1 000 - 5 000 kr",
+      between500010000: "5 000 - 10 000 kr",
+      between1000025000: "10 000 - 25 000 kr",
+      over25000: "Över 25 000 kr",
+      flexible: "Flexibel",
+    },
+    usageScope: "Användningsomfattning",
+    usageScopes: {
+      select: "Välj omfattning",
+      local: "Lokal/Regional",
+      national: "Nationell",
+      international: "Internationell",
+      worldwide: "Global",
+      onlineOnly: "Endast online",
+    },
+    specificAssets: "Specifika tillgångar",
+    specificAssetsPlaceholder:
+      "Ange vilka bilder, designer eller andra tillgångar du är intresserad av att licensiera. Inkludera URL:er eller beskrivningar...",
+    projectDescription: "Projektbeskrivning",
+    projectDescriptionPlaceholder:
+      "Beskriv ditt projekt, hur du planerar att använda det licensierade innehållet, målgrupp, distributionskanaler och tidslinje...",
+    additionalRequirements: "Ytterligare krav",
+    additionalRequirementsPlaceholder:
+      "Eventuella specifika licensvillkor, exklusivitetsbehov eller andra krav...",
+    neededBy: "Licens behövs senast",
+    neededByOptions: {
+      select: "Välj tidslinje",
+      asap: "Så snart som möjligt",
+      within1Week: "Inom 1 vecka",
+      within2Weeks: "Inom 2 veckor",
+      within1Month: "Inom 1 månad",
+      flexible: "Flexibel",
+    },
+    duration: "Licensens längd",
+    durationOptions: {
+      select: "Välj längd",
+      oneYear: "1 år",
+      twoYears: "2 år",
+      fiveYears: "5 år",
+      perpetual: "Perpetuell",
+      custom: "Anpassad längd",
+    },
+    securityVerificationAriaLabel: "Säkerhetsverifiering",
+    sendLicensingRequest: "Skicka licensförfrågan",
+    successMessage: "Licensförfrågan skickad! Jag återkommer inom 24 timmar.",
+    errorMessage: "Skickandet misslyckades! Försök igen.",
+  },
+};
+---
+
+<section
+  id="license-form-section"
+  aria-labelledby="license-form-heading"
+  class="space-y-8"
+>
+  <header class="space-y-4">
+    <h2
+      id="license-form-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      {translations[locale].heading}
+    </h2>
+    <p class="leading-relaxed text-stone-500">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <form
+    id="licensing-inquiry-form"
+    method="post"
+    class="space-y-6 border border-stone-300 p-6 pb-2 dark:border-stone-700"
+  >
+    <fieldset class="space-y-4">
+      <legend
+        class="text-sm font-medium tracking-wider text-stone-500 uppercase"
+      >
+        {translations[locale].contactInformation}
+      </legend>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label
+            for="license-contact-name"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].name} *
+          </label>
+          <input
+            type="text"
+            id="license-contact-name"
+            name="name"
+            autocomplete="name"
+            required
+            placeholder={translations[locale].namePlaceholder}
+            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          />
+        </div>
+
+        <div>
+          <label
+            for="license-contact-email"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].email} *
+          </label>
+          <input
+            type="email"
+            id="license-contact-email"
+            name="email"
+            autocomplete="email"
+            required
+            placeholder={translations[locale].emailPlaceholder}
+            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          />
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label
+            for="license-company"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].company} *
+          </label>
+          <input
+            type="text"
+            id="license-company"
+            name="company"
+            autocomplete="organization"
+            required
+            placeholder={translations[locale].companyPlaceholder}
+            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          />
+        </div>
+
+        <div>
+          <label
+            for="license-phone"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].phone}
+            {translations[locale].optional}
+          </label>
+          <input
+            type="tel"
+            id="license-phone"
+            name="phone"
+            autocomplete="tel"
+            placeholder={translations[locale].phonePlaceholder}
+            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="space-y-4">
+      <legend
+        class="text-sm font-medium tracking-wider text-stone-500 uppercase"
+      >
+        {translations[locale].licensingDetails}
+      </legend>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label
+            for="license-type"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].licenseType} *
+          </label>
+          <select
+            id="license-type"
+            name="license_type"
+            required
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value="">{translations[locale].licenseTypes.select}</option>
+            <option value="Single Use"
+              >{translations[locale].licenseTypes.singleUse}</option
+            >
+            <option value="Extended"
+              >{translations[locale].licenseTypes.extended}</option
+            >
+            <option value="Commercial"
+              >{translations[locale].licenseTypes.commercial}</option
+            >
+            <option value="Exclusive"
+              >{translations[locale].licenseTypes.exclusive}</option
+            >
+            <option value="Custom"
+              >{translations[locale].licenseTypes.custom}</option
+            >
+          </select>
+        </div>
+
+        <div>
+          <label
+            for="usage-type"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].intendedUse} *
+          </label>
+          <select
+            id="usage-type"
+            name="usage_type"
+            required
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value="">{translations[locale].intendedUses.select}</option>
+            <option value="Digital Marketing"
+              >{translations[locale].intendedUses.digitalMarketing}</option
+            >
+            <option value="Print Media"
+              >{translations[locale].intendedUses.printMedia}</option
+            >
+            <option value="Web/App Development"
+              >{translations[locale].intendedUses.webAppDevelopment}</option
+            >
+            <option value="Social Media"
+              >{translations[locale].intendedUses.socialMedia}</option
+            >
+            <option value="Editorial"
+              >{translations[locale].intendedUses.editorial}</option
+            >
+            <option value="Commercial Product"
+              >{translations[locale].intendedUses.commercialProduct}</option
+            >
+            <option value="Packaging"
+              >{translations[locale].intendedUses.packaging}</option
+            >
+            <option value="Other"
+              >{translations[locale].intendedUses.other}</option
+            >
+          </select>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label
+            for="budget-range"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].budgetRange} *
+          </label>
+          <select
+            id="budget-range"
+            name="budget_range"
+            required
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value="">{translations[locale].budgetRanges.select}</option>
+            <option value="Under SEK 1,000"
+              >{translations[locale].budgetRanges.under1000}</option
+            >
+            <option value="SEK 1,000 - SEK 5,000"
+              >{translations[locale].budgetRanges.between10005000}</option
+            >
+            <option value="SEK 5,000 - SEK 10,000"
+              >{translations[locale].budgetRanges.between500010000}</option
+            >
+            <option value="SEK 10,000 - SEK 25,000"
+              >{translations[locale].budgetRanges.between1000025000}</option
+            >
+            <option value="SEK 25,000+"
+              >{translations[locale].budgetRanges.over25000}</option
+            >
+            <option value="Flexible"
+              >{translations[locale].budgetRanges.flexible}</option
+            >
+          </select>
+        </div>
+
+        <div>
+          <label
+            for="usage-scope"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].usageScope} *
+          </label>
+          <select
+            id="usage-scope"
+            name="usage_scope"
+            required
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value="">{translations[locale].usageScopes.select}</option>
+            <option value="Local"
+              >{translations[locale].usageScopes.local}</option
+            >
+            <option value="National"
+              >{translations[locale].usageScopes.national}</option
+            >
+            <option value="International"
+              >{translations[locale].usageScopes.international}</option
+            >
+            <option value="Worldwide"
+              >{translations[locale].usageScopes.worldwide}</option
+            >
+            <option value="Online only"
+              >{translations[locale].usageScopes.onlineOnly}</option
+            >
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="specific-assets"
+          class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+        >
+          {translations[locale].specificAssets} *
+        </label>
+        <textarea
+          id="specific-assets"
+          name="specific_assets"
+          required
+          rows="3"
+          placeholder={translations[locale].specificAssetsPlaceholder}
+          class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        ></textarea>
+      </div>
+
+      <div>
+        <label
+          for="project-description"
+          class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+        >
+          {translations[locale].projectDescription} *
+        </label>
+        <textarea
+          id="project-description"
+          name="project_description"
+          required
+          rows="4"
+          placeholder={translations[locale].projectDescriptionPlaceholder}
+          class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        ></textarea>
+      </div>
+
+      <div>
+        <label
+          for="additional-requirements"
+          class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+        >
+          {translations[locale].additionalRequirements}
+        </label>
+        <textarea
+          id="additional-requirements"
+          name="additional_requirements"
+          rows="3"
+          placeholder={translations[locale].additionalRequirementsPlaceholder}
+          class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        ></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset class="space-y-4">
+      <legend
+        class="text-sm font-medium tracking-wider text-stone-500 uppercase"
+      >
+        {translations[locale].licensingDetails}
+      </legend>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label
+            for="needed-by"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].neededBy} *
+          </label>
+          <select
+            id="needed-by"
+            name="needed_by"
+            required
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value=""
+              >{translations[locale].neededByOptions.select}</option
+            >
+            <option value="ASAP"
+              >{translations[locale].neededByOptions.asap}</option
+            >
+            <option value="Within 1 week"
+              >{translations[locale].neededByOptions.within1Week}</option
+            >
+            <option value="Within 2 weeks"
+              >{translations[locale].neededByOptions.within2Weeks}</option
+            >
+            <option value="Within 1 month"
+              >{translations[locale].neededByOptions.within1Month}</option
+            >
+            <option value="Flexible"
+              >{translations[locale].neededByOptions.flexible}</option
+            >
+          </select>
+        </div>
+
+        <div>
+          <label
+            for="duration"
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {translations[locale].duration} *
+          </label>
+          <select
+            id="duration"
+            name="duration"
+            class="mt-2 w-full border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            <option value=""
+              >{translations[locale].durationOptions.select}</option
+            >
+            <option value="1 year"
+              >{translations[locale].durationOptions.oneYear}</option
+            >
+            <option value="2 years"
+              >{translations[locale].durationOptions.twoYears}</option
+            >
+            <option value="5 years"
+              >{translations[locale].durationOptions.fiveYears}</option
+            >
+            <option value="Perpetual"
+              >{translations[locale].durationOptions.perpetual}</option
+            >
+            <option value="Custom"
+              >{translations[locale].durationOptions.custom}</option
+            >
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <div
+      id="turnstile-container"
+      aria-label={translations[locale].securityVerificationAriaLabel}
+      class="hidden"
+    >
+    </div>
+
+    <button
+      type="submit"
+      id="licensing-submit-btn"
+      class="group flex w-full cursor-pointer items-center justify-center gap-2 bg-red-500 py-3 text-sm font-medium tracking-tight text-white transition hover:bg-red-600 active:scale-[0.97] active:opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <PixelarticonsMail aria-hidden="true" class="h-4 w-4" />
+      <span>{translations[locale].sendLicensingRequest}</span>
+      <PixelarticonsArrowRight
+        aria-hidden="true"
+        class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      />
+    </button>
+
+    <div
+      id="licensing-success-message"
+      role="status"
+      aria-live="polite"
+      class="mb-4 hidden w-full flex-wrap items-center justify-center gap-2 bg-green-600 p-3 text-sm text-white"
+    >
+      <PixelarticonsMailCheck aria-hidden="true" class="h-4 w-4" />
+      <span>{translations[locale].successMessage}</span>
+    </div>
+
+    <div
+      id="licensing-error-message"
+      role="alert"
+      aria-live="assertive"
+      class="mb-4 hidden w-full flex-wrap items-center justify-center gap-2 bg-red-600 p-3 text-sm text-white"
+    >
+      <PixelarticonsMailDelete aria-hidden="true" class="h-4 w-4" />
+      <span id="licensing-error-text">{translations[locale].errorMessage}</span>
+    </div>
+  </form>
+</section>
+
+<script>
+  import "./LicensingContact";
+</script>

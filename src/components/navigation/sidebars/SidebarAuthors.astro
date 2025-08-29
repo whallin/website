@@ -9,18 +9,18 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 
 const translations = {
   en: {
-    topAuthors: "Top authors",
+    totalAuthors: "Total authors",
     topContributors: "Top contributors",
   },
   sv: {
-    topAuthors: "Topp författare",
+    totalAuthors: "Antal författare",
     topContributors: "Topp bidragsgivare",
   },
 };
 
 const stats = [
   {
-    label: translations[locale].topAuthors,
+    label: translations[locale].totalAuthors,
     value: authorStats.totalAuthors.toString(),
     Icon: PixelarticonsHumanHandsup,
   },

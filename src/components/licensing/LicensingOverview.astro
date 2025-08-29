@@ -1,0 +1,151 @@
+---
+import PixelarticonsCamera from "../icons/PixelarticonsCamera.astro";
+import PixelarticonsFillHalf from "../icons/PixelarticonsFillHalf.astro";
+import PixelarticonsFrame from "../icons/PixelarticonsFrame.astro";
+import PixelarticonsVideo from "../icons/PixelarticonsVideo.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    licensingOverview: "Licensing Overview",
+    whatsIncluded: "What's included",
+  },
+  sv: {
+    licensingOverview: "Licensöversikt",
+    whatsIncluded: "Vad som ingår",
+  },
+};
+
+const workTypes = [
+  {
+    title: { en: "Photography", sv: "Fotografi" },
+    icon: PixelarticonsCamera,
+    description: {
+      en: "Existing commercial and lifestyle photography including product shots, portraits, and event photography.",
+      sv: "Existerande kommersiell och livsstilsfotografi inklusive produktbilder, porträtt och evenemangsfotografi.",
+    },
+    includes: {
+      en: [
+        "High-resolution files",
+        "Basic retouching",
+        "Commercial usage rights",
+        "Web-optimized versions",
+      ],
+      sv: [
+        "Högupplösta filer",
+        "Grundläggande retuschering",
+        "Rättigheter för kommersiell användning",
+        "Webboptimerade versioner",
+      ],
+    },
+  },
+  {
+    title: { en: "Graphics Design", sv: "Grafisk design" },
+    icon: PixelarticonsFillHalf,
+    description: {
+      en: "Pre-made brand identities, logos, marketing materials, and design assets for commercial use.",
+      sv: "Färdiga varumärkesidentiteter, logotyper, marknadsföringsmaterial och designresurser för kommersiell användning.",
+    },
+    includes: {
+      en: [
+        "Source files",
+        "Multiple formats",
+        "Brand guidelines",
+        "Color variations",
+      ],
+      sv: [
+        "Källfiler",
+        "Flera format",
+        "Varumärkesriktlinjer",
+        "Färgvariationer",
+      ],
+    },
+  },
+  {
+    title: { en: "Web Projects", sv: "Webbprojekt" },
+    icon: PixelarticonsFrame,
+    description: {
+      en: "Complete website designs, templates, and interfaces available for licensing and customization.",
+      sv: "Fullständiga webbdesign mallar och gränssnitt tillgängliga för licensiering och anpassning.",
+    },
+    includes: {
+      en: [
+        "Design & code files",
+        "Asset exports",
+        "Implementation notes",
+        "Style guides",
+      ],
+      sv: [
+        "Design- och kodfiler",
+        "Export av material",
+        "Implementeringsmanualer",
+        "Stilguider",
+      ],
+    },
+  },
+  {
+    title: { en: "Video & Motion", sv: "Video & rörligt" },
+    icon: PixelarticonsVideo,
+    description: {
+      en: "Complete motion graphics, promotional videos, and animated content for marketing and commercial purposes.",
+      sv: "Färdig rörlig grafik, reklamvideor och animerat innehåll för marknadsföring och kommersiella ändamål.",
+    },
+    includes: {
+      en: [
+        "Final renders",
+        "Project files",
+        "Asset library",
+        "Usage guidelines",
+      ],
+      sv: [
+        "Slutgiltiga renderingar",
+        "Projektfiler",
+        "Tillgångsbibliotek",
+        "Användningsriktlinjer",
+      ],
+    },
+  },
+];
+---
+
+<section class="space-y-8" aria-labelledby="licensing-overview">
+  <h2 id="licensing-overview" class="sr-only">
+    {translations[locale].licensingOverview}
+  </h2>
+
+  <div class="grid gap-6 md:grid-cols-2" role="list">
+    {
+      workTypes.map((type) => (
+        <article
+          class="flex flex-col justify-between gap-4 border border-stone-300 p-6 dark:border-stone-700"
+          role="listitem"
+        >
+          <div class="space-y-3">
+            <header class="flex items-center gap-3">
+              <type.icon aria-hidden="true" class="h-6 w-6 text-red-400" />
+              <h3 class="font-medium text-stone-800 dark:text-stone-100">
+                {type.title[locale]}
+              </h3>
+            </header>
+
+            <p class="text-sm leading-relaxed text-stone-500">
+              {type.description[locale]}
+            </p>
+          </div>
+
+          <aside>
+            <h4 class="mb-2 text-xs font-medium tracking-wider text-stone-800 uppercase dark:text-stone-100">
+              {translations[locale].whatsIncluded}
+            </h4>
+            <ul class="list-inside list-disc space-y-1 text-sm text-stone-500 marker:text-red-400">
+              {type.includes[locale].map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </aside>
+        </article>
+      ))
+    }
+  </div>
+</section>
