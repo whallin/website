@@ -1,0 +1,26 @@
+---
+import ImgHeaderFaq from "../assets/header/headerFaq.jpg";
+import FaqAllFaqs from "../components/faq/FaqAllFaqs.astro";
+import SidebarFaq from "../components/navigation/sidebars/SidebarFaq.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarFaq slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderFaq}
+      headerImgAlt=""
+      headingText="Vanliga frågor"
+      headingItalic={false}
+      descriptionText="Snabba svar på vanliga frågor om processer, tidslinjer, prissättning och samarbete. Hittade du inte svaret? Jag är bara ett meddelande bort."
+      btnText="Ställ en fråga"
+      btnHref="/contact"
+      btnAriaLabel="Ställ en fråga på kontaktsidan"
+    />
+
+    <FaqAllFaqs />
+  </div>
+</LayoutBase>

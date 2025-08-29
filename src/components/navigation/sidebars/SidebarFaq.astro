@@ -1,42 +1,44 @@
 ---
 import { getCollection } from "astro:content";
+import PixelarticonsClock from "../../icons/PixelarticonsClock.astro";
 import PixelarticonsFlag from "../../icons/PixelarticonsFlag.astro";
-import PixelarticonsHeart from "../../icons/PixelarticonsHeart.astro";
-import PixelarticonsHumanHandsup from "../../icons/PixelarticonsHumanHandsup.astro";
 import SidebarBase from "../SidebarBase.astro";
 
-const clients = await getCollection("clientsCollection");
-const clientCount = clients.length;
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const faqCollections = await getCollection("faqCollection");
+
+const totalQuestions = faqCollections.reduce((total, collection) => {
+  return total + collection.data.items.length;
+}, 0);
+
+const currentDate = new Date();
+const formattedDate = currentDate.toLocaleDateString(locale, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 
 const translations = {
   en: {
-    servedClients: "Served clients",
-    representedCountries: "Represented countries",
-    latestClient: "Latest client",
+    questionsAnswered: "Questions answered",
+    lastUpdated: "Last updated",
   },
   sv: {
-    servedClients: "Betjänade kunder",
-    representedCountries: "Representerade länder",
-    latestClient: "Senaste kunden",
+    questionsAnswered: "Frågor besvarade",
+    lastUpdated: "Senast uppdaterad",
   },
 };
 
 const stats = [
   {
-    label: translations[locale].servedClients,
-    value: clientCount.toString(),
-    Icon: PixelarticonsHeart,
-  },
-  {
-    label: translations[locale].representedCountries,
-    value: "4",
+    label: translations[locale].questionsAnswered,
+    value: totalQuestions.toString(),
     Icon: PixelarticonsFlag,
   },
   {
-    label: translations[locale].latestClient,
-    value: "The Wood Hotel by Elite",
-    Icon: PixelarticonsHumanHandsup,
+    label: translations[locale].lastUpdated,
+    value: formattedDate,
+    Icon: PixelarticonsClock,
   },
 ];
 ---

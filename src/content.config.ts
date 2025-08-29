@@ -146,10 +146,37 @@ const portfolioCollection = defineCollection({
       .strict(),
 });
 
+const faqCollection = defineCollection({
+  loader: glob({ pattern: "*.json", base: "./src/content/faq" }),
+  schema: z
+    .object({
+      categoryLabel: z.object({
+        en: z.string().min(1, "English category label is required"),
+        sv: z.string().min(1, "Swedish category label is required"),
+      }),
+      items: z
+        .array(
+          z.object({
+            question: z.object({
+              en: z.string().min(1, "English question is required"),
+              sv: z.string().min(1, "Swedish question is required"),
+            }),
+            answer: z.object({
+              en: z.string().min(1, "English answer is required"),
+              sv: z.string().min(1, "Swedish answer is required"),
+            }),
+          }),
+        )
+        .min(1, "At least one FAQ item is required"),
+    })
+    .strict(),
+});
+
 export const collections = {
   adsCollection,
   clientsCollection,
   authorCollection,
+  faqCollection,
   blogCollection,
   portfolioCollection,
 };
