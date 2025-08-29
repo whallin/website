@@ -25,7 +25,12 @@ const languageSwitch = {
   hreflang={targetLocale}
   rel="alternate"
   aria-label={languageSwitch.ariaLabel}
+  id="language-switcher"
   class="transition-opacity hover:opacity-75 active:opacity-50"
 >
   <languageSwitch.FlagComponent aria-hidden="true" class="h-6 w-6" />
 </a>
+
+<script>
+  import "./LanguageSwitcher";
+</script>
