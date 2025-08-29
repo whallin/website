@@ -1,0 +1,263 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsFillHalf from "../icons/PixelarticonsFillHalf.astro";
+import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
+import PixelarticonsHeart from "../icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const valuePropositions = [
+  {
+    title: { en: "Full-stack creative", sv: "Full-stack kreativ" },
+    description: {
+      en: "Unlike specialists who focus on one thing, I offer end-to-end creative solutions. From brand strategy to web development to photography — I can handle your entire creative pipeline.",
+      sv: "Till skillnad från specialister som fokuserar på en sak, erbjuder jag helhetslösningar inom det kreativa. Från varumärkesstrategi till webbutveckling till fotografi - jag kan hantera hela din kreativa process.",
+    },
+    icon: PixelarticonsFillHalf,
+    benefits: {
+      en: [
+        "One point of contact",
+        "Consistent visual language",
+        "Streamlined project management",
+        "Cost-effective bundling",
+      ],
+      sv: [
+        "En enda kontaktperson",
+        "Konsekvent visuellt språk",
+        "Effektiv projektledning",
+        "Kostnadseffektiva paket",
+      ],
+    },
+  },
+  {
+    title: { en: "Business-focused design", sv: "Affärsinriktad design" },
+    description: {
+      en: "Every design decision is driven by your business goals. I don't just make things look pretty. I create solutions that drive engagement, conversions, and growth.",
+      sv: "Varje designbeslut drivs av dina affärsmål. Jag gör inte bara saker prydliga. Jag skapar lösningar som driver engagemang, konverteringar och tillväxt.",
+    },
+    icon: PixelarticonsFlag,
+    benefits: {
+      en: [
+        "ROI-focused approach",
+        "Data-driven decisions",
+        "Conversion optimization",
+        "Performance tracking",
+      ],
+      sv: [
+        "ROI-inriktad strategi",
+        "Datadrivna beslut",
+        "Optimering av konverteringar",
+        "Prestandaspårning",
+      ],
+    },
+  },
+  {
+    title: {
+      en: "Modern tools & techniques",
+      sv: "Moderna verktyg och tekniker",
+    },
+    description: {
+      en: "I stay current with the latest design trends, technologies, and best practices. Your projects benefit from cutting-edge techniques and future-proof solutions.",
+      sv: "Jag håller mig uppdaterad med de senaste designtrenderna, teknologierna och industristandarderna. Dina projekt drar nytta av nya tekniker och framtidssäkra lösningar.",
+    },
+    icon: PixelarticonsHeart,
+    benefits: {
+      en: [
+        "Latest design systems",
+        "Modern web standards",
+        "Performance optimization",
+        "Accessibility compliance",
+      ],
+      sv: [
+        "Senaste designsystemen",
+        "Moderna webbstandarder",
+        "Prestandaoptimering",
+        "Tillgänglighetsanpassning",
+      ],
+    },
+  },
+  {
+    title: { en: "Personal attention", sv: "Personlig uppmärksamhet" },
+    description: {
+      en: "As an independent creative, you work directly with me — no account managers or junior staff. You get professional expertise and personal service on every project.",
+      sv: "Som ensam kreatör arbetar du direkt med mig - inga kundansvariga eller juniora medarbetare. Du får professionell expertis och personlig service i varje projekt.",
+    },
+    icon: PixelarticonsHumanHandsup,
+    benefits: {
+      en: [
+        "Direct communication",
+        "High-level expertise",
+        "Flexible scheduling",
+        "Personal investment",
+      ],
+      sv: [
+        "Direkt kommunikation",
+        "Expertis på hög nivå",
+        "Flexibla scheman",
+        "Personlig investering",
+      ],
+    },
+  },
+];
+
+const clientResults = [
+  {
+    metric: "250K+",
+    description: {
+      en: "Total impressions",
+      sv: "Totala visningar",
+    },
+  },
+  {
+    metric: "50+",
+    description: {
+      en: "Projects delivered",
+      sv: "Projekt levererade",
+    },
+  },
+  {
+    metric: "98%",
+    description: { en: "Client satisfaction rate", sv: "Kundnöjdhet" },
+  },
+  {
+    metric: "24hr",
+    description: { en: "Average response time", sv: "Genomsnittlig svarstid" },
+  },
+];
+
+const translations = {
+  en: {
+    heading: "Why should you choose me?",
+    description:
+      "What sets me apart in a crowded creative market? Here's why businesses and brands choose to work with me for their most important projects.",
+    clientResultsHeading: "Client results",
+    clientResultsDescription: "Real outcomes from real projects",
+    readyToStart: "Ready to see the difference?",
+    projectIntro:
+      "Every great project begins with a conversation. Let's discuss your goals and how I can help bring your ideas to life.",
+    startYourProject: "Start your project",
+  },
+  sv: {
+    heading: "Varför bör du välja mig?",
+    description:
+      "Vad skiljer mig från mängden i en konkurrensutsatt kreativ marknad? Här är varför företag och varumärken väljer att arbeta med mig för sina viktigaste projekt.",
+    clientResultsHeading: "Kundresultat",
+    clientResultsDescription: "Verkliga resultat från verkliga projekt",
+    readyToStart: "Redo att se skillnaden?",
+    projectIntro:
+      "Varje stort projekt börjar med ett samtal. Låt oss diskutera dina mål och hur jag kan hjälpa till att förverkliga dina idéer.",
+    startYourProject: "Starta ditt projekt",
+  },
+};
+---
+
+<section aria-labelledby="why-choose-heading" class="space-y-8">
+  <header class="space-y-2">
+    <h2
+      id="why-choose-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsHumanHandsup
+        aria-hidden="true"
+        class="mr-1 mb-1 inline-block"
+      />
+      {translations[locale].heading}
+    </h2>
+    <p class="leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <div class="grid gap-6 lg:grid-cols-2">
+    {
+      valuePropositions.map((item) => (
+        <article class="group border border-stone-200 p-6 transition-colors hover:border-stone-300 dark:border-stone-700 dark:hover:border-stone-600">
+          <header class="mb-4 flex items-center gap-2">
+            <item.icon
+              aria-hidden="true"
+              class="h-6 w-6 text-red-500 dark:text-red-400"
+            />
+            <h3 class="font-serif text-lg text-stone-800 dark:text-stone-100">
+              {item.title[locale]}
+            </h3>
+          </header>
+
+          <p class="mb-4 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            {item.description[locale]}
+          </p>
+
+          <ul class="list-inside list-disc space-y-1 marker:text-red-400">
+            {item.benefits[locale].map((benefit) => (
+              <li class="text-sm text-stone-700 dark:text-stone-300">
+                {benefit}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+
+  <section
+    aria-labelledby="client-results-heading"
+    class="border border-stone-200 dark:border-stone-700"
+  >
+    <header
+      class="space-y-1 border-b border-stone-200 p-4 dark:border-stone-700 dark:bg-stone-800"
+    >
+      <h3
+        id="client-results-heading"
+        class="font-serif text-lg text-stone-800 dark:text-stone-100"
+      >
+        {translations[locale].clientResultsHeading}
+      </h3>
+      <p class="text-sm text-stone-600 dark:text-stone-400">
+        {translations[locale].clientResultsDescription}
+      </p>
+    </header>
+
+    <div class="p-6">
+      <dl class="grid gap-6 sm:grid-cols-4">
+        {
+          clientResults.map((result) => (
+            <div class="text-center">
+              <dt class="mb-1 font-mono text-2xl font-bold text-red-400">
+                {result.metric}
+              </dt>
+              <dd class="text-sm text-stone-600 dark:text-stone-400">
+                {result.description[locale]}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <aside
+    aria-labelledby="cta-heading"
+    class="space-y-2 border border-stone-200 p-6 text-center dark:border-stone-700 dark:bg-stone-800"
+  >
+    <h3
+      id="cta-heading"
+      class="font-serif text-lg text-stone-800 dark:text-stone-100"
+    >
+      {translations[locale].readyToStart}
+    </h3>
+    <p class="text-sm text-stone-600 dark:text-stone-400">
+      {translations[locale].projectIntro}
+    </p>
+
+    <a
+      href="#project-form-section"
+      class="group mt-3 inline-flex items-center gap-1 bg-red-500 px-6 py-2 text-sm font-medium text-stone-100 transition active:scale-[0.97] active:opacity-50"
+    >
+      {translations[locale].startYourProject}
+      <PixelarticonsArrowRight
+        aria-hidden="true"
+        class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      />
+    </a>
+  </aside>
+</section>

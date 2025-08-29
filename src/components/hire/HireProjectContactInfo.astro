@@ -1,0 +1,118 @@
+---
+interface FormField {
+  id: string;
+  name: string;
+  type: "text" | "email" | "tel";
+  label: string;
+  placeholder: string;
+  required?: boolean;
+  autocomplete?: string;
+}
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    legend: "Contact Information",
+    nameLabel: "Name",
+    namePlaceholder: "Your full name",
+    emailLabel: "Email",
+    emailPlaceholder: "your@email.com",
+    companyLabel: "Company/Organization",
+    companyPlaceholder: "Your company name",
+    phoneLabel: "Phone (optional)",
+    phonePlaceholder: "+1 (555) 123-4567",
+  },
+  sv: {
+    legend: "Kontaktinformation",
+    nameLabel: "Namn",
+    namePlaceholder: "Ditt fullständiga namn",
+    emailLabel: "E-post",
+    emailPlaceholder: "din@e-post.se",
+    companyLabel: "Företag/Organisation",
+    companyPlaceholder: "Ditt företagsnamn",
+    phoneLabel: "Telefon (valfritt)",
+    phonePlaceholder: "070-123 45 67",
+  },
+};
+
+const formFields: FormField[] = [
+  {
+    id: "contact-name",
+    name: "name",
+    type: "text",
+    label: translations[locale].nameLabel,
+    placeholder: translations[locale].namePlaceholder,
+    required: true,
+    autocomplete: "name",
+  },
+  {
+    id: "contact-email",
+    name: "email",
+    type: "email",
+    label: translations[locale].emailLabel,
+    placeholder: translations[locale].emailPlaceholder,
+    required: true,
+    autocomplete: "email",
+  },
+  {
+    id: "company",
+    name: "company",
+    type: "text",
+    label: translations[locale].companyLabel,
+    placeholder: translations[locale].companyPlaceholder,
+    autocomplete: "organization",
+  },
+  {
+    id: "phone",
+    name: "phone",
+    type: "tel",
+    label: translations[locale].phoneLabel,
+    placeholder: translations[locale].phonePlaceholder,
+    autocomplete: "tel",
+  },
+];
+
+const getFieldPairs = (fields: FormField[]) => {
+  const pairs: FormField[][] = [];
+  for (let i = 0; i < fields.length; i += 2) {
+    pairs.push([fields[i], fields[i + 1]].filter(Boolean) as FormField[]);
+  }
+  return pairs;
+};
+
+const fieldPairs = getFieldPairs(formFields);
+---
+
+<fieldset class="space-y-4">
+  <legend class="text-sm font-medium tracking-wider text-stone-500 uppercase">
+    {translations[locale].legend}
+  </legend>
+
+  {
+    fieldPairs.map((pair) => (
+      <div class="grid gap-4 sm:grid-cols-2">
+        {pair.map((field) => (
+          <div>
+            <label
+              for={field.id}
+              class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+            >
+              {field.label}
+              {field.required ? " *" : ""}
+            </label>
+            <input
+              type={field.type}
+              id={field.id}
+              name={field.name}
+              autocomplete={field.autocomplete}
+              required={field.required}
+              placeholder={field.placeholder}
+              class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+            />
+          </div>
+        ))}
+      </div>
+    ))
+  }
+</fieldset>

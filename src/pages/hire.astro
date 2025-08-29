@@ -1,0 +1,43 @@
+---
+export const prerender = true;
+
+import ImgHeaderHire from "../assets/header/headerHire.jpg";
+import HireCollaboration from "../components/hire/HireCollaboration.astro";
+import HireCoreServices from "../components/hire/HireCoreServices.astro";
+import HireProjectForm from "../components/hire/HireProjectForm.astro";
+import HireWorkflow from "../components/hire/HireWorkflow.astro";
+import SidebarHire from "../components/navigation/sidebars/SidebarHire.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+---
+
+<LayoutBase>
+  <SidebarHire slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderHire}
+      headerImgAlt="Bild av William Hallin"
+      headingText="Anlita William Hallin"
+      headingItalic={false}
+      descriptionText="Redo att förverkliga din idé? Från varumärkesidentitet till webbutveckling till fotografering, hjälper jag företag att skapa lockande visuella upplevelser som ger resultat."
+      btnText="Starta ditt projekt"
+      btnHref="#project-form-section"
+      btnAriaLabel="Hoppa till projektförfrågningsformuläret"
+    />
+
+    <HireCoreServices />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <HireWorkflow />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <HireCollaboration />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <HireProjectForm />
+  </div>
+</LayoutBase>

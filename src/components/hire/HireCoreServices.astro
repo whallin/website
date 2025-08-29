@@ -1,0 +1,251 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsCamera from "../icons/PixelarticonsCamera.astro";
+import PixelarticonsFillHalf from "../icons/PixelarticonsFillHalf.astro";
+import PixelarticonsFrame from "../icons/PixelarticonsFrame.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const coreServices = [
+  {
+    title: {
+      en: "Brand & visual identity",
+      sv: "Varumärke & visuell identitet",
+    },
+    description: {
+      en: "Brand development including logos, graphics, brand guidelines, and strategy that creates a cohesive visual identity across all channels.",
+      sv: "Varumärkesutveckling inklusive logotyper, grafik, varumärkesriktlinjer och strategi som skapar en sammanhängande visuell identitet över alla kanaler.",
+    },
+    icon: PixelarticonsFillHalf,
+    startingPrice: { en: "SEK 5 000", sv: "5 000 kr" },
+    deliveryTime: { en: "2-4 weeks", sv: "2-4 veckor" },
+    includes: {
+      en: [
+        "Logo & brand design",
+        "Graphics & marketing materials",
+        "Brand guidelines",
+        "Visual style systems",
+      ],
+      sv: [
+        "Logotyp- & varumärkesdesign",
+        "Grafik- & marknadsföringsmaterial",
+        "Varumärkesriktlinjer",
+        "Visuella stilsystem",
+      ],
+    },
+    featured: true,
+  },
+  {
+    title: {
+      en: "Visual content production",
+      sv: "Visuell innehållsproduktion",
+    },
+    description: {
+      en: "Photography and video production services for commercial, product, and promotional content for businesses and organizations, including post-production and creative direction.",
+      sv: "Foto- och videoproduktion för kommersiellt, produkt- och marknadsföringsinnehåll för företag och organisationer, inklusive efterproduktion och regi.",
+    },
+    icon: PixelarticonsCamera,
+    startingPrice: { en: "SEK 4 000", sv: "4 000 kr" },
+    deliveryTime: { en: "1-3 weeks", sv: "1-3 veckor" },
+    includes: {
+      en: [
+        "Photography sessions",
+        "Video production",
+        "Post-production editing",
+        "Multiple format delivery",
+      ],
+      sv: [
+        "Fotosessioner",
+        "Videoproduktion",
+        "Redigering",
+        "Leverans i flera format",
+      ],
+    },
+    featured: true,
+  },
+  {
+    title: {
+      en: "Digital experiences",
+      sv: "Digitala upplevelser",
+    },
+    description: {
+      en: "Digital solutions from UX design to development, creating websites, applications, and digital platforms that deliver interactive user experiences.",
+      sv: "Digitala lösningar från UX-design till utveckling, utveckling av webbplatser, applikationer och digitala plattformar som levererar interaktiva användarupplevelser.",
+    },
+    icon: PixelarticonsFrame,
+    startingPrice: { en: "SEK 10 000", sv: "10 000 kr" },
+    deliveryTime: { en: "3-6 weeks", sv: "3-6 veckor" },
+    includes: {
+      en: [
+        "UX/UI design",
+        "Web development",
+        "Responsive design",
+        "Performance optimization",
+      ],
+      sv: [
+        "UX/UI-design",
+        "Webbutveckling",
+        "Responsiv design",
+        "Prestandaoptimering",
+      ],
+    },
+    featured: false,
+  },
+  {
+    title: {
+      en: "Creative strategy",
+      sv: "Kreativ strategi",
+    },
+    description: {
+      en: "Strategic creative guidance, project planning, and brand positioning to ensure cohesive and effective outcomes.",
+      sv: "Strategisk kreativ vägledning, projektplanering och varumärkespositionering för att säkerställa sammanhängande och effektiva resultat.",
+    },
+    icon: PixelarticonsBriefcase,
+    startingPrice: { en: "SEK 2 000", sv: "2 000 kr" },
+    deliveryTime: { en: "Same day", sv: "Samma dag" },
+    includes: {
+      en: [
+        "Creative strategy sessions",
+        "Multi-platform planning",
+        "Brand positioning advice",
+        "Project roadmapping",
+      ],
+      sv: [
+        "Kreativa strategisessioner",
+        "Planering för flera plattformar",
+        "Rådgivning om positionering",
+        "Projektplanering",
+      ],
+    },
+    featured: false,
+  },
+];
+
+const translations = {
+  en: {
+    coreServicesHeading: "Core services",
+    coreServicesDescription:
+      "Professional design and creative services tailored to your needs. Each service is customizable and can be combined for comprehensive solutions.",
+    featured: "Featured",
+    startingPriceLabel: "Starting price",
+    deliveryTimeLabel: "Delivery time",
+    includesLabel: "Includes",
+    getStartedLabel: "Get started",
+    getStartedAriaLabel: "Start a project with ",
+  },
+  sv: {
+    coreServicesHeading: "Kärntjänster",
+    coreServicesDescription:
+      "Professionella design- och kreativa tjänster anpassade efter dina behov. Varje tjänst är anpassningsbar och kan kombineras för helhetslösningar.",
+    featured: "Utvald",
+    startingPriceLabel: "Startpris",
+    deliveryTimeLabel: "Leveranstid",
+    includesLabel: "Inkluderar",
+    getStartedLabel: "Kom igång",
+    getStartedAriaLabel: "Starta ett projekt med ",
+  },
+};
+---
+
+<section aria-labelledby="core-services-heading" class="space-y-8">
+  <header class="space-y-2">
+    <h2
+      id="core-services-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsBriefcase
+        aria-hidden="true"
+        class="mr-1 mb-1 inline-block"
+      />
+      {translations[locale].coreServicesHeading}
+    </h2>
+    <p class="leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].coreServicesDescription}
+    </p>
+  </header>
+
+  <div
+    role="list"
+    aria-labelledby="core-services-heading"
+    class="grid gap-6 lg:grid-cols-2"
+  >
+    {
+      coreServices.map((service) => (
+        <article
+          role="listitem"
+          class="group relative border border-stone-200 transition-colors hover:border-stone-300 dark:border-stone-700 dark:hover:border-stone-600"
+        >
+          <div class="flex h-full flex-col justify-between gap-4 p-6">
+            <div class="space-y-4">
+              {service.featured && (
+                <span class="block w-fit rounded-full bg-red-100 px-2 py-1 text-xs font-medium tracking-tight text-red-700 dark:bg-red-900/50 dark:text-red-400">
+                  {translations[locale].featured}
+                </span>
+              )}
+
+              <header class="flex flex-col gap-2 text-stone-800 sm:flex-row sm:items-center dark:text-stone-100">
+                <service.icon
+                  aria-hidden="true"
+                  class="h-6 w-6 transition-colors group-hover:text-red-500 dark:group-hover:text-red-400"
+                />
+
+                <h3 class="font-serif text-xl transition-colors group-hover:text-red-700 dark:group-hover:text-red-400">
+                  {service.title[locale]}
+                </h3>
+              </header>
+
+              <p class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                {service.description[locale]}
+              </p>
+
+              <dl class="grid grid-cols-2 gap-4 text-sm">
+                <div class="space-y-1">
+                  <dt class="text-xs font-medium tracking-wider text-stone-500 uppercase">
+                    {translations[locale].startingPriceLabel}
+                  </dt>
+                  <dd class="font-mono font-medium text-stone-800 dark:text-stone-100">
+                    {service.startingPrice[locale]}
+                  </dd>
+                </div>
+                <div class="space-y-1">
+                  <dt class="text-xs font-medium tracking-wider text-stone-500 uppercase">
+                    {translations[locale].deliveryTimeLabel}
+                  </dt>
+                  <dd class="font-mono font-medium text-stone-800 dark:text-stone-100">
+                    {service.deliveryTime[locale]}
+                  </dd>
+                </div>
+              </dl>
+
+              <div class="space-y-1">
+                <h4 class="text-xs font-medium tracking-wider text-stone-500 uppercase">
+                  {translations[locale].includesLabel}
+                </h4>
+                <ul class="list-inside list-disc space-y-1 text-sm marker:text-red-400">
+                  {service.includes[locale].map((item) => (
+                    <li class="text-stone-600 dark:text-stone-400">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 border-t border-stone-200 pt-4 dark:border-stone-700">
+              <a
+                href="#project-form-selection"
+                aria-label={`${translations[locale].getStartedAriaLabel} ${service.title[locale]}`}
+                class="group mt-2 inline-flex items-center gap-1 px-px text-sm text-red-600 transition-colors hover:bg-red-400 hover:text-stone-100 dark:text-red-400"
+              >
+                {translations[locale].getStartedLabel}
+                <PixelarticonsArrowRight
+                  aria-hidden="true"
+                  class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
