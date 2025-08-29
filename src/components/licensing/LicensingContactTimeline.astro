@@ -1,0 +1,147 @@
+---
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    timelineDetails: "License timeline",
+    neededBy: "License needed by",
+    neededByOptions: {
+      select: "Select timeline",
+      asap: "ASAP",
+      within1Week: "Within 1 week",
+      within2Weeks: "Within 2 weeks",
+      within1Month: "Within 1 month",
+      flexible: "Flexible",
+    },
+    duration: "License duration",
+    durationOptions: {
+      select: "Select duration",
+      oneYear: "1 year",
+      twoYears: "2 years",
+      fiveYears: "5 years",
+      perpetual: "Perpetual",
+      custom: "Custom Duration",
+    },
+  },
+  sv: {
+    timelineDetails: "Licensens tidslinje",
+    neededBy: "Licens behövs senast",
+    neededByOptions: {
+      select: "Välj tidslinje",
+      asap: "Så snart som möjligt",
+      within1Week: "Inom 1 vecka",
+      within2Weeks: "Inom 2 veckor",
+      within1Month: "Inom 1 månad",
+      flexible: "Flexibel",
+    },
+    duration: "Licensens längd",
+    durationOptions: {
+      select: "Välj längd",
+      oneYear: "1 år",
+      twoYears: "2 år",
+      fiveYears: "5 år",
+      perpetual: "Perpetuell",
+      custom: "Anpassad längd",
+    },
+  },
+};
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface FormField {
+  id: string;
+  name: string;
+  label: string;
+  required?: boolean;
+  options: SelectOption[];
+}
+
+const formFields: FormField[] = [
+  {
+    id: "needed-by",
+    name: "needed_by",
+    label: translations[locale].neededBy,
+    required: true,
+    options: [
+      { value: "", label: translations[locale].neededByOptions.select },
+      { value: "ASAP", label: translations[locale].neededByOptions.asap },
+      {
+        value: "Within 1 week",
+        label: translations[locale].neededByOptions.within1Week,
+      },
+      {
+        value: "Within 2 weeks",
+        label: translations[locale].neededByOptions.within2Weeks,
+      },
+      {
+        value: "Within 1 month",
+        label: translations[locale].neededByOptions.within1Month,
+      },
+      {
+        value: "Flexible",
+        label: translations[locale].neededByOptions.flexible,
+      },
+    ],
+  },
+  {
+    id: "duration",
+    name: "duration",
+    label: translations[locale].duration,
+    required: true,
+    options: [
+      { value: "", label: translations[locale].durationOptions.select },
+      { value: "1 year", label: translations[locale].durationOptions.oneYear },
+      {
+        value: "2 years",
+        label: translations[locale].durationOptions.twoYears,
+      },
+      {
+        value: "5 years",
+        label: translations[locale].durationOptions.fiveYears,
+      },
+      {
+        value: "Perpetual",
+        label: translations[locale].durationOptions.perpetual,
+      },
+      { value: "Custom", label: translations[locale].durationOptions.custom },
+    ],
+  },
+];
+---
+
+<fieldset>
+  <legend
+    class="mb-4 text-sm font-medium tracking-wider text-stone-500 uppercase"
+  >
+    {translations[locale].timelineDetails}
+  </legend>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    {
+      formFields.map((field) => (
+        <div>
+          <label
+            for={field.id}
+            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+          >
+            {field.label}
+            {field.required ? " *" : ""}
+          </label>
+          <select
+            id={field.id}
+            name={field.name}
+            required={field.required}
+            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+          >
+            {field.options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        </div>
+      ))
+    }
+  </div>
+</fieldset>

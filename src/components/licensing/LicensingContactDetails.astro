@@ -1,0 +1,350 @@
+---
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    licensingDetails: "Licensing details",
+    licenseType: "License type",
+    licenseTypes: {
+      select: "Select license type",
+      singleUse: "Single Use License",
+      extended: "Extended License",
+      commercial: "Commercial License",
+      exclusive: "Exclusive License",
+      custom: "Custom License",
+    },
+    intendedUse: "Intended use",
+    intendedUses: {
+      select: "Select usage type",
+      digitalMarketing: "Digital marketing",
+      printMedia: "Print media",
+      webAppDevelopment: "Web/app development",
+      socialMedia: "Social media",
+      editorial: "Editorial",
+      commercialProduct: "Commercial product",
+      packaging: "Packaging",
+      other: "Other",
+    },
+    budgetRange: "Budget range",
+    budgetRanges: {
+      select: "Select budget range",
+      under1000: "Under SEK 1,000",
+      between10005000: "SEK 1,000 - 5,000",
+      between500010000: "SEK 5,000 - 10,000",
+      between1000025000: "SEK 10,000 - 25,000",
+      over25000: "SEK 25,000+",
+      flexible: "Flexible",
+    },
+    usageScope: "Geographic scope",
+    usageScopes: {
+      select: "Select scope",
+      local: "Local/Regional",
+      national: "National",
+      international: "International",
+      worldwide: "Worldwide",
+      onlineOnly: "Online only",
+    },
+    specificAssets: "Specific assets",
+    specificAssetsPlaceholder:
+      "Please specify which images, designs, or other assets you're interested in licensing. Include URLs or descriptions...",
+    projectDescription: "Project description",
+    projectDescriptionPlaceholder:
+      "Describe your project, how you plan to use the licensed content, target audience, distribution channels, and timeline...",
+    additionalRequirements: "Additional requirements",
+    additionalRequirementsPlaceholder:
+      "Any specific licensing terms, exclusivity needs, or other requirements...",
+  },
+  sv: {
+    licensingDetails: "Licensens detaljer",
+    licenseType: "Licenstyp",
+    licenseTypes: {
+      select: "Välj licenstyp",
+      singleUse: "Enkel licens",
+      extended: "Utökad licens",
+      commercial: "Kommersiell licens",
+      exclusive: "Exklusiv licens",
+      custom: "Anpassad licens",
+    },
+    intendedUse: "Avsedd användning",
+    intendedUses: {
+      select: "Välj användningstyp",
+      digitalMarketing: "Digital marknadsföring",
+      printMedia: "Tryckt media",
+      webAppDevelopment: "Webb-/app-utveckling",
+      socialMedia: "Sociala medier",
+      editorial: "Redaktionell",
+      commercialProduct: "Kommersiell produkt",
+      packaging: "Förpackning",
+      other: "Annat",
+    },
+    budgetRange: "Budgetintervall",
+    budgetRanges: {
+      select: "Välj budgetintervall",
+      under1000: "Under 1 000 kr",
+      between10005000: "1 000 - 5 000 kr",
+      between500010000: "5 000 - 10 000 kr",
+      between1000025000: "10 000 - 25 000 kr",
+      over25000: "Över 25 000 kr",
+      flexible: "Flexibel",
+    },
+    usageScope: "Användningsomfattning",
+    usageScopes: {
+      select: "Välj omfattning",
+      local: "Lokal/Regional",
+      national: "Nationell",
+      international: "Internationell",
+      worldwide: "Global",
+      onlineOnly: "Endast online",
+    },
+    specificAssets: "Specifika tillgångar",
+    specificAssetsPlaceholder:
+      "Ange vilka bilder, designer eller andra tillgångar du är intresserad av att licensiera. Inkludera URL:er eller beskrivningar...",
+    projectDescription: "Projektbeskrivning",
+    projectDescriptionPlaceholder:
+      "Beskriv ditt projekt, hur du planerar att använda det licensierade innehållet, målgrupp, distributionskanaler och tidslinje...",
+    additionalRequirements: "Ytterligare krav",
+    additionalRequirementsPlaceholder:
+      "Eventuella specifika licensvillkor, exklusivitetsbehov eller andra krav...",
+  },
+};
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface FormField {
+  id: string;
+  name: string;
+  type: "select" | "textarea";
+  label: string;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  options?: SelectOption[];
+  gridClass?: string;
+}
+
+const formFields: FormField[] = [
+  {
+    id: "license-type",
+    name: "license_type",
+    type: "select",
+    label: translations[locale].licenseType,
+    required: true,
+    gridClass: "sm:grid-cols-2",
+    options: [
+      { value: "", label: translations[locale].licenseTypes.select },
+      {
+        value: "Single Use",
+        label: translations[locale].licenseTypes.singleUse,
+      },
+      { value: "Extended", label: translations[locale].licenseTypes.extended },
+      {
+        value: "Commercial",
+        label: translations[locale].licenseTypes.commercial,
+      },
+      {
+        value: "Exclusive",
+        label: translations[locale].licenseTypes.exclusive,
+      },
+      { value: "Custom", label: translations[locale].licenseTypes.custom },
+    ],
+  },
+  {
+    id: "usage-type",
+    name: "usage_type",
+    type: "select",
+    label: translations[locale].intendedUse,
+    required: true,
+    gridClass: "sm:grid-cols-2",
+    options: [
+      { value: "", label: translations[locale].intendedUses.select },
+      {
+        value: "Digital marketing",
+        label: translations[locale].intendedUses.digitalMarketing,
+      },
+      {
+        value: "Print media",
+        label: translations[locale].intendedUses.printMedia,
+      },
+      {
+        value: "Web/app development",
+        label: translations[locale].intendedUses.webAppDevelopment,
+      },
+      {
+        value: "Social media",
+        label: translations[locale].intendedUses.socialMedia,
+      },
+      {
+        value: "Editorial",
+        label: translations[locale].intendedUses.editorial,
+      },
+      {
+        value: "Commercial product",
+        label: translations[locale].intendedUses.commercialProduct,
+      },
+      {
+        value: "Packaging",
+        label: translations[locale].intendedUses.packaging,
+      },
+      { value: "Other", label: translations[locale].intendedUses.other },
+    ],
+  },
+  {
+    id: "budget-range",
+    name: "budget_range",
+    type: "select",
+    label: translations[locale].budgetRange,
+    required: true,
+    gridClass: "sm:grid-cols-2",
+    options: [
+      { value: "", label: translations[locale].budgetRanges.select },
+      {
+        value: "Under SEK 1,000",
+        label: translations[locale].budgetRanges.under1000,
+      },
+      {
+        value: "SEK 1,000 - SEK 5,000",
+        label: translations[locale].budgetRanges.between10005000,
+      },
+      {
+        value: "SEK 5,000 - SEK 10,000",
+        label: translations[locale].budgetRanges.between500010000,
+      },
+      {
+        value: "SEK 10,000 - SEK 25,000",
+        label: translations[locale].budgetRanges.between1000025000,
+      },
+      {
+        value: "SEK 25,000+",
+        label: translations[locale].budgetRanges.over25000,
+      },
+      { value: "Flexible", label: translations[locale].budgetRanges.flexible },
+    ],
+  },
+  {
+    id: "usage-scope",
+    name: "usage_scope",
+    type: "select",
+    label: translations[locale].usageScope,
+    required: true,
+    gridClass: "sm:grid-cols-2",
+    options: [
+      { value: "", label: translations[locale].usageScopes.select },
+      { value: "Local", label: translations[locale].usageScopes.local },
+      { value: "National", label: translations[locale].usageScopes.national },
+      {
+        value: "International",
+        label: translations[locale].usageScopes.international,
+      },
+      { value: "Worldwide", label: translations[locale].usageScopes.worldwide },
+      {
+        value: "Online only",
+        label: translations[locale].usageScopes.onlineOnly,
+      },
+    ],
+  },
+  {
+    id: "specific-assets",
+    name: "specific_assets",
+    type: "textarea",
+    label: translations[locale].specificAssets,
+    placeholder: translations[locale].specificAssetsPlaceholder,
+    required: true,
+    rows: 3,
+  },
+  {
+    id: "project-description",
+    name: "project_description",
+    type: "textarea",
+    label: translations[locale].projectDescription,
+    placeholder: translations[locale].projectDescriptionPlaceholder,
+    required: true,
+    rows: 4,
+  },
+  {
+    id: "additional-requirements",
+    name: "additional_requirements",
+    type: "textarea",
+    label: translations[locale].additionalRequirements,
+    placeholder: translations[locale].additionalRequirementsPlaceholder,
+    rows: 3,
+  },
+];
+
+const getFieldPairs = (fields: FormField[]) => {
+  const selectFields = fields.filter((f) => f.type === "select");
+  const textareaFields = fields.filter((f) => f.type === "textarea");
+
+  const pairs: FormField[][] = [];
+  for (let i = 0; i < selectFields.length; i += 2) {
+    const pair = [selectFields[i], selectFields[i + 1]].filter(
+      Boolean,
+    ) as FormField[];
+    pairs.push(pair);
+  }
+
+  return { pairs, textareaFields };
+};
+
+const { pairs: selectPairs, textareaFields } = getFieldPairs(formFields);
+---
+
+<fieldset>
+  <legend
+    class="mb-4 text-sm font-medium tracking-wider text-stone-500 uppercase"
+  >
+    {translations[locale].licensingDetails}
+  </legend>
+
+  {
+    selectPairs.map((pair) => (
+      <div class="mb-4 grid gap-4 sm:grid-cols-2">
+        {pair.map((field) => (
+          <div>
+            <label
+              for={field.id}
+              class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+            >
+              {field.label}
+              {field.required ? " *" : ""}
+            </label>
+            <select
+              id={field.id}
+              name={field.name}
+              required={field.required}
+              class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+            >
+              {field.options?.map((option) => (
+                <option value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+    ))
+  }
+
+  {
+    textareaFields.map((field) => (
+      <div>
+        <label
+          for={field.id}
+          class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+        >
+          {field.label}
+          {field.required ? " *" : ""}
+        </label>
+        <textarea
+          id={field.id}
+          name={field.name}
+          required={field.required}
+          rows={field.rows}
+          placeholder={field.placeholder}
+          class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        />
+      </div>
+    ))
+  }
+</fieldset>
