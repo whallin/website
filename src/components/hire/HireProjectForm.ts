@@ -106,7 +106,7 @@ const initializeTurnstile = () => {
 
     if (!turnstileManager.rendered) {
       turnstileManager.render(
-        "#project-turnstile-container",
+        "#turnstile-container",
         TURNSTILE_SITE_KEY,
         {
           onSuccess: () => {
