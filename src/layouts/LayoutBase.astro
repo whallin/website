@@ -5,12 +5,24 @@ import Footer from "../components/navigation/Footer.astro";
 import Navbar from "../components/navigation/Navbar.astro";
 import "../styles/global.css";
 
-const { schema, adId } = Astro.props;
+const {
+  title,
+  description,
+  keywords = [],
+  article = false,
+  schema,
+  adId,
+} = Astro.props;
 ---
 
 <html lang={Astro.currentLocale}>
   <head>
-    <HtmlHead />
+    <HtmlHead
+      title={title}
+      description={description}
+      keywords={keywords}
+      article={article}
+    />
     {
       schema && (
         <script type="application/ld+json" set:html={JSON.stringify(schema)} />

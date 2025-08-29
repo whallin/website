@@ -19,9 +19,29 @@ export async function getStaticPaths() {
 }
 
 const { author } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: author.data.name,
+  url: Astro.url,
+  image: Astro.url + author.data.avatar.src,
+  sameAs: author.data.socialLinks
+    ? [
+        author.data.socialLinks.linkedin,
+        author.data.socialLinks.github,
+        author.data.socialLinks.website,
+      ].filter(Boolean)
+    : [],
+  jobTitle: "Förrfattare",
+  worksFor: {
+    "@type": "Organization",
+    name: "HallinMedia",
+  },
+};
 ---
 
-<LayoutBase>
+<LayoutBase schema={schema}>
   <SidebarBase showLogo showReturn slot="sidebar">
     <div slot="content">
       <AuthorProfileSidebarData author={author} />
