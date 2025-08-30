@@ -41,7 +41,11 @@ const schema = {
 };
 ---
 
-<LayoutBase>
+<LayoutBase
+  title={`${author.data.name} - Author`}
+  description={author.data.bio.en}
+  schema={schema}
+>
   <SidebarBase showLogo showReturn slot="sidebar">
     <div slot="content">
       <AuthorProfileSidebarData author={author} />

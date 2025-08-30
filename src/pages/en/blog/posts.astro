@@ -7,7 +7,10 @@ import PageHeaderImg from "../../../components/PageHeaderImg.astro";
 import LayoutBase from "../../../layouts/LayoutBase.astro";
 ---
 
-<LayoutBase>
+<LayoutBase
+  title="All blog posts"
+  description="Browse all published articles on the Hallin blog - from the latest insights to guides on design and media."
+>
   <SidebarBase showLogo showReturn showNav slot="sidebar" />
 
   <div slot="content" class="space-y-12">

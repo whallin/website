@@ -20,7 +20,10 @@ export async function getStaticPaths() {
 const { client } = Astro.props;
 ---
 
-<LayoutBase>
+<LayoutBase
+  title={`${client.data.name} - Client`}
+  description={client.data.description.en}
+>
   <SidebarBase showLogo showReturn showNav slot="sidebar" />
 
   <main slot="content" class="space-y-12">

@@ -7,19 +7,21 @@ import PageHeaderImg from "../../components/PageHeaderImg.astro";
 import LayoutBase from "../../layouts/LayoutBase.astro";
 ---
 
-<LayoutBase>
-  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+<LayoutBase
+  title="Alla blogginlägg"
+  description="Bläddra genom alla publicerade artiklar på Hallin-bloggen - från senaste insikter till guider inom design och media."
+/>
+<SidebarBase showLogo showReturn showNav slot="sidebar" />
 
-  <div slot="content" class="space-y-12">
-    <PageHeaderImg
-      headingText="Alla blogginlägg"
-      headingItalic={false}
-      descriptionText="Osäker om du har läst alla blogginlägg? Nedan finns alla publicerade inlägg, samlade i en prydlig lista sorterad efter datum."
-      btnText="Skicka ett meddelande"
-      btnHref="/contact"
-      btnAriaLabel="Kontakta William angående bloggen"
-    />
+<div slot="content" class="space-y-12">
+  <PageHeaderImg
+    headingText="Alla blogginlägg"
+    headingItalic={false}
+    descriptionText="Osäker om du har läst alla blogginlägg? Nedan finns alla publicerade inlägg, samlade i en prydlig lista sorterad efter datum."
+    btnText="Skicka ett meddelande"
+    btnHref="/contact"
+    btnAriaLabel="Kontakta William angående bloggen"
+  />
 
-    <BlogAllPosts />
-  </div>
-</LayoutBase>
+  <BlogAllPosts />
+</div>
