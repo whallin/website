@@ -21,10 +21,13 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
   type="button"
   aria-label={translations[locale].ariaLabelToggle}
   title={translations[locale].title}
-  class="w-fit cursor-pointer rounded-md border border-stone-300 p-2 text-stone-700 transition hover:opacity-75 active:scale-90 dark:border-stone-700 dark:text-stone-300"
+  class="h-8 w-8 cursor-pointer rounded-md border border-stone-300 p-1.5 text-stone-700 transition hover:opacity-75 active:scale-90 dark:border-stone-700 dark:text-stone-300"
 >
-  <PixelarticonsMoonStar aria-hidden="true" class="h-4 w-4 dark:hidden" />
-  <PixelarticonsSunAlt aria-hidden="true" class="hidden h-4 w-4 dark:block" />
+  <PixelarticonsMoonStar aria-hidden="true" class="h-full w-full dark:hidden" />
+  <PixelarticonsSunAlt
+    aria-hidden="true"
+    class="hidden h-full w-full dark:block"
+  />
 </button>
 
 <script>
