@@ -2,6 +2,9 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import SvgWordmarkDark from "../../assets/wordmark-dark.svg";
 import SvgWordmarkLight from "../../assets/wordmark-light.svg";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
 import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
 import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
 import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
@@ -35,6 +38,7 @@ const socialLinks = [
 const footerLinks = {
   en: [
     {
+      icon: PixelarticonsBriefcase,
       category: "Work",
       links: [
         { href: "portfolio", label: "Portfolio" },
@@ -44,6 +48,7 @@ const footerLinks = {
       ],
     },
     {
+      icon: PixelarticonsHumanHandsup,
       category: "William Hallin",
       links: [
         { href: "about", label: "About me" },
@@ -53,6 +58,7 @@ const footerLinks = {
       ],
     },
     {
+      icon: PixelarticonsScriptText,
       category: "Support",
       links: [
         { href: "faq", label: "FAQ" },
@@ -63,6 +69,7 @@ const footerLinks = {
   ],
   sv: [
     {
+      icon: PixelarticonsBriefcase,
       category: "Arbete",
       links: [
         { href: "portfolio", label: "Portfölj" },
@@ -72,6 +79,7 @@ const footerLinks = {
       ],
     },
     {
+      icon: PixelarticonsHumanHandsup,
       category: "William Hallin",
       links: [
         { href: "about", label: "Om mig" },
@@ -81,6 +89,7 @@ const footerLinks = {
       ],
     },
     {
+      icon: PixelarticonsScriptText,
       category: "Support",
       links: [
         { href: "faq", label: "FAQ" },
@@ -131,6 +140,7 @@ const currentFooterLinks = footerLinks[locale];
         currentFooterLinks.map((section) => (
           <div>
             <h3 class="mb-3 text-sm font-medium text-stone-800 dark:text-stone-100">
+              <section.icon aria-hidden="true" class="mr-1 inline h-4 w-4" />
               {section.category}
             </h3>
             <ul class="space-y-1">

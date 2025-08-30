@@ -105,29 +105,22 @@ const initializeTurnstile = () => {
     uiManager.hideMessages();
 
     if (!turnstileManager.rendered) {
-      turnstileManager.render(
-        "#turnstile-container",
-        TURNSTILE_SITE_KEY,
-        {
-          onSuccess: () => {
-            uiManager.updateSubmitButton();
-          },
-          onError: (errorCode: string) => {
-            uiManager.updateSubmitButton();
-            uiManager.showMessage(
-              "error",
-              "Captcha failed. Try again. (" + errorCode + ")",
-            );
-          },
-          onExpired: () => {
-            uiManager.updateSubmitButton();
-            uiManager.showMessage(
-              "error",
-              "Captcha expired. Complete it again.",
-            );
-          },
+      turnstileManager.render("#turnstile-container", TURNSTILE_SITE_KEY, {
+        onSuccess: () => {
+          uiManager.updateSubmitButton();
         },
-      );
+        onError: (errorCode: string) => {
+          uiManager.updateSubmitButton();
+          uiManager.showMessage(
+            "error",
+            "Captcha failed. Try again. (" + errorCode + ")",
+          );
+        },
+        onExpired: () => {
+          uiManager.updateSubmitButton();
+          uiManager.showMessage("error", "Captcha expired. Complete it again.");
+        },
+      });
     }
   };
 
