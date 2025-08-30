@@ -33,6 +33,7 @@
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/sitemap": "^3.5.1",
     "@sentry/astro": "^10.8.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.5",
     "resend": "^6.0.2",

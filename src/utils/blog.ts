@@ -2,16 +2,16 @@ import type { CollectionEntry } from "astro:content";
 
 export type BlogPost = CollectionEntry<"blogCollection">;
 
-export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
+export function formatDate(date: string, locale: string): string {
+  return new Date(date).toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
 
-export function formatDateShort(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
+export function formatDateShort(date: string, locale: string): string {
+  return new Date(date).toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",

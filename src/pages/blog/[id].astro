@@ -1,0 +1,204 @@
+---
+export const prerender = true;
+
+import { Image } from "astro:assets";
+import { getCollection, getEntry, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import BlogNewsletterSignup from "../../components/blog/BlogNewsletterSignup.astro";
+import PixelarticonsCalendar from "../../components/icons/PixelarticonsCalendar.astro";
+import PixelarticonsClock from "../../components/icons/PixelarticonsClock.astro";
+import PixelarticonsPin from "../../components/icons/PixelarticonsPin.astro";
+import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+import { calculateReadTime, formatDate } from "../../utils/blog.ts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blogCollection", ({ id }) => {
+    return id.startsWith("sv/");
+  });
+  return posts.map((post) => ({
+    params: { id: post.id.replace("sv/", "") },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const authors = await Promise.all(
+  post.data.author.map(async (authorRef) => {
+    return await getEntry("authorCollection", authorRef.id);
+  }),
+);
+const timeToRead = calculateReadTime(post.body || "");
+const formattedDate = formatDate(post.data.publishedDate, "sv-SE");
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": Astro.url,
+  },
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.thumbnailImg,
+  author: authors.map((author) => ({
+    "@type": "Person",
+    name: author?.data.name,
+    url: author?.data.socialLinks?.website || "https://hallin.media",
+    image: author?.data.avatar,
+  })),
+  publisher: {
+    "@type": "Organization",
+    name: "HallinMedia",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://hallin.media/meta.png",
+    },
+  },
+  datePublished: post.data.publishedDate,
+  dateModified: post.data.publishedDate,
+};
+---
+
+<LayoutBase
+  title={post.data.title}
+  description={post.data.description}
+  article={true}
+  schema={schema}
+>
+  <SidebarBase showLogo showReturn slot="sidebar">
+    <div slot="content">
+      <aside
+        class="space-y-4 text-xs text-stone-500"
+        aria-label="Artikelmetadata"
+      >
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
+            <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
+            Publicerad
+          </span>
+          <time
+            datetime={post.data.publishedDate}
+            class="font-mono text-stone-800 dark:text-stone-300"
+          >
+            {formattedDate}
+          </time>
+        </div>
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
+            <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
+            Lästid
+          </span>
+          <span class="font-mono text-stone-800 dark:text-stone-300">
+            {timeToRead} min
+          </span>
+        </div>
+      </aside>
+    </div>
+  </SidebarBase>
+
+  <article slot="content" class="space-y-8">
+    <header>
+      <PageHeaderImg
+        headerImgSrc={post.data.thumbnailImg}
+        headerImgAlt={post.data.thumbnailImgAlt}
+        headingText={post.data.title}
+        headingItalic={false}
+        descriptionText={post.data.description}
+        showBtn={false}
+      />
+
+      <aside
+        class="flex flex-wrap gap-6 text-xs text-stone-500 md:hidden"
+        aria-label="Artikelmetadata"
+      >
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
+            <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
+            Publicerad
+          </span>
+          <time
+            datetime={post.data.publishedDate}
+            class="font-mono text-stone-800 dark:text-stone-300"
+          >
+            {formattedDate}
+          </time>
+        </div>
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
+            <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
+            Lästid
+          </span>
+          <span class="font-mono text-stone-800 dark:text-stone-300">
+            {timeToRead} min
+          </span>
+        </div>
+      </aside>
+    </header>
+
+    <main
+      class="prose dark:prose-invert prose-stone prose-headings:font-serif prose-headings:font-medium prose-headings:italic prose-a:hover:bg-red-400 prose-a:hover:text-stone-100 prose-a:active:opacity-50 prose-a:decoration-dashed prose-a:decoration-from-font prose-a:underline-offset-2"
+    >
+      <Content />
+    </main>
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <aside aria-labelledby="authors-heading">
+      <h2
+        id="authors-heading"
+        class="mb-4 font-serif text-xl text-stone-800 dark:text-stone-300"
+      >
+        Inlägg publicerat av
+      </h2>
+
+      <ul role="list" class="flex flex-wrap gap-2">
+        {
+          authors.map(
+            (author) =>
+              author && (
+                <li>
+                  <a
+                    href={getRelativeLocaleUrl("sv", `authors/${author.id}`)}
+                    class="flex w-fit gap-4 p-3 text-stone-800 transition hover:bg-stone-200/50 active:opacity-50 dark:text-stone-300 dark:hover:bg-stone-800"
+                    aria-label={`Visa profil för ${author.data.name}`}
+                  >
+                    <Image
+                      src={author.data.avatar}
+                      alt={`Bild av ${author.data.name}`}
+                      width={48}
+                      height={48}
+                      class="rounded-full select-none"
+                    />
+                    <div>
+                      <span class="font-medium tracking-tight">
+                        {author.data.name}
+                      </span>
+                      {author.data.location && (
+                        <span class="flex items-center gap-1 text-sm text-stone-600 dark:text-stone-400">
+                          <PixelarticonsPin
+                            aria-hidden="true"
+                            class="h-4 w-4"
+                          />
+                          {author.data.location}
+                        </span>
+                      )}
+                    </div>
+                  </a>
+                </li>
+              ),
+          )
+        }
+      </ul>
+    </aside>
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <section aria-labelledby="newsletter-signup">
+      <BlogNewsletterSignup />
+    </section>
+  </article>
+</LayoutBase>
