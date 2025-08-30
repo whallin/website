@@ -29,13 +29,13 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.6",
+    "@astrojs/cloudflare": "^12.6.7",
     "@astrojs/mdx": "^4.3.4",
     "@astrojs/sitemap": "^3.5.1",
     "@sentry/astro": "^10.8.0",
     "@tailwindcss/vite": "^4.1.12",
-    "astro": "^5.13.4",
-    "resend": "^6.0.1",
+    "astro": "^5.13.5",
+    "resend": "^6.0.2",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
