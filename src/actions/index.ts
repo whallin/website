@@ -199,9 +199,9 @@ export const server = {
 
   /**
    * Handles newsletter subscription with turnstile verification
-   * Validates the email address, verifies turnstile token, and adds contact to Resend audience
+   * Validates the email address and first name, verifies turnstile token, and adds contact to Resend audience
    *
-   * @param input - Form data containing email and turnstile token
+   * @param input - Form data containing first name, email and turnstile token
    * @param context - Astro action context containing request information
    * @returns Promise resolving to success status and contact data
    * @throws ActionError for validation failures or subscription errors
@@ -209,6 +209,7 @@ export const server = {
   subscribeToNewsletter: defineAction({
     accept: "form",
     input: z.object({
+      firstName: z.string().min(1, "First name is required"),
       email: z.string().email("Please enter a valid email address"),
       "cf-turnstile-response": z
         .string()
@@ -216,7 +217,7 @@ export const server = {
     }),
 
     handler: async (
-      { email, "cf-turnstile-response": turnstileToken },
+      { firstName, email, "cf-turnstile-response": turnstileToken },
       context,
     ) => {
       const clientIp = getClientIp(context.request);
@@ -225,6 +226,7 @@ export const server = {
       try {
         const { data, error } = await resend.contacts.create({
           email: email,
+          firstName: firstName,
           unsubscribed: false,
           audienceId: "d08ca3a9-2673-4432-9199-8753384e6eb8",
         });

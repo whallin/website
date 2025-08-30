@@ -3,6 +3,7 @@ export const prerender = true;
 
 import ImgHeaderBlog from "../../../assets/header/headerBlog.jpg";
 import BlogFeaturedPost from "../../../components/blog/BlogFeaturedPost.astro";
+import BlogNewsletterSignup from "../../../components/blog/BlogNewsletterSignup.astro";
 import BlogRecentPosts from "../../../components/blog/BlogRecentPosts.astro";
 import SidebarBlog from "../../../components/navigation/sidebars/SidebarBlog.astro";
 import PageHeaderImg from "../../../components/PageHeaderImg.astro";
@@ -28,6 +29,10 @@ import LayoutBase from "../../../layouts/LayoutBase.astro";
     />
 
     <BlogFeaturedPost />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <BlogNewsletterSignup />
 
     <hr class="border-stone-300 dark:border-stone-700" />
 
