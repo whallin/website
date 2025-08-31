@@ -1,0 +1,16 @@
+{
+  "title": {
+    "en": "Graphic design",
+    "sv": "Grafisk design"
+  },
+  "description": {
+    "en": "Crafting visuals that tell your story and elevate your brand with professional graphic design services.",
+    "sv": "Skapar visuellt material som berättar din historia och lyfter ditt varumärke med professionella grafiska designtjänster."
+  },
+  "icon": "PixelarticonsFillHalf",
+  "featured": true,
+  "category": {
+    "en": "Media Services",
+    "sv": "Mediatjänster"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": {
+    "en": "Photography",
+    "sv": "Fotografi"
+  },
+  "description": {
+    "en": "Capture high-quality images that tell stories and elevate your brand. Specialising in product, corporate, and event photography.",
+    "sv": "Fånga högkvalitativa bilder som berättar historier och lyfter ditt varumärke. Specialiserad på produkt-, företags- och evenemangsfotografering."
+  },
+  "icon": "PixelarticonsCamera",
+  "featured": true,
+  "category": {
+    "en": "Media Services",
+    "sv": "Mediatjänster"
+  }
+}
