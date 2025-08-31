@@ -1,16 +1,34 @@
 ---
 export const prerender = true;
 
+import { getCollection } from "astro:content";
 import ImgHeaderFaq from "../assets/header/headerFaq.jpg";
 import FaqAllFaqs from "../components/faq/FaqAllFaqs.astro";
 import SidebarFaq from "../components/navigation/sidebars/SidebarFaq.astro";
 import PageHeaderImg from "../components/PageHeaderImg.astro";
 import LayoutBase from "../layouts/LayoutBase.astro";
+
+const faqEntries = await getCollection("faqCollection");
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqEntries.flatMap((category) =>
+    category.data.items.map((item) => ({
+      "@type": "Question",
+      name: item.question.sv,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer.sv.replace(/<[^>]*>/g, ""),
+      },
+    })),
+  ),
+};
 ---
 
 <LayoutBase
   title="Vanliga frågor"
   description="Få svar på vanliga frågor om design, fotografering, webbutveckling, priser och projektprocesser. Snabba och tydliga svar på det du undrar över."
+  schema={schema}
 >
   <SidebarFaq slot="sidebar" />
 
