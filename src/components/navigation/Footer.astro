@@ -35,70 +35,37 @@ const socialLinks = [
   },
 ];
 
-const footerLinks = {
-  en: [
-    {
-      icon: PixelarticonsBriefcase,
-      category: "Work",
-      links: [
-        { href: "portfolio", label: "Portfolio" },
-        { href: "services", label: "Services" },
-        // { href: "pricing", label: "Pricing" },
-        { href: "hire", label: "Hire William" },
-      ],
-    },
-    {
-      icon: PixelarticonsHumanHandsup,
-      category: "William Hallin",
-      links: [
-        { href: "about", label: "About me" },
-        { href: "blog", label: "Blog" },
-        { href: "clients", label: "Clients" },
-        { href: "contact", label: "Contact me" },
-      ],
-    },
-    {
-      icon: PixelarticonsScriptText,
-      category: "Support",
-      links: [
-        { href: "faq", label: "FAQ" },
-        { href: "licensing", label: "Licensing" },
-        { href: "legal", label: "Legal" },
-      ],
-    },
-  ],
-  sv: [
-    {
-      icon: PixelarticonsBriefcase,
-      category: "Arbete",
-      links: [
-        { href: "portfolio", label: "Portfölj" },
-        { href: "services", label: "Tjänster" },
-        // { href: "pricing", label: "Priser" },
-        { href: "hire", label: "Anlita William" },
-      ],
-    },
-    {
-      icon: PixelarticonsHumanHandsup,
-      category: "William Hallin",
-      links: [
-        { href: "about", label: "Om mig" },
-        { href: "blog", label: "Blogg" },
-        { href: "clients", label: "Kunder" },
-        { href: "contact", label: "Kontakta mig" },
-      ],
-    },
-    {
-      icon: PixelarticonsScriptText,
-      category: "Support",
-      links: [
-        { href: "faq", label: "FAQ" },
-        { href: "licensing", label: "Licensiering" },
-        { href: "legal", label: "Juridik" },
-      ],
-    },
-  ],
-};
+const footerLinks = [
+  {
+    icon: PixelarticonsBriefcase,
+    category: { en: "Work", sv: "Arbete" },
+    links: [
+      { href: "portfolio", label: { en: "Portfolio", sv: "Portfölj" } },
+      { href: "services", label: { en: "Services", sv: "Tjänster" } },
+      // { href: "pricing", label: { en: "Pricing", sv: "Priser" } },
+      { href: "hire", label: { en: "Hire William", sv: "Anlita William" } },
+    ],
+  },
+  {
+    icon: PixelarticonsHumanHandsup,
+    category: { en: "William Hallin", sv: "William Hallin" },
+    links: [
+      { href: "about", label: { en: "About me", sv: "Om mig" } },
+      { href: "blog", label: { en: "Blog", sv: "Blogg" } },
+      { href: "clients", label: { en: "Clients", sv: "Kunder" } },
+      { href: "contact", label: { en: "Contact me", sv: "Kontakta mig" } },
+    ],
+  },
+  {
+    icon: PixelarticonsScriptText,
+    category: { en: "Support", sv: "Support" },
+    links: [
+      { href: "faq", label: { en: "FAQ", sv: "FAQ" } },
+      { href: "licensing", label: { en: "Licensing", sv: "Licensiering" } },
+      { href: "legal", label: { en: "Legal", sv: "Juridik" } },
+    ],
+  },
+];
 
 async function safeExec(cmd: string) {
   try {
@@ -127,7 +94,6 @@ const translations = {
 };
 
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
-const currentFooterLinks = footerLinks[locale];
 ---
 
 <div transition:name="footer" class="md:mt-16">
@@ -137,11 +103,11 @@ const currentFooterLinks = footerLinks[locale];
       class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8"
     >
       {
-        currentFooterLinks.map((section) => (
+        footerLinks.map((section) => (
           <div>
             <h3 class="mb-3 text-sm font-medium text-stone-800 dark:text-stone-100">
               <section.icon aria-hidden="true" class="mr-1 inline h-4 w-4" />
-              {section.category}
+              {section.category[locale]}
             </h3>
             <ul class="space-y-1">
               {section.links.map((link) => (
@@ -150,7 +116,7 @@ const currentFooterLinks = footerLinks[locale];
                     href={getRelativeLocaleUrl(locale, link.href)}
                     class="text-sm text-stone-600 hover:bg-red-400 hover:text-stone-100 active:opacity-50 dark:text-stone-400"
                   >
-                    {link.label}
+                    {link.label[locale]}
                   </a>
                 </li>
               ))}
