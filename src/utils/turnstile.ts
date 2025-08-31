@@ -92,6 +92,7 @@ export function createTurnstileManager(): TurnstileManager {
       ) {
         (window as any).turnstile.reset();
       }
+      rendered = false;
     },
 
     hasValidToken() {

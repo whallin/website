@@ -122,6 +122,8 @@ const initializeTurnstile = (
   turnstileManager: any,
   inputSelector: string = "input, textarea, select",
 ) => {
+  const listeners: Array<{ el: Element; type: string; fn: EventListener }> = [];
+
   const onFirstInput = () => {
     uiManager.hideMessages();
 
@@ -146,11 +148,20 @@ const initializeTurnstile = (
   };
 
   elements.form.querySelectorAll(inputSelector).forEach((input) => {
-    input.addEventListener("input", onFirstInput);
+    const inputHandler = onFirstInput;
+    input.addEventListener("input", inputHandler);
+    listeners.push({ el: input, type: "input", fn: inputHandler });
+
     if (input.tagName === "SELECT") {
-      input.addEventListener("change", onFirstInput);
+      const changeHandler = onFirstInput;
+      input.addEventListener("change", changeHandler);
+      listeners.push({ el: input, type: "change", fn: changeHandler });
     }
   });
+
+  return () => {
+    listeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
+  };
 };
 
 /**
@@ -168,8 +179,7 @@ export const initializeForm = (config: FormConfig) => {
   );
 
   config.elements.form.addEventListener("submit", handleSubmit);
-
-  initializeTurnstile(
+  const removeInputListeners = initializeTurnstile(
     config.elements,
     uiManager,
     turnstileManager,
@@ -177,4 +187,10 @@ export const initializeForm = (config: FormConfig) => {
   );
 
   uiManager.updateSubmitButton();
+
+  return () => {
+    config.elements.form.removeEventListener("submit", handleSubmit);
+    removeInputListeners?.();
+    turnstileManager.reset();
+  };
 };
