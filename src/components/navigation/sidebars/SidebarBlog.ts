@@ -1,7 +1,9 @@
 import { getCollection } from "astro:content";
 
-export async function calculateBlogStats() {
-  const allPosts = await getCollection("blogCollection");
+export async function calculateBlogStats(locale: "en" | "sv") {
+  const allPosts = await getCollection("blogCollection", ({ id }) =>
+    id.startsWith(locale),
+  );
   const publishedPosts = allPosts.filter((post) => !post.data.draft);
   const totalPosts = publishedPosts.length;
 

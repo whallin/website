@@ -5,8 +5,8 @@ import PixelarticonsScriptText from "../../icons/PixelarticonsScriptText.astro";
 import SidebarBase from "../SidebarBase.astro";
 import { calculateBlogStats } from "./SidebarBlog";
 
-const blogStats = await calculateBlogStats();
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const blogStats = await calculateBlogStats(locale);
 
 const translations = {
   en: {
