@@ -23,7 +23,7 @@ if (!featuredPost) {
 }
 
 const readTime = calculateReadTime(featuredPost.body || "");
-const formattedDate = formatDateShort(featuredPost.data.publishedDate);
+const formattedDate = formatDateShort(featuredPost.data.publishedDate, locale);
 const isoDate = formatDateISO(featuredPost.data.publishedDate);
 
 const translations = {

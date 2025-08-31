@@ -59,7 +59,10 @@ const publishedPosts = getAllPublishedPosts(authorPosts);
       <ul class="grid gap-8 md:grid-cols-2">
         {publishedPosts.map((post) => {
           const readTime = calculateReadTime(post.body || "");
-          const formattedDate = formatDateShort(post.data.publishedDate);
+          const formattedDate = formatDateShort(
+            post.data.publishedDate,
+            locale,
+          );
           const isoDate = formatDateISO(post.data.publishedDate);
 
           return (

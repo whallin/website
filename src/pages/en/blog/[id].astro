@@ -1,17 +1,13 @@
 ---
 export const prerender = true;
 
-import { Image } from "astro:assets";
 import { getCollection, getEntry, render } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import BlogNewsletterSignup from "../../../components/blog/BlogNewsletterSignup.astro";
-import PixelarticonsCalendar from "../../../components/icons/PixelarticonsCalendar.astro";
-import PixelarticonsClock from "../../../components/icons/PixelarticonsClock.astro";
-import PixelarticonsPin from "../../../components/icons/PixelarticonsPin.astro";
-import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import BlogPostAuthors from "../../../components/blog/BlogPostAuthors.astro";
+import BlogPostMetadata from "../../../components/blog/BlogPostMetadata.astro";
+import SidebarBlogPost from "../../../components/navigation/sidebars/SidebarBlogPost.astro";
 import PageHeaderImg from "../../../components/PageHeaderImg.astro";
 import LayoutBase from "../../../layouts/LayoutBase.astro";
-import { calculateReadTime, formatDate } from "../../../utils/blog.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blogCollection", ({ id }) => {
@@ -31,8 +27,6 @@ const authors = await Promise.all(
     return await getEntry("authorCollection", authorRef.id);
   }),
 );
-const timeToRead = calculateReadTime(post.body || "");
-const formattedDate = formatDate(post.data.publishedDate, "sv-SE");
 
 const schema = {
   "@context": "https://schema.org",
@@ -69,36 +63,7 @@ const schema = {
   article={true}
   schema={schema}
 >
-  <SidebarBase showLogo showReturn slot="sidebar">
-    <div slot="content">
-      <aside
-        class="space-y-4 text-xs text-stone-500"
-        aria-label="Article metadata"
-      >
-        <div class="space-y-0.5">
-          <span class="mb-1 flex items-center gap-1">
-            <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
-            Published
-          </span>
-          <time
-            datetime={post.data.publishedDate}
-            class="font-mono text-stone-800 dark:text-stone-300"
-          >
-            {formattedDate}
-          </time>
-        </div>
-        <div class="space-y-0.5">
-          <span class="mb-1 flex items-center gap-1">
-            <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
-            Reading time
-          </span>
-          <span class="font-mono text-stone-800 dark:text-stone-300">
-            {timeToRead} min
-          </span>
-        </div>
-      </aside>
-    </div>
-  </SidebarBase>
+  <SidebarBlogPost slot="sidebar" post={post} />
 
   <article slot="content" class="space-y-8">
     <header>
@@ -111,32 +76,7 @@ const schema = {
         showBtn={false}
       />
 
-      <aside
-        class="flex flex-wrap gap-6 text-xs text-stone-500 md:hidden"
-        aria-label="Article metadata"
-      >
-        <div class="space-y-0.5">
-          <span class="mb-1 flex items-center gap-1">
-            <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
-            Published
-          </span>
-          <time
-            datetime={post.data.publishedDate}
-            class="font-mono text-stone-800 dark:text-stone-300"
-          >
-            {formattedDate}
-          </time>
-        </div>
-        <div class="space-y-0.5">
-          <span class="mb-1 flex items-center gap-1">
-            <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
-            Reading time
-          </span>
-          <span class="font-mono text-stone-800 dark:text-stone-300">
-            {timeToRead} min
-          </span>
-        </div>
-      </aside>
+      <BlogPostMetadata post={post} />
     </header>
 
     <main
@@ -145,60 +85,33 @@ const schema = {
       <Content />
     </main>
 
-    <hr class="border-stone-300 dark:border-stone-700" />
-
-    <aside aria-labelledby="authors-heading">
-      <h2
-        id="authors-heading"
-        class="mb-4 font-serif text-xl text-stone-800 dark:text-stone-300"
-      >
-        Post published by
-      </h2>
-
-      <ul role="list" class="flex flex-wrap gap-2">
-        {
-          authors.map(
-            (author) =>
-              author && (
-                <li>
-                  <a
-                    href={getRelativeLocaleUrl("en", `authors/${author.id}`)}
-                    class="flex w-fit gap-4 p-3 text-stone-800 transition hover:bg-stone-200/50 active:opacity-50 dark:text-stone-300 dark:hover:bg-stone-800"
-                    aria-label={`View profile for ${author.data.name}`}
-                  >
-                    <Image
-                      src={author.data.avatar}
-                      alt={`Image of ${author.data.name}`}
-                      width={48}
-                      height={48}
-                      class="rounded-full select-none"
-                    />
-                    <div>
-                      <span class="font-medium tracking-tight">
-                        {author.data.name}
-                      </span>
-                      {author.data.location && (
-                        <span class="flex items-center gap-1 text-sm text-stone-600 dark:text-stone-400">
-                          <PixelarticonsPin
-                            aria-hidden="true"
-                            class="h-4 w-4"
-                          />
-                          {author.data.location}
-                        </span>
-                      )}
-                    </div>
-                  </a>
-                </li>
-              ),
-          )
-        }
-      </ul>
-    </aside>
+    <BlogPostAuthors authors={authors} />
 
     <hr class="border-stone-300 dark:border-stone-700" />
 
     <section aria-labelledby="newsletter-signup">
       <BlogNewsletterSignup />
+    </section>
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <section>
+      <script
+        src="https://giscus.app/client.js"
+        data-repo="whallin/website"
+        data-repo-id="R_kgDOPfSzkg"
+        data-category="Giscus Comments"
+        data-category-id="DIC_kwDOPfSzks4CuRB9"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async></script>
     </section>
   </article>
 </LayoutBase>
