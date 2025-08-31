@@ -1,5 +1,5 @@
 ---
-import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import FormShell from "../forms/FormShell.astro";
 import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
 import PixelarticonsMailCheck from "../icons/PixelarticonsMailCheck.astro";
 import PixelarticonsMailDelete from "../icons/PixelarticonsMailDelete.astro";
@@ -36,108 +36,80 @@ const translations = {
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 ---
 
-<section id="newsletter-signup-section" class="not-prose">
-  <div class="space-y-4 border border-red-300 p-6 dark:bg-stone-800/50">
-    <header class="space-y-2">
-      <h3 class="font-serif text-xl text-stone-800 dark:text-stone-100">
-        <PixelarticonsMail aria-hidden="true" class="mr-1 mb-1 inline-block" />
-        {translations[locale].heading}
-      </h3>
-      <p class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-        {translations[locale].description}
-      </p>
-    </header>
-
-    <form
-      id="newsletter-form"
-      method="post"
-      class="flex flex-col gap-4 overflow-hidden"
-    >
-      <fieldset class="flex flex-col gap-4 lg:flex-row">
-        <legend class="sr-only">
-          {translations[locale].heading}
-        </legend>
-
-        <div class="w-full">
-          <label
-            for="firstName"
-            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
-          >
-            {translations[locale].labelFirstName}
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            autocomplete="given-name"
-            required
-            placeholder={translations[locale].placeholderFirstName}
-            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
-          />
-        </div>
-
-        <div class="w-full">
-          <label
-            for="email"
-            class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
-          >
-            {translations[locale].labelEmail}
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            autocomplete="email"
-            required
-            placeholder={translations[locale].placeholderEmail}
-            class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
-          />
-        </div>
-      </fieldset>
-
-      <div
-        id="newsletter-turnstile-container"
-        aria-label={translations[locale].securityAriaLabel}
-        class="hidden"
-      >
-      </div>
-
-      <button
-        type="submit"
-        id="newsletter-submit-btn"
-        class="group flex w-full cursor-pointer items-center justify-center gap-1 bg-[#FF3030] p-2 text-sm font-medium tracking-tight text-stone-50 transition hover:opacity-75 active:scale-[0.97] active:opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        <span>{translations[locale].buttonSignup}</span>
-        <PixelarticonsArrowRight
-          aria-hidden="true"
-          class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-        />
-      </button>
-
-      <div
-        id="newsletter-success-message"
-        role="status"
-        aria-live="polite"
-        class="hidden w-full flex-wrap items-center justify-center gap-1 bg-green-600 p-2 text-sm text-stone-50"
-      >
-        <PixelarticonsMailCheck aria-hidden="true" class="h-4 w-4" />
-        <span>{translations[locale].successMessage}</span>
-      </div>
-
-      <div
-        id="newsletter-error-message"
-        role="alert"
-        aria-live="assertive"
-        class="hidden w-full flex-wrap items-center justify-center gap-1 bg-red-600 p-2 text-sm text-stone-50"
-      >
-        <PixelarticonsMailDelete aria-hidden="true" class="h-4 w-4" />
-        <span id="newsletter-error-text"
-          >{translations[locale].errorMessage}</span
-        >
-      </div>
-    </form>
+<FormShell
+  formId="newsletter-form"
+  turnstileId="newsletter-turnstile-container"
+  submitBtnId="newsletter-submit-btn"
+  submitText={translations[locale].buttonSignup}
+  successId="newsletter-success-message"
+  errorId="newsletter-error-message"
+  errorTextId="newsletter-error-text"
+  borderClassName="border-red-400"
+>
+  <div slot="header" class="space-y-2">
+    <h3 class="font-serif text-xl text-stone-800 dark:text-stone-100">
+      <PixelarticonsMail aria-hidden="true" class="mr-1 mb-1 inline-block" />
+      {translations[locale].heading}
+    </h3>
+    <p class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
   </div>
-</section>
+
+  <fieldset slot="fields" class="flex flex-col gap-4 lg:flex-row">
+    <legend class="sr-only">{translations[locale].heading}</legend>
+
+    <div class="w-full">
+      <label
+        for="firstName"
+        class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+      >
+        {translations[locale].labelFirstName}
+      </label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        autocomplete="given-name"
+        required
+        placeholder={translations[locale].placeholderFirstName}
+        class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+      />
+    </div>
+
+    <div class="w-full">
+      <label
+        for="email"
+        class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+      >
+        {translations[locale].labelEmail}
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        autocomplete="email"
+        required
+        placeholder={translations[locale].placeholderEmail}
+        class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+      />
+    </div>
+  </fieldset>
+
+  <PixelarticonsMailCheck
+    slot="success-icon"
+    aria-hidden="true"
+    class="h-4 w-4"
+  />
+  <span slot="success-text">{translations[locale].successMessage}</span>
+
+  <PixelarticonsMailDelete
+    slot="error-icon"
+    aria-hidden="true"
+    class="h-4 w-4"
+  />
+  <span slot="error-text">{translations[locale].errorMessage}</span>
+</FormShell>
 
 <script>
   import "./BlogNewsletterSignup";

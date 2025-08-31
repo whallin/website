@@ -1,0 +1,61 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+
+const {
+  formId,
+  turnstileId,
+  submitBtnId,
+  submitText,
+  successId,
+  errorId,
+  errorTextId,
+  borderClassName = "border-stone-300 dark:border-stone-700",
+} = Astro.props;
+---
+
+<section class="not-prose">
+  <div class={`space-y-4 border p-6 dark:bg-stone-800/50 ${borderClassName}`}>
+    <slot name="header" />
+
+    <form id={formId} method="post" class="flex flex-col gap-4 overflow-hidden">
+      <slot name="fields" />
+
+      <div id={turnstileId} class="hidden"></div>
+
+      <button
+        type="submit"
+        id={submitBtnId}
+        class="group flex w-full cursor-pointer items-center justify-center gap-1 bg-[#FF3030] p-2 text-sm font-medium tracking-tight text-stone-50 transition hover:opacity-75 active:scale-[0.97] active:opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <slot name="submit-icon" />
+        <span>{submitText}</span>
+
+        <PixelarticonsArrowRight
+          slot="submit-icon"
+          aria-hidden="true"
+          class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+        />
+      </button>
+
+      <div
+        id={successId}
+        role="status"
+        aria-live="polite"
+        class="hidden w-full flex-wrap items-center justify-center gap-1 bg-green-600 p-2 text-sm text-stone-50"
+      >
+        <slot name="success-icon" />
+        <slot name="success-text" />
+      </div>
+
+      <div
+        id={errorId}
+        role="alert"
+        aria-live="assertive"
+        class="hidden w-full flex-wrap items-center justify-center gap-1 bg-red-600 p-2 text-sm text-stone-50"
+      >
+        <slot name="error-icon" />
+        <span id={errorTextId}><slot name="error-text" /></span>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,5 +1,5 @@
 ---
-import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import FormShell from "../forms/FormShell.astro";
 import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
 import PixelarticonsMailCheck from "../icons/PixelarticonsMailCheck.astro";
 import PixelarticonsMailDelete from "../icons/PixelarticonsMailDelete.astro";
@@ -32,11 +32,7 @@ const translations = {
 };
 ---
 
-<section
-  id="license-form-section"
-  aria-labelledby="license-form-heading"
-  class="space-y-8"
->
+<section class="space-y-8">
   <header class="space-y-4">
     <h2
       id="license-form-heading"
@@ -50,57 +46,38 @@ const translations = {
     </p>
   </header>
 
-  <form
-    id="licensing-inquiry-form"
-    method="post"
-    class="flex flex-col gap-4 overflow-hidden border-stone-300 sm:border sm:p-6 dark:border-stone-700"
+  <FormShell
+    formId="licensing-inquiry-form"
+    turnstileId="turnstile-container"
+    submitBtnId="licensing-submit-btn"
+    submitText={translations[locale].sendLicensingRequest}
+    successId="licensing-success-message"
+    errorId="licensing-error-message"
+    errorTextId="licensing-error-text"
   >
-    <LicensingContactInfo />
-    <LicensingContactDetails />
-    <LicensingContactTimeline />
-
-    <div
-      id="turnstile-container"
-      aria-label={translations[locale].securityVerificationAriaLabel}
-      class="hidden"
-    >
+    <div slot="fields" class="space-y-4">
+      <LicensingContactInfo />
+      <LicensingContactDetails />
+      <LicensingContactTimeline />
     </div>
 
-    <button
-      type="submit"
-      id="licensing-submit-btn"
-      class="group flex w-full cursor-pointer items-center justify-center gap-1 bg-[#FF3030] p-2 text-sm font-medium tracking-tight text-stone-50 transition hover:opacity-75 active:scale-[0.97] active:opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      <PixelarticonsMail aria-hidden="true" class="h-4 w-4" />
-      <span>{translations[locale].sendLicensingRequest}</span>
-      <PixelarticonsArrowRight
-        aria-hidden="true"
-        class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-      />
-    </button>
+    <PixelarticonsMail slot="submit-icon" aria-hidden="true" class="h-4 w-4" />
 
-    <div
-      id="licensing-success-message"
-      role="status"
-      aria-live="polite"
-      class="hidden w-full flex-wrap items-center justify-center gap-1 bg-green-600 p-2 text-sm text-stone-50"
-    >
-      <PixelarticonsMailCheck aria-hidden="true" class="h-4 w-4" />
-      <span>{translations[locale].successMessage}</span>
-    </div>
+    <PixelarticonsMailCheck
+      slot="success-icon"
+      aria-hidden="true"
+      class="h-4 w-4"
+    />
+    <span slot="success-text">{translations[locale].successMessage}</span>
 
-    <div
-      id="licensing-error-message"
-      role="alert"
-      aria-live="assertive"
-      class="hidden w-full flex-wrap items-center justify-center gap-1 bg-red-600 p-2 text-sm text-stone-50"
-    >
-      <PixelarticonsMailDelete aria-hidden="true" class="h-4 w-4" />
-      <span id="licensing-error-text">{translations[locale].errorMessage}</span>
-    </div>
-  </form>
+    <PixelarticonsMailDelete
+      slot="error-icon"
+      aria-hidden="true"
+      class="h-4 w-4"
+    />
+    <span slot="error-text">{translations[locale].errorMessage}</span>
+  </FormShell>
 </section>
-
 <script>
   import "./LicensingContact";
 </script>
