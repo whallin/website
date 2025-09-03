@@ -1,49 +1,18 @@
 ---
+export const prerender = true;
+
 import ImgHeaderAuthors from "../../assets/header/headerAuthors.jpg";
 import AuthorsAllAuthors from "../../components/authors/AuthorsAllAuthors.astro";
-import PixelarticonsHeart from "../../components/icons/PixelarticonsHeart.astro";
-import PixelarticonsHumanHandsup from "../../components/icons/PixelarticonsHumanHandsup.astro";
-import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import SidebarAuthors from "../../components/navigation/sidebars/SidebarAuthors.astro";
 import PageHeaderImg from "../../components/PageHeaderImg.astro";
 import LayoutBase from "../../layouts/LayoutBase.astro";
-import { calculateAuthorStats } from "../../utils/authorStats";
-
-const authorStats = await calculateAuthorStats();
-
-const stats = [
-  {
-    label: "Topp författare",
-    value: authorStats.totalAuthors.toString(),
-    Icon: PixelarticonsHumanHandsup,
-  },
-  {
-    label: "Topp bidragsgivare",
-    value: authorStats.topContributor,
-    Icon: PixelarticonsHeart,
-  },
-];
 ---
 
-<LayoutBase>
-  <SidebarBase showLogo showReturn slot="sidebar">
-    <div slot="content">
-      <aside class="space-y-4 text-xs text-stone-500">
-        {
-          stats.map((stat) => (
-            <div class="space-y-0.5">
-              <span class="mb-1 flex items-center gap-1">
-                <stat.Icon aria-hidden="true" class="h-4 w-4" />
-                {stat.label}
-              </span>
-              <span class="font-mono text-stone-800 dark:text-stone-300">
-                {stat.value}
-              </span>
-            </div>
-          ))
-        }
-      </aside>
-    </div>
-  </SidebarBase>
+<LayoutBase
+  title="Författare"
+  description="Upptäck alla författare och gästskribenter bakom Hallin-bloggens artiklar. Läs om deras bakgrund, expertis och bidrag till innehållet."
+>
+  <SidebarAuthors slot="sidebar" />
 
   <div slot="content" class="space-y-12">
     <PageHeaderImg

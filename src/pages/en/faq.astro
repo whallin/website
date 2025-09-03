@@ -1,0 +1,49 @@
+---
+export const prerender = true;
+
+import { getCollection } from "astro:content";
+import ImgHeaderFaq from "../../assets/header/headerFaq.jpg";
+import FaqAllFaqs from "../../components/faq/FaqAllFaqs.astro";
+import SidebarFaq from "../../components/navigation/sidebars/SidebarFaq.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+
+const faqEntries = await getCollection("faqCollection");
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqEntries.flatMap((category) =>
+    category.data.items.map((item) => ({
+      "@type": "Question",
+      name: item.question.en,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer.en.replace(/<[^>]*>/g, ""),
+      },
+    })),
+  ),
+};
+---
+
+<LayoutBase
+  title="Frequently Asked Questions"
+  description="Get answers to common questions about design, photography, web development, pricing, and project processes. Quick and clear answers to your inquiries."
+  schema={schema}
+>
+  <SidebarFaq slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderFaq}
+      headerImgAlt=""
+      headingText="Frequently Asked Questions"
+      headingItalic={false}
+      descriptionText="Quick answers to common questions about processes, timelines, pricing, and collaboration. Didn't find the answer? I'm only a message away."
+      btnText="Ask a question"
+      btnHref="/contact"
+      btnAriaLabel="Ask a question on the contact page"
+    />
+
+    <FaqAllFaqs />
+  </div>
+</LayoutBase>

@@ -1,0 +1,49 @@
+---
+export const prerender = true;
+
+import ImgHeaderLicensing from "../assets/header/headerLicensing.jpg";
+import LicensingComparison from "../components/licensing/LicensingComparison.astro";
+import LicensingContact from "../components/licensing/LicensingContact.astro";
+import LicensingGuidelines from "../components/licensing/LicensingGuidelines.astro";
+import LicensingOverview from "../components/licensing/LicensingOverview.astro";
+import LicensingPricing from "../components/licensing/LicensingPricing.astro";
+import SidebarLicensing from "../components/navigation/sidebars/SidebarLicensing.astro";
+import PageHeaderImg from "../components/PageHeaderImg.astro";
+import LayoutBase from "../layouts/LayoutBase.astro";
+---
+
+<LayoutBase
+  title="Licensiera bilder och design"
+  description="Licensiera William Hallins fotografi och design för din kampanj eller webbplats. Tydliga licensvillkor och prismodeller för kommersiell användning."
+>
+  <SidebarLicensing slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderLicensing}
+      headerImgAlt=""
+      headingText="Licensera mitt arbete"
+      headingItalic={false}
+      descriptionText="Behöver du bilder för din kampanj, webbplats eller produkt? Säkerställ en tydlig och problemfri licens för att använda min färdiga fotografi och lättanpassade designer."
+      btnText="Begär en licens"
+      btnHref="#license-form-section"
+      btnAriaLabel="Begär en licens via kontaktformuläret"
+    />
+
+    <LicensingOverview />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingPricing />
+
+    <LicensingComparison />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingGuidelines />
+
+    <hr class="border-stone-300 dark:border-stone-700" />
+
+    <LicensingContact />
+  </div>
+</LayoutBase>

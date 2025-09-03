@@ -1,0 +1,46 @@
+---
+import PixelarticonsBriefcase from "../../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsClock from "../../icons/PixelarticonsClock.astro";
+import PixelarticonsMail from "../../icons/PixelarticonsMail.astro";
+import SidebarBase from "../SidebarBase.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const stats = [
+  {
+    label: { en: "Services offered", sv: "Tjänster erbjudna" },
+    value: { en: "3", sv: "3" },
+    Icon: PixelarticonsBriefcase,
+  },
+  {
+    label: { en: "Typical kickoff", sv: "Typisk kickoff" },
+    value: { en: "~3 days", sv: "~3 dagar" },
+    Icon: PixelarticonsClock,
+  },
+  {
+    label: { en: "SLA response", sv: "SLA-svar" },
+    value: { en: "<24 hours", sv: "<24 timmar" },
+    Icon: PixelarticonsMail,
+  },
+];
+---
+
+<SidebarBase showLogo showReturn>
+  <div slot="content">
+    <aside class="space-y-4 text-xs text-stone-500">
+      {
+        stats.map((stat) => (
+          <div class="space-y-0.5">
+            <span class="mb-1 flex items-center gap-1">
+              <stat.Icon aria-hidden="true" class="h-4 w-4" />
+              {stat.label[locale]}
+            </span>
+            <span class="font-mono text-stone-800 dark:text-stone-300">
+              {stat.value[locale]}
+            </span>
+          </div>
+        ))
+      }
+    </aside>
+  </div>
+</SidebarBase>

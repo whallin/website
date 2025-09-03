@@ -1,0 +1,324 @@
+---
+import PixelarticonsPin from "../icons/PixelarticonsPin.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const licensingPlans = [
+  {
+    name: { en: "Standard license", sv: "Standardlicens" },
+    price: { en: "SEK 1,500", sv: "1 500kr" },
+    description: {
+      en: "Perfect for small businesses and individual projects.",
+      sv: "Perfekt för småföretag och individuella projekt.",
+    },
+    features: {
+      en: [
+        "Commercial use rights",
+        "Up to 50,000 prints",
+        "Use on websites & social media",
+        "Digital marketing campaigns",
+        "Non-exclusive license",
+        "1 year usage period",
+        "Basic support included",
+      ],
+      sv: [
+        "Kommersiella användningsrättigheter",
+        "Upp till 50 000 tryckexemplar",
+        "Användning på webben och sociala medier",
+        "Digitala marknadsföringskampanjer",
+        "Icke-exklusiv licens",
+        "1 års användningsperiod",
+        "Grundläggande support ingår",
+      ],
+    },
+    limitations: {
+      en: [
+        "No resale or redistribution",
+        "No use in templates for resale",
+        "Attribution required",
+      ],
+      sv: [
+        "Ingen vidareförsäljning eller omdistribution",
+        "Ingen användning i mallar för vidareförsäljning",
+        "Attribuering krävs",
+      ],
+    },
+    popular: false,
+  },
+  {
+    name: { en: "Extended license", sv: "Utökad licens" },
+    price: { en: "SEK 4,000", sv: "4 000kr" },
+    description: {
+      en: "For larger campaigns and broader commercial use.",
+      sv: "För större kampanjer och bredare kommersiell användning.",
+    },
+    features: {
+      en: [
+        "Unlimited print impressions",
+        "Broadcast & TV commercial use",
+        "Product packaging & merchandise",
+        "Trade show & exhibition displays",
+        "2 year usage period",
+        "Priority support included",
+        "Minor customization allowed",
+      ],
+      sv: [
+        "Obegränsade tryckexemplar",
+        "Sändning & TV-reklamanvändning",
+        "Produktförpackning & varor",
+        "Mäss- & utställningsskärmar",
+        "2 års användningsperiod",
+        "Prioriterad support ingår",
+        "Mindre ändringar tillåtna",
+      ],
+    },
+    limitations: {
+      en: ["No resale or redistribution", "No use in templates for resale"],
+      sv: [
+        "Ingen vidareförsäljning eller omdistribution",
+        "Ingen användning i mallar för vidareförsäljning",
+      ],
+    },
+    popular: true,
+  },
+  {
+    name: { en: "Exclusive license", sv: "Exklusiv licens" },
+    price: { en: "SEK 10,000", sv: "10 000kr" },
+    description: {
+      en: "Complete ownership and exclusive usage rights.",
+      sv: "Fullständig äganderätt och exklusiva användningsrättigheter.",
+    },
+    features: {
+      en: [
+        "Exclusive usage rights",
+        "Unlimited commercial use",
+        "Resale & redistribution allowed",
+        "Template creation allowed",
+        "Lifetime usage period",
+        "Source files included",
+        "Dedicated support & consultation",
+        "No attribution requirement",
+      ],
+      sv: [
+        "Exklusiva användningsrättigheter",
+        "Obegränsad kommersiell användning",
+        "Vidareförsäljning & omdistribution tillåten",
+        "Mallskapande tillåtet",
+        "Livslång användningsperiod",
+        "Källfiler ingår",
+        "Dedikerad support & konsultation",
+        "Inga attribueringskrav",
+      ],
+    },
+    limitations: {
+      en: ["Higher investment required", "Subject to availability"],
+      sv: ["Högre investering krävs", "I mån av tillgång"],
+    },
+    popular: false,
+  },
+];
+
+const additionalOptions = [
+  {
+    name: { en: "Rush processing", sv: "Påskyndad behandling" },
+    price: { en: "SEK 750", sv: "750kr" },
+    description: {
+      en: "Expedite license processing for issuing licenses within 24 hours.",
+      sv: "Påskynda licensbehandlingen för att utfärda licenser inom 24 timmar.",
+    },
+  },
+  {
+    name: { en: "Custom terms", sv: "Anpassade villkor" },
+    price: { en: "Quote on request", sv: "Offert på begäran" },
+    description: {
+      en: "Negotiate specific usage terms for unique licensing requirements.",
+      sv: "Förhandla om specifika användningsvillkor för unika licenskrav.",
+    },
+  },
+  {
+    name: { en: "Attribution removal", sv: "Borttagning av attribuering" },
+    price: { en: "SEK 1,000", sv: "1 000kr" },
+    description: {
+      en: "Remove attribution requirements for works under the Standard License.",
+      sv: "Ta bort attribueringskrav för arbeten under standardlicensen.",
+    },
+  },
+  {
+    name: { en: "Extended territory", sv: "Utökat territorium" },
+    price: { en: "SEK 2,000", sv: "2 000kr" },
+    description: {
+      en: "Expand license usage rights to additional geographic regions.",
+      sv: "Utöka licensens användningsrättigheter till ytterligare geografiska områden.",
+    },
+  },
+];
+
+const translations = {
+  en: {
+    licensingPricing: "Licensing pricing",
+    description:
+      "Transparent pricing for different usage needs. All licenses include legal documentation and clear usage guidelines to protect both your business and my work.",
+    mostPopular: "Popular",
+    whatsIncluded: "What's included",
+    limitations: "Limitations",
+    requestLicense: "Request a license",
+    requestLicenseAria: "Request a {planName}",
+    additionalOptions: "Additional options",
+    customizeYourLicense: "Customize your license with these optional add-ons.",
+  },
+  sv: {
+    licensingPricing: "Licenspriser",
+    description:
+      "Transparent prissättning för olika användningsbehov. Alla licenser inkluderar juridisk dokumentation och tydliga riktlinjer för att skydda både ditt företag och mitt arbete.",
+    mostPopular: "Populär",
+    whatsIncluded: "Vad som ingår",
+    limitations: "Begränsningar",
+    requestLicense: "Begär licens",
+    requestLicenseAria: "Begär en {planName}",
+    additionalOptions: "Ytterligare alternativ",
+    customizeYourLicense: "Anpassa din licens med dessa valfria tillägg.",
+  },
+};
+---
+
+<section aria-labelledby="licensing-pricing-heading" class="space-y-8">
+  <header class="space-y-4">
+    <h2
+      id="licensing-pricing-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsPin aria-hidden="true" class="mr-1 mb-1 inline h-6 w-6" />
+      {translations[locale].licensingPricing}
+    </h2>
+    <p class="max-w-2xl leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <div class="grid gap-2 lg:grid-cols-3">
+    {
+      licensingPlans.map((plan) => (
+        <article
+          class={`border ${plan.popular ? "border-red-400" : "border-stone-200 dark:border-stone-700"} relative flex h-full flex-col`}
+        >
+          {plan.popular && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 transform">
+              <span
+                class="rounded-full bg-red-500 px-3 py-1 text-xs font-medium tracking-widest text-stone-100 uppercase"
+                aria-label={`${translations[locale].mostPopular} plan`}
+              >
+                {translations[locale].mostPopular}
+              </span>
+            </div>
+          )}
+
+          <header
+            class={`p-6 ${plan.popular ? "bg-red-50 dark:bg-red-950/20" : "dark:bg-stone-800"} border-b border-stone-200 dark:border-stone-700`}
+          >
+            <h3 class="mb-2 font-serif text-xl text-stone-800 dark:text-stone-100">
+              {plan.name[locale]}
+            </h3>
+            <data
+              class="font-mono text-xl font-medium tracking-tight text-stone-800 dark:text-stone-100"
+              value={plan.price[locale]}
+            >
+              {plan.price[locale]}
+            </data>
+            <p class="mt-2 text-sm text-stone-600 dark:text-stone-400">
+              {plan.description[locale]}
+            </p>
+          </header>
+
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex-1 space-y-6">
+              <div>
+                <h4 class="mb-3 text-xs font-medium tracking-wider text-stone-700 uppercase dark:text-stone-300">
+                  {translations[locale].whatsIncluded}
+                </h4>
+                <ul class="list-inside list-disc space-y-2 marker:text-green-500">
+                  {plan.features[locale].map((feature) => (
+                    <li class="text-sm text-stone-600 dark:text-stone-400">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="mb-3 text-xs font-medium tracking-wider text-stone-700 uppercase dark:text-stone-300">
+                  {translations[locale].limitations}
+                </h4>
+                <ul class="list-inside list-disc space-y-2 marker:text-amber-500">
+                  {plan.limitations[locale].map((limitation) => (
+                    <li class="text-sm text-stone-600 dark:text-stone-400">
+                      {limitation}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <a
+              href="#license-form-section"
+              aria-label={translations[locale].requestLicenseAria.replace(
+                "{planName}",
+                plan.name[locale],
+              )}
+              class={`mt-6 block w-full px-4 py-2 text-center text-sm font-medium transition hover:opacity-75 active:scale-[0.97] active:opacity-50 ${
+                plan.popular
+                  ? "bg-red-500 text-stone-100"
+                  : "border border-stone-300 text-stone-700 dark:border-stone-600 dark:text-stone-300"
+              }`}
+            >
+              {translations[locale].requestLicense}
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <section aria-labelledby="additional-options-heading">
+    <div class="border border-stone-200 dark:border-stone-700">
+      <header
+        class="border-b border-stone-200 p-6 dark:border-stone-700 dark:bg-stone-800"
+      >
+        <h3
+          id="additional-options-heading"
+          class="mb-2 font-serif text-xl text-stone-800 dark:text-stone-100"
+        >
+          {translations[locale].additionalOptions}
+        </h3>
+        <p class="text-sm text-stone-600 dark:text-stone-400">
+          {translations[locale].customizeYourLicense}
+        </p>
+      </header>
+
+      <div class="p-6">
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {
+            additionalOptions.map((option) => (
+              <li class="flex flex-col items-start justify-between gap-4 border border-stone-200 p-4 dark:border-stone-700">
+                <div class="flex-1">
+                  <h4 class="text-sm font-medium text-stone-800 dark:text-stone-100">
+                    {option.name[locale]}
+                  </h4>
+                  <p class="mt-1 text-xs text-stone-600 dark:text-stone-400">
+                    {option.description[locale]}
+                  </p>
+                </div>
+
+                <data
+                  class="font-mono text-sm whitespace-nowrap text-stone-800 dark:text-stone-100"
+                  value={option.price[locale]}
+                >
+                  {option.price[locale]}
+                </data>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>

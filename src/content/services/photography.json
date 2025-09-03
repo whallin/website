@@ -1,0 +1,16 @@
+{
+  "title": {
+    "en": "Photography",
+    "sv": "Fotografi"
+  },
+  "description": {
+    "en": "High-impact photography and image production for products, teams and events. Optimized for e-commerce, press and social media to drive engagement.",
+    "sv": "Högkvalitativ fotografi och bildproduktion för produkter, team och evenemang. Optimerat för e-handel, press och sociala medier för att öka engagemanget."
+  },
+  "icon": "PixelarticonsCamera",
+  "featured": true,
+  "category": {
+    "en": "Media Services",
+    "sv": "Mediatjänster"
+  }
+}

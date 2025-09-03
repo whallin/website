@@ -23,7 +23,13 @@ const allPortfolioEntries = await getCollection(
   },
 );
 
-const portfolioProjects = allPortfolioEntries.map((entry, index) => ({
+const sortedPortfolioEntries = allPortfolioEntries.sort((a, b) => {
+  const dateA = new Date(a.data.publishedDate).getTime();
+  const dateB = new Date(b.data.publishedDate).getTime();
+  return dateB - dateA;
+});
+
+const portfolioProjects = sortedPortfolioEntries.map((entry, index) => ({
   id: index + 1,
   title: entry.data.title,
   category: entry.data.category,
@@ -45,7 +51,7 @@ const portfolioProjects = allPortfolioEntries.map((entry, index) => ({
       portfolioProjects.map((project) => (
         <article
           class={`group relative border border-stone-200 transition hover:border-stone-300 dark:border-stone-700 dark:bg-stone-800 dark:hover:border-stone-600 ${
-            project.featured ? "sm:col-span-2 lg:col-span-2" : ""
+            project.featured ? "sm:col-span-1 lg:col-span-2" : ""
           }`}
         >
           <a

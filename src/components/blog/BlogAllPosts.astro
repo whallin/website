@@ -4,6 +4,12 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { formatDateISO, getAllPublishedPosts } from "../../utils/blog";
 import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
 
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
+  return id.startsWith(`${locale}/`);
+});
+const allPublishedPosts = getAllPublishedPosts(allBlogPosts);
+
 const translations = {
   en: {
     sectionAriaLabel: "Blog posts",
@@ -14,12 +20,6 @@ const translations = {
     readPost: "Läs inlägg",
   },
 };
-
-const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
-const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
-  return id.startsWith(`${locale}/`);
-});
-const allPublishedPosts = getAllPublishedPosts(allBlogPosts);
 ---
 
 <section aria-label={translations[locale].sectionAriaLabel}>

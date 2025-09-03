@@ -1,0 +1,31 @@
+---
+export const prerender = true;
+
+import ImgHeaderLegal from "../../../assets/header/headerLegal.jpg";
+import LegalAllDocuments from "../../../components/legal/LegalAllDocuments.astro";
+import SidebarBase from "../../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase
+  title="Legal documents"
+  description="Read through privacy policy, terms of service, and other legal documents in plain and simple English. Transparent guidelines on how I handle your data."
+>
+  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderLegal}
+      headerImgAlt=""
+      headingText="Legal documents"
+      headingItalic={false}
+      descriptionText="Privacy, terms, and policies — the important stuff in plain and simple English so you know how I operate things here."
+      btnText="Got a question?"
+      btnHref="/contact"
+      btnAriaLabel="Ask a legal question on the contact page"
+    />
+
+    <LegalAllDocuments />
+  </div>
+</LayoutBase>

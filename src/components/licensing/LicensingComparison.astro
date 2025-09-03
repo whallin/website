@@ -1,0 +1,413 @@
+---
+import PixelarticonsAlignLeft from "../icons/PixelarticonsAlignLeft.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const comparisonFeatures = [
+  {
+    feature: { en: "Commercial use", sv: "Kommersiell användning" },
+    standard: { en: "Limited", sv: "Begränsad" },
+    extended: { en: "Unlimited", sv: "Obegränsad" },
+    exclusive: { en: "Unlimited", sv: "Obegränsad" },
+  },
+  {
+    feature: { en: "Print impressions", sv: "Tryckexemplar" },
+    standard: { en: "Up to 50,000", sv: "Upp till 50 000" },
+    extended: { en: "Unlimited", sv: "Obegränsad" },
+    exclusive: { en: "Unlimited", sv: "Obegränsad" },
+  },
+  {
+    feature: { en: "Digital use", sv: "Digital användning" },
+    standard: "✓",
+    extended: "✓",
+    exclusive: "✓",
+  },
+  {
+    feature: { en: "Broadcast/TV use", sv: "Broadcast/TV-användning" },
+    standard: "✗",
+    extended: "✓",
+    exclusive: "✓",
+  },
+  {
+    feature: { en: "Product packaging", sv: "Produktförpackning" },
+    standard: "✗",
+    extended: "✓",
+    exclusive: "✓",
+  },
+  {
+    feature: { en: "Attribution required", sv: "Attribution krävs" },
+    standard: "✓",
+    extended: "✗",
+    exclusive: "✗",
+  },
+  {
+    feature: { en: "Modification rights", sv: "Ändringsrättigheter" },
+    standard: { en: "Basic", sv: "Grundläggande" },
+    extended: { en: "Moderate", sv: "Måttlig" },
+    exclusive: { en: "Full", sv: "Fullständig" },
+  },
+  {
+    feature: { en: "Resale rights", sv: "Rätten till återförsäljning" },
+    standard: "✗",
+    extended: "✗",
+    exclusive: "✓",
+  },
+  {
+    feature: { en: "Template creation", sv: "Mallskapande" },
+    standard: "✗",
+    extended: "✗",
+    exclusive: "✓",
+  },
+  {
+    feature: { en: "Geographic scope", sv: "Geografiskt område" },
+    standard: { en: "Sweden", sv: "Sverige" },
+    extended: { en: "Europe", sv: "Europa" },
+    exclusive: { en: "Worldwide", sv: "Internationellt" },
+  },
+  {
+    feature: { en: "Usage period", sv: "Användningsperiod" },
+    standard: { en: "1 year", sv: "1 år" },
+    extended: { en: "2 years", sv: "2 år" },
+    exclusive: { en: "Lifetime", sv: "Livstid" },
+  },
+  {
+    feature: { en: "Source files", sv: "Källfiler" },
+    standard: "✗",
+    extended: { en: "Basic", sv: "Grundläggande" },
+    exclusive: { en: "Complete", sv: "Fullständig" },
+  },
+  {
+    feature: { en: "Support level", sv: "Supportnivå" },
+    standard: { en: "Basic", sv: "Grundläggande" },
+    extended: { en: "Priority", sv: "Prioritet" },
+    exclusive: { en: "Dedicated", sv: "Dedikerad" },
+  },
+  {
+    feature: { en: "License transfer", sv: "Licensöverföring" },
+    standard: "✗",
+    extended: "✗",
+    exclusive: { en: "Available", sv: "Tillgänglig" },
+  },
+];
+
+function getValueDisplay(value: string | { en: string; sv: string }) {
+  if (value === "✓") {
+    return {
+      text: { en: "Included", sv: "Inkluderad" },
+      class: "text-green-600 dark:text-green-400",
+      symbol: "✓",
+    };
+  } else if (value === "✗") {
+    return {
+      text: { en: "Not included", sv: "Ej inkluderad" },
+      class: "text-red-500 dark:text-red-400",
+      symbol: "✗",
+    };
+  } else {
+    return {
+      text: value,
+      class: "text-stone-700 dark:text-stone-300",
+      symbol: null,
+    };
+  }
+}
+
+function getLocalizedText(
+  text: string | { en: string; sv: string },
+  locale: "en" | "sv",
+): string {
+  return typeof text === "string" ? text : text[locale];
+}
+
+const translations = {
+  en: {
+    heading: "License Comparison",
+    description:
+      "Compare all licensing options side-by-side to find the perfect fit for your project needs and budget.",
+    features: "Features",
+    standard: "Standard",
+    standardPrice: "SEK 1,000",
+    extended: "Extended",
+    extendedPrice: "SEK 4,000",
+    exclusive: "Exclusive",
+    exclusivePrice: "SEK 10,000",
+    popular: "Popular",
+  },
+  sv: {
+    heading: "Licensjämförelse",
+    description:
+      "Jämför alla licensalternativ sida vid sida för att hitta den perfekta lösningen för ditt projekts behov och budget.",
+    features: "Funktioner",
+    standard: "Standard",
+    standardPrice: "1 000kr",
+    extended: "Utökad",
+    extendedPrice: "4 000kr",
+    exclusive: "Exklusiv",
+    exclusivePrice: "10 000kr",
+    popular: "Populär",
+  },
+};
+---
+
+<section aria-labelledby="licensing-comparison-heading" class="space-y-8">
+  <header class="space-y-4">
+    <h2
+      id="licensing-comparison-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsAlignLeft
+        aria-hidden="true"
+        class="mr-1 mb-1 inline h-6 w-6"
+      />
+      {translations[locale].heading}
+    </h2>
+    <p class="max-w-2xl text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <table
+    class="hidden w-full border-collapse border border-stone-200 md:table dark:border-stone-700"
+  >
+    <thead>
+      <tr class="bg-stone-100 dark:bg-stone-800">
+        <th
+          scope="col"
+          class="border-r border-b border-stone-200 p-4 text-left dark:border-stone-700"
+        >
+          <span class="text-sm font-medium text-stone-800 dark:text-stone-100">
+            {translations[locale].features}
+          </span>
+        </th>
+        <th
+          scope="col"
+          class="border-r border-b border-stone-200 p-4 text-center dark:border-stone-700"
+        >
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-stone-800 dark:text-stone-100">
+              {translations[locale].standard}
+            </div>
+            <div class="font-mono text-xs font-normal text-stone-500">
+              {translations[locale].standardPrice}
+            </div>
+          </div>
+        </th>
+        <th
+          scope="col"
+          class="border-r border-b border-stone-200 bg-red-50 p-4 text-center dark:border-stone-700 dark:bg-red-950/20"
+        >
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-stone-800 dark:text-stone-100">
+              {translations[locale].extended}
+            </div>
+            <div class="font-mono text-xs font-normal text-stone-500">
+              {translations[locale].extendedPrice}
+            </div>
+            <span
+              class="inline-block rounded-full bg-red-500 px-2 py-0.5 text-xs font-medium text-stone-100"
+            >
+              {translations[locale].popular}
+            </span>
+          </div>
+        </th>
+        <th
+          scope="col"
+          class="border-r border-b border-stone-200 p-4 text-center dark:border-stone-700"
+        >
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-stone-800 dark:text-stone-100">
+              {translations[locale].exclusive}
+            </div>
+            <div class="font-mono text-xs font-normal text-stone-500">
+              {translations[locale].exclusivePrice}
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        comparisonFeatures.map((row, index) => (
+          <tr
+            class={
+              index % 2 === 0
+                ? "bg-stone-100 dark:bg-stone-800"
+                : "bg-stone-50/50 dark:bg-stone-800/50"
+            }
+          >
+            <th
+              scope="row"
+              class="border-r border-stone-200 p-4 text-left dark:border-stone-700"
+            >
+              <span class="text-sm font-medium text-stone-700 dark:text-stone-300">
+                {row.feature[locale]}
+              </span>
+            </th>
+
+            <td class="border-r border-stone-200 p-4 text-center dark:border-stone-700">
+              {(() => {
+                const display = getValueDisplay(row.standard);
+                return (
+                  <span class={`text-sm ${display.class}`}>
+                    {display.symbol ? (
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
+                        {display.symbol}
+                      </span>
+                    ) : (
+                      getLocalizedText(display.text, locale)
+                    )}
+                  </span>
+                );
+              })()}
+            </td>
+
+            <td class="border-r border-stone-200 bg-red-50/50 p-4 text-center dark:border-stone-700 dark:bg-red-950/10">
+              {(() => {
+                const display = getValueDisplay(row.extended);
+                return (
+                  <span class={`text-sm ${display.class}`}>
+                    {display.symbol ? (
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
+                        {display.symbol}
+                      </span>
+                    ) : (
+                      getLocalizedText(display.text, locale)
+                    )}
+                  </span>
+                );
+              })()}
+            </td>
+
+            <td class="p-4 text-center">
+              {(() => {
+                const display = getValueDisplay(row.exclusive);
+                return (
+                  <span class={`text-sm ${display.class}`}>
+                    {display.symbol ? (
+                      <span
+                        class="font-mono text-lg"
+                        aria-label={display.text[locale]}
+                      >
+                        {display.symbol}
+                      </span>
+                    ) : (
+                      getLocalizedText(display.text, locale)
+                    )}
+                  </span>
+                );
+              })()}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <div class="space-y-6 md:hidden">
+    <section>
+      <h3 class="font-medium text-stone-800 dark:text-stone-100">
+        {translations[locale].standard} - {translations[locale].standardPrice}
+      </h3>
+      <dl
+        class="mt-4 divide-y divide-stone-200 border border-stone-200 dark:divide-stone-700 dark:border-stone-700"
+      >
+        {
+          comparisonFeatures.map((feature) => {
+            const display = getValueDisplay(feature.standard);
+            return (
+              <div class="flex flex-wrap items-center justify-between gap-2 p-3">
+                <dt class="text-sm text-stone-700 dark:text-stone-300">
+                  {feature.feature[locale]}
+                </dt>
+                <dd class={`text-sm font-medium ${display.class}`}>
+                  {display.symbol ? (
+                    <span class="font-mono" aria-label={display.text[locale]}>
+                      {display.symbol}
+                    </span>
+                  ) : (
+                    getLocalizedText(display.text, locale)
+                  )}
+                </dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </section>
+
+    <section>
+      <div class="flex items-center gap-2">
+        <h3 class="font-medium text-stone-800 dark:text-stone-100">
+          {translations[locale].extended} - {translations[locale].extendedPrice}
+        </h3>
+        <span
+          class="rounded-full bg-red-500 px-2 py-0.5 text-xs font-medium text-white"
+        >
+          {translations[locale].popular}
+        </span>
+      </div>
+      <dl
+        class="mt-4 divide-y divide-stone-200 border border-stone-200 dark:divide-stone-700 dark:border-stone-700"
+      >
+        {
+          comparisonFeatures.map((feature) => {
+            const display = getValueDisplay(feature.extended);
+            return (
+              <div class="flex flex-wrap items-center justify-between gap-2 p-3">
+                <dt class="text-sm text-stone-700 dark:text-stone-300">
+                  {feature.feature[locale]}
+                </dt>
+                <dd class={`text-sm font-medium ${display.class}`}>
+                  {display.symbol ? (
+                    <span class="font-mono" aria-label={display.text[locale]}>
+                      {display.symbol}
+                    </span>
+                  ) : (
+                    getLocalizedText(display.text, locale)
+                  )}
+                </dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </section>
+
+    <section>
+      <h3 class="font-medium text-stone-800 dark:text-stone-100">
+        {translations[locale].exclusive} - {translations[locale].exclusivePrice}
+      </h3>
+      <dl
+        class="mt-4 divide-y divide-stone-200 border border-stone-200 dark:divide-stone-700 dark:border-stone-700"
+      >
+        {
+          comparisonFeatures.map((feature) => {
+            const display = getValueDisplay(feature.exclusive);
+            return (
+              <div class="flex flex-wrap items-center justify-between gap-2 p-3">
+                <dt class="text-sm text-stone-700 dark:text-stone-300">
+                  {feature.feature[locale]}
+                </dt>
+                <dd class={`text-sm font-medium ${display.class}`}>
+                  {display.symbol ? (
+                    <span class="font-mono" aria-label={display.text[locale]}>
+                      {display.symbol}
+                    </span>
+                  ) : (
+                    getLocalizedText(display.text, locale)
+                  )}
+                </dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+title: "Rätten att tystas branding"
+description: "Branding project for the short documentary Rätten att tystas. Includes logo, color scheme, and typography."
+category: "Branding"
+publishedDate: "2025-02-18T00:00:00Z"
+thumbnailImg: "/src/assets/portfolio/ratten-att-tystas-brand-design/thumbnail.jpg"
+thumbnailImgAlt: "Image of Rätten att tystas logo"
+featured: false
+---
+
+import Img01 from "../../../assets/portfolio/ratten-att-tystas-brand-design/01.jpg";
+import Img02 from "../../../assets/portfolio/ratten-att-tystas-brand-design/02.jpg";
+import { Picture } from "astro:assets";
+
+Rätten att tystas was the idea for a short documentary that explored the limits and challenges of freedom of expression in an increasingly digitalised Sweden. The project aimed to highlight the complex issues surrounding censorship, surveillance and the individual's right to express themselves freely in today's digital society.
+
+As the documentary would have required a large amount of graphics to explain and clarify issues, I chose to create an entire identity for the project. This included a logo, colour scheme and typography to be used in all production, marketing and communication related to the documentary.
+
+<div class="grid gap-4 select-none sm:grid-cols-2">
+  <Picture
+    src={Img01}
+    alt="Logo for Rätten att tystas"
+    quality={80}
+    formats={["avif"]}
+    layout="constrained"
+    fit="cover"
+    position="center"
+    class="h-auto w-full"
+  />
+  <Picture
+    src={Img02}
+    alt="Logo usage example for Rätten att tystas"
+    quality={80}
+    formats={["avif"]}
+    layout="constrained"
+    fit="cover"
+    position="center"
+    class="h-auto w-full"
+  />
+</div>

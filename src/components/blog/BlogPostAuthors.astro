@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsPin from "../icons/PixelarticonsPin.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const { authors } = Astro.props;
+
+const translations = {
+  en: {
+    heading: "Post authored by",
+    ariaLabel: "View profile for",
+  },
+  sv: {
+    heading: "Inlägg publicerat av",
+    ariaLabel: "Visa profil för",
+  },
+};
+---
+
+<aside aria-labelledby="authors-heading">
+  <h2
+    id="authors-heading"
+    class="mb-4 flex items-center gap-1 font-serif text-xl text-stone-800 dark:text-stone-300"
+  >
+    <PixelarticonsHumanHandsup aria-hidden="true" />
+    {translations[locale].heading}
+  </h2>
+
+  <ul role="list" class="flex flex-wrap gap-2">
+    {
+      authors.map(
+        (author) =>
+          author && (
+            <li>
+              <a
+                href={getRelativeLocaleUrl(locale, `authors/${author.id}`)}
+                class="flex w-fit gap-4 p-3 text-stone-800 transition hover:bg-stone-200/50 active:opacity-50 dark:text-stone-300 dark:hover:bg-stone-800"
+                aria-label={`${translations[locale].ariaLabel} ${author.data.name}`}
+              >
+                <Image
+                  src={author.data.avatar}
+                  alt={`Bild av ${author.data.name}`}
+                  width={48}
+                  height={48}
+                  class="rounded-full select-none"
+                />
+                <div>
+                  <span class="font-medium tracking-tight">
+                    {author.data.name}
+                  </span>
+                  {author.data.location && (
+                    <span class="flex items-center gap-1 text-sm text-stone-600 dark:text-stone-400">
+                      <PixelarticonsPin aria-hidden="true" class="h-4 w-4" />
+                      {author.data.location}
+                    </span>
+                  )}
+                </div>
+              </a>
+            </li>
+          ),
+      )
+    }
+  </ul>
+</aside>

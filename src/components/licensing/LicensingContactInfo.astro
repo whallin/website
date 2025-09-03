@@ -1,0 +1,128 @@
+---
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    optional: "(optional)",
+    contactInformation: "Contact information",
+    name: "Name",
+    namePlaceholder: "Your full name",
+    email: "Email",
+    emailPlaceholder: "your@email.com",
+    company: "Company/Organization",
+    companyPlaceholder: "Your company name",
+    phone: "Phone",
+    phonePlaceholder: "+1 (555) 123-4567",
+  },
+  sv: {
+    optional: "(valfritt)",
+    contactInformation: "Kontaktinformation",
+    name: "Namn",
+    namePlaceholder: "Ditt fullständiga namn",
+    email: "E-post",
+    emailPlaceholder: "din@e-post.se",
+    company: "Företag/Organisation",
+    companyPlaceholder: "Ditt företagsnamn",
+    phone: "Telefon",
+    phonePlaceholder: "070-123 45 67",
+  },
+};
+
+interface FormField {
+  id: string;
+  name: string;
+  type: "text" | "email" | "tel";
+  label: string;
+  placeholder: string;
+  required?: boolean;
+  autocomplete?: string;
+  gridClass?: string;
+}
+
+const formFields: FormField[] = [
+  {
+    id: "license-contact-name",
+    name: "name",
+    type: "text",
+    label: translations[locale].name,
+    placeholder: translations[locale].namePlaceholder,
+    required: true,
+    autocomplete: "name",
+    gridClass: "sm:grid-cols-2",
+  },
+  {
+    id: "license-contact-email",
+    name: "email",
+    type: "email",
+    label: translations[locale].email,
+    placeholder: translations[locale].emailPlaceholder,
+    required: true,
+    autocomplete: "email",
+    gridClass: "sm:grid-cols-2",
+  },
+  {
+    id: "license-company",
+    name: "company",
+    type: "text",
+    label: translations[locale].company,
+    placeholder: translations[locale].companyPlaceholder,
+    required: true,
+    autocomplete: "organization",
+    gridClass: "sm:grid-cols-2",
+  },
+  {
+    id: "license-phone",
+    name: "phone",
+    type: "tel",
+    label: `${translations[locale].phone} ${translations[locale].optional}`,
+    placeholder: translations[locale].phonePlaceholder,
+    autocomplete: "tel",
+    gridClass: "sm:grid-cols-2",
+  },
+];
+
+const getFieldPairs = (fields: FormField[]) => {
+  const pairs = [];
+  for (let i = 0; i < fields.length; i += 2) {
+    pairs.push([fields[i], fields[i + 1]].filter(Boolean));
+  }
+  return pairs;
+};
+
+const fieldPairs = getFieldPairs(formFields);
+---
+
+<fieldset>
+  <legend
+    class="mb-4 text-sm font-medium tracking-wider text-stone-500 uppercase"
+  >
+    {translations[locale].contactInformation}
+  </legend>
+
+  {
+    fieldPairs.map((pair) => (
+      <div class="mb-4 grid gap-4 sm:grid-cols-2">
+        {pair.map((field) => (
+          <div>
+            <label
+              for={field.id}
+              class="text-sm font-medium tracking-tight text-stone-800 dark:text-stone-100"
+            >
+              {field.label}
+              {field.required ? " *" : ""}
+            </label>
+            <input
+              type={field.type}
+              id={field.id}
+              name={field.name}
+              autocomplete={field.autocomplete}
+              required={field.required}
+              placeholder={field.placeholder}
+              class="mt-2 w-full border border-stone-300 px-3 py-2 placeholder:text-stone-500 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+            />
+          </div>
+        ))}
+      </div>
+    ))
+  }
+</fieldset>

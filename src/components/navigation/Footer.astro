@@ -2,6 +2,9 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import SvgWordmarkDark from "../../assets/wordmark-dark.svg";
 import SvgWordmarkLight from "../../assets/wordmark-light.svg";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
 import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
 import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
 import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
@@ -32,6 +35,38 @@ const socialLinks = [
   },
 ];
 
+const footerLinks = [
+  {
+    icon: PixelarticonsBriefcase,
+    category: { en: "Work", sv: "Arbete" },
+    links: [
+      { href: "portfolio", label: { en: "Portfolio", sv: "Portfölj" } },
+      { href: "services", label: { en: "Services", sv: "Tjänster" } },
+      // { href: "pricing", label: { en: "Pricing", sv: "Priser" } },
+      { href: "hire", label: { en: "Hire William", sv: "Anlita William" } },
+    ],
+  },
+  {
+    icon: PixelarticonsHumanHandsup,
+    category: { en: "William Hallin", sv: "William Hallin" },
+    links: [
+      { href: "about", label: { en: "About me", sv: "Om mig" } },
+      { href: "blog", label: { en: "Blog", sv: "Blogg" } },
+      { href: "clients", label: { en: "Clients", sv: "Kunder" } },
+      { href: "contact", label: { en: "Contact me", sv: "Kontakta mig" } },
+    ],
+  },
+  {
+    icon: PixelarticonsScriptText,
+    category: { en: "Support", sv: "Support" },
+    links: [
+      { href: "faq", label: { en: "FAQ", sv: "FAQ" } },
+      { href: "licensing", label: { en: "Licensing", sv: "Licensiering" } },
+      { href: "legal", label: { en: "Legal", sv: "Juridik" } },
+    ],
+  },
+];
+
 async function safeExec(cmd: string) {
   try {
     const { execSync } = await import("child_process");
@@ -48,11 +83,13 @@ const translations = {
     allRights: "All rights reserved.",
     ariaSocialMedia: "Social media and settings",
     visitProfile: "Visit profile on",
+    ariaFooterNav: "Footer navigation",
   },
   sv: {
     allRights: "Alla rättigheter förbehållna.",
     ariaSocialMedia: "Sociala medier och inställningar",
     visitProfile: "Besök profil på",
+    ariaFooterNav: "Sidfotsnavigering",
   },
 };
 
@@ -60,72 +97,103 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 ---
 
 <div transition:name="footer" class="md:mt-16">
-  <footer
-    class="flex flex-col items-center justify-between gap-4 border-t border-stone-300 pt-8 md:flex-row dark:border-stone-700"
-  >
-    <div class="flex flex-col items-center gap-4 text-stone-500 md:flex-row">
-      <a
-        href={getRelativeLocaleUrl(locale, "/")}
-        class="transition hover:opacity-75 active:scale-[0.97]"
-      >
-        <SvgWordmarkDark width="64" aria-hidden="true" class="dark:hidden" />
-        <SvgWordmarkLight
-          width="64"
-          aria-hidden="true"
-          class="hidden dark:block"
-        />
-      </a>
+  <footer class="border-t border-stone-300 pt-8 dark:border-stone-700">
+    <nav
+      aria-label={translations[locale].ariaFooterNav}
+      class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8"
+    >
+      {
+        footerLinks.map((section) => (
+          <div>
+            <h3 class="mb-3 text-sm font-medium text-stone-800 dark:text-stone-100">
+              <section.icon aria-hidden="true" class="mr-1 inline h-4 w-4" />
+              {section.category[locale]}
+            </h3>
+            <ul class="space-y-1">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={getRelativeLocaleUrl(locale, link.href)}
+                    class="text-sm text-stone-600 hover:bg-red-400 hover:text-stone-100 active:opacity-50 dark:text-stone-400"
+                  >
+                    {link.label[locale]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
 
-      <div
-        class="flex flex-col items-center gap-0.5 text-center text-xs md:items-start md:text-left"
-      >
-        <span>
-          © 2025 <a
-            href="https://newgent.digital/?utm_source=hallinmedia&utm_medium=footer&utm_campaign=website"
+    <div
+      class="flex flex-col items-center justify-between gap-4 border-t border-stone-300 pt-8 md:flex-row dark:border-stone-700"
+    >
+      <div class="flex flex-col items-center gap-4 text-stone-500 md:flex-row">
+        <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class="transition hover:opacity-75 active:scale-[0.97]"
+        >
+          <SvgWordmarkDark width="64" aria-hidden="true" class="dark:hidden" />
+          <SvgWordmarkLight
+            width="64"
+            aria-hidden="true"
+            class="hidden dark:block"
+          />
+        </a>
+
+        <div
+          class="flex flex-col items-center gap-0.5 text-center text-xs md:items-start md:text-left"
+        >
+          <span>
+            © 2025 <a
+              href="https://newgent.digital/?utm_source=hallinmedia&utm_medium=footer&utm_campaign=website"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:bg-sky-500 hover:text-stone-100 active:opacity-50"
+              >NWG Digital AB</a
+            >. {translations[locale].allRights}
+          </span>
+          <a
+            href="https://github.com/whallin/website"
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:bg-sky-500 hover:text-stone-100 active:opacity-50"
-            >NWG Digital AB</a
-          >. {translations[locale].allRights}
-        </span>
-        <a
-          href="https://github.com/whallin/website"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="w-fit underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-black hover:text-white hover:no-underline active:opacity-50 dark:hover:bg-white dark:hover:text-black"
-        >
-          {commitHash}
-        </a>
+            class="w-fit underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-black hover:text-white hover:no-underline active:opacity-50 dark:hover:bg-white dark:hover:text-black"
+          >
+            {commitHash}
+          </a>
+        </div>
       </div>
-    </div>
 
-    <nav aria-label={translations[locale].ariaSocialMedia}>
-      <ul
-        class="flex flex-row items-center gap-4 text-stone-700 dark:text-stone-300"
+      <nav
+        aria-label={translations[locale].ariaSocialMedia}
+        class="flex flex-col items-center gap-4 md:items-end"
       >
-        {
-          socialLinks.map((social) => (
-            <li>
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="transition-opacity hover:opacity-75 active:opacity-50"
-                aria-label={`${translations[locale].visitProfile} ${social.label}`}
-              >
-                <social.icon class="h-4 w-4" aria-hidden="true" />
-              </a>
-            </li>
-          ))
-        }
+        <ul
+          class="flex flex-row flex-wrap items-center justify-center gap-4 text-stone-700 dark:text-stone-300"
+        >
+          {
+            socialLinks.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="transition-opacity hover:opacity-75 active:opacity-50"
+                  aria-label={`${translations[locale].visitProfile} ${social.label}`}
+                >
+                  <social.icon class="h-4 w-4" aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
 
-        <li>
+        <div class="flex items-center gap-4">
           <LanguageSwitcher />
-        </li>
-        <li>
           <ThemeSwitcher />
-        </li>
-      </ul>
-    </nav>
+        </div>
+      </nav>
+    </div>
   </footer>
 </div>

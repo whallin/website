@@ -1,0 +1,83 @@
+---
+import FormShell from "../forms/FormShell.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+import PixelarticonsMailCheck from "../icons/PixelarticonsMailCheck.astro";
+import PixelarticonsMailDelete from "../icons/PixelarticonsMailDelete.astro";
+import LicensingContactDetails from "./LicensingContactDetails.astro";
+import LicensingContactInfo from "./LicensingContactInfo.astro";
+import LicensingContactTimeline from "./LicensingContactTimeline.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const translations = {
+  en: {
+    heading: "Request a license",
+    description:
+      "Ready to license my work? Fill out the form below with your project details, and I'll get back to you with a quote and license agreement.",
+    securityVerificationAriaLabel: "Security verification",
+    sendLicensingRequest: "Send licensing request",
+    successMessage:
+      "Licensing request sent successfully! I'll get back within 24 hours.",
+    errorMessage: "Sending failed! Try again.",
+  },
+  sv: {
+    heading: "Begär en licens",
+    description:
+      "Redo att licensiera mitt arbete? Fyll i formuläret nedan med dina projektuppgifter, så återkommer jag med en offert och licensavtal.",
+    securityVerificationAriaLabel: "Säkerhetsverifiering",
+    sendLicensingRequest: "Skicka licensförfrågan",
+    successMessage: "Licensförfrågan skickad! Jag återkommer inom 24 timmar.",
+    errorMessage: "Skickandet misslyckades! Försök igen.",
+  },
+};
+---
+
+<section class="space-y-8">
+  <header class="space-y-4">
+    <h2
+      id="license-form-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsMail aria-hidden="true" class="mr-1 mb-1 inline h-6 w-6" />
+      {translations[locale].heading}
+    </h2>
+    <p class="leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <FormShell
+    formId="licensing-inquiry-form"
+    turnstileId="turnstile-container"
+    submitBtnId="licensing-submit-btn"
+    submitText={translations[locale].sendLicensingRequest}
+    successId="licensing-success-message"
+    errorId="licensing-error-message"
+    errorTextId="licensing-error-text"
+  >
+    <div slot="fields" class="space-y-4">
+      <LicensingContactInfo />
+      <LicensingContactDetails />
+      <LicensingContactTimeline />
+    </div>
+
+    <PixelarticonsMail slot="submit-icon" aria-hidden="true" class="h-4 w-4" />
+
+    <PixelarticonsMailCheck
+      slot="success-icon"
+      aria-hidden="true"
+      class="h-4 w-4"
+    />
+    <span slot="success-text">{translations[locale].successMessage}</span>
+
+    <PixelarticonsMailDelete
+      slot="error-icon"
+      aria-hidden="true"
+      class="h-4 w-4"
+    />
+    <span slot="error-text">{translations[locale].errorMessage}</span>
+  </FormShell>
+</section>
+<script>
+  import "./LicensingContact";
+</script>

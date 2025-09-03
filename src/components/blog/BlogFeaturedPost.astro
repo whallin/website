@@ -12,6 +12,20 @@ import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
 import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
 import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
 
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
+  return id.startsWith(`${locale}/`);
+});
+const featuredPost = getFeaturedPost(allBlogPosts);
+
+if (!featuredPost) {
+  return null;
+}
+
+const readTime = calculateReadTime(featuredPost.body || "");
+const formattedDate = formatDateShort(featuredPost.data.publishedDate, locale);
+const isoDate = formatDateISO(featuredPost.data.publishedDate);
+
 const translations = {
   en: {
     heading: "Featured post",
@@ -26,20 +40,6 @@ const translations = {
     minRead: " min läsning",
   },
 };
-
-const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
-const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
-  return id.startsWith(`${locale}/`);
-});
-const featuredPost = getFeaturedPost(allBlogPosts);
-
-if (!featuredPost) {
-  return null;
-}
-
-const readTime = calculateReadTime(featuredPost.body || "");
-const formattedDate = formatDateShort(featuredPost.data.publishedDate);
-const isoDate = formatDateISO(featuredPost.data.publishedDate);
 ---
 
 {

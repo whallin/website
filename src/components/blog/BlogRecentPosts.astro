@@ -10,6 +10,12 @@ import {
 } from "../../utils/blog";
 import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
 
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
+  return id.startsWith(`${locale}/`);
+});
+const recentPosts = getRecentPosts(allBlogPosts, 6);
+
 const translations = {
   en: {
     heading: "Most recent posts",
@@ -22,12 +28,6 @@ const translations = {
     minRead: "min läsning",
   },
 };
-
-const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
-const allBlogPosts = await getCollection("blogCollection", ({ id }) => {
-  return id.startsWith(`${locale}/`);
-});
-const recentPosts = getRecentPosts(allBlogPosts, 6);
 ---
 
 <section aria-labelledby="recent-posts-heading">
@@ -42,7 +42,7 @@ const recentPosts = getRecentPosts(allBlogPosts, 6);
     {
       recentPosts.map((post) => {
         const readTime = calculateReadTime(post.body || "");
-        const formattedDate = formatDateShort(post.data.publishedDate);
+        const formattedDate = formatDateShort(post.data.publishedDate, locale);
         const isoDate = formatDateISO(post.data.publishedDate);
 
         return (

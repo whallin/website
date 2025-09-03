@@ -1,0 +1,31 @@
+---
+export const prerender = true;
+
+import ImgHeaderServices from "../../../assets/header/headerServices.jpg";
+import SidebarServices from "../../../components/navigation/sidebars/SidebarServices.astro";
+import PageHeaderImg from "../../../components/PageHeaderImg.astro";
+import ServicesAllServices from "../../../components/services/ServicesAllServices.astro";
+import LayoutBase from "../../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase
+  title="Services - Design, photo & media"
+  description="Professional services in brand design, advertising campaigns, product photography, and web development. Complete media production that engages and delivers results."
+>
+  <SidebarServices slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderServices}
+      headerImgAlt=""
+      headingText="My services"
+      headingItalic={false}
+      descriptionText="From brand visuals and ad campaigns, to product photos and video experiences — I help plan, design, and deliver media productions that moves people."
+      btnText="Get started"
+      btnHref="/hire"
+      btnAriaLabel="Get a service on the hire page"
+    />
+
+    <ServicesAllServices />
+  </div>
+</LayoutBase>

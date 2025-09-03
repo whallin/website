@@ -1,0 +1,31 @@
+---
+export const prerender = true;
+
+import ImgHeaderLegal from "../../assets/header/headerLegal.jpg";
+import LegalAllDocuments from "../../components/legal/LegalAllDocuments.astro";
+import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase
+  title="Juridiska dokument"
+  description="Läs igenom integritetspolicy, användarvillkor och andra juridiska dokument på enkel svenska. Transparenta riktlinjer för hur vi hanterar din data."
+>
+  <SidebarBase showLogo showReturn showNav slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderLegal}
+      headerImgAlt=""
+      headingText="Juridiska dokument"
+      headingItalic={false}
+      descriptionText="Integritet, villkor och policyer - de viktiga sakerna på enkel svenska så att du vet hur jag driver allt här omkring."
+      btnText="Har du en fråga?"
+      btnHref="/contact"
+      btnAriaLabel="Ställ en juridisk fråga på kontaktsidan"
+    />
+
+    <LegalAllDocuments />
+  </div>
+</LayoutBase>

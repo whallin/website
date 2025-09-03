@@ -1,0 +1,230 @@
+---
+import PixelarticonsArrowRight from "../icons/PixelarticonsArrowRight.astro";
+import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
+import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
+import PixelarticonsHeart from "../icons/PixelarticonsHeart.astro";
+import PixelarticonsHumanHandsup from "../icons/PixelarticonsHumanHandsup.astro";
+import PixelarticonsMail from "../icons/PixelarticonsMail.astro";
+
+const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+
+const workflowSteps = [
+  {
+    step: 1,
+    title: {
+      en: "Discovery & planning",
+      sv: "Upptäckts- & planeringsfas",
+    },
+    description: {
+      en: "We start with a conversation about your goals, target audience, and project requirements. I'll provide a comprehensive project proposal with timeline and pricing.",
+      sv: "Vi börjar med ett samtal om dina mål, målgrupp och projektkrav. Jag kommer med ett omfattande projektförslag med tidslinje och prissättning.",
+    },
+    duration: { en: "1-2 days", sv: "1-2 dagar" },
+    deliverables: {
+      en: ["Project brief", "Timeline", "Contract"],
+      sv: ["Projektomfattning", "Tidslinje", "Avtal"],
+    },
+    icon: PixelarticonsFlag,
+  },
+  {
+    step: 2,
+    title: {
+      en: "Research & strategy",
+      sv: "Forskning & strategi",
+    },
+    description: {
+      en: "Deep dive into your industry, competitors, and target market. I develop the creative strategy and direction that will guide the entire project.",
+      sv: "Djupdykning i din bransch, konkurrenter och målmarknad. Jag utvecklar den kreativa strategin och riktningen som kommer att vägleda hela projektet.",
+    },
+    duration: { en: "2-3 days", sv: "2-3 dagar" },
+    deliverables: {
+      en: ["Market research", "Creative brief", "Style direction"],
+      sv: ["Marknadsundersökning", "Kreativ sammanfattning", "Stilriktning"],
+    },
+    icon: PixelarticonsClock,
+  },
+  {
+    step: 3,
+    title: {
+      en: "Design & development",
+      sv: "Design & utveckling",
+    },
+    description: {
+      en: "I keep you updated with regular updates and milestone reviews to ensure we're on the right track.",
+      sv: "Jag håller dig informerad med regelbundna uppdateringar och milstolpsgranskningar för att se till att vi är på rätt spår.",
+    },
+    duration: { en: "1-3 weeks", sv: "1-3 veckor" },
+    deliverables: {
+      en: ["Initial concepts", "Revisions", "Final deliverables"],
+      sv: ["Initiala koncept", "Revideringar", "Slutliga leveranser"],
+    },
+    icon: PixelarticonsHeart,
+  },
+  {
+    step: 4,
+    title: {
+      en: "Review & refinement",
+      sv: "Granskning & förfining",
+    },
+    description: {
+      en: "Together we review the work and make any necessary adjustments. Up to 3 rounds of revisions are included to ensure everything meets your expectations.",
+      sv: "Tillsammans granskar vi arbetet och gör nödvändiga justeringar. Upp till 3 omgångar av revideringar ingår för att säkerställa att allt uppfyller dina förväntningar.",
+    },
+    duration: { en: "3-5 days", sv: "3-5 dagar" },
+    deliverables: {
+      en: ["Feedback sessions", "Revisions", "Approval"],
+      sv: ["Feedbacksessioner", "Revideringar", "Godkännande"],
+    },
+    icon: PixelarticonsMail,
+  },
+  {
+    step: 5,
+    title: {
+      en: "Delivery & launch",
+      sv: "Leverans & lansering",
+    },
+    description: {
+      en: "Final files are prepared and delivered in all required formats. I provide ongoing support during launch and ensure everything works perfectly.",
+      sv: "Slutliga filer förbereds och levereras i alla nödvändiga format. Jag erbjuder kontinuerligt stöd under lanseringen och säkerställer att allt fungerar perfekt.",
+    },
+    duration: { en: "1-2 days", sv: "1-2 dagar" },
+    deliverables: {
+      en: ["Final files", "Documentation", "Launch support"],
+      sv: ["Slutliga filer", "Dokumentation", "Lanseringsstöd"],
+    },
+    icon: PixelarticonsHumanHandsup,
+  },
+];
+
+const translations = {
+  en: {
+    heading: "How we work together",
+    description:
+      "A transparent, collaborative process designed to deliver results. Every project follows the same proven workflow, adapted to your specific project.",
+    stepsAriaLabel: "Project workflow steps",
+    step: "Step",
+    keyDeliverables: "Key deliverables",
+    readyToStart: "Ready to start your project?",
+    projectIntro:
+      "Every great project begins with a conversation. Let's discuss your goals and how I can help bring your ideas to life.",
+    startYourProject: "Start your project",
+  },
+  sv: {
+    heading: "Hur vi arbetar ihop",
+    description:
+      "En transparent, samarbetsinriktad process utformad för att leverera resultat. Varje projekt följer samma beprövade arbetsflöde, anpassat till ditt specifika projekt.",
+    stepsAriaLabel: "Projektets arbetsflöde",
+    step: "Steg",
+    keyDeliverables: "Leveranser",
+    readyToStart: "Redo att starta ditt projekt?",
+    projectIntro:
+      "Varje stort projekt börjar med en dialog. Låt oss diskutera dina mål och hur jag kan hjälpa till med dina idéer.",
+    startYourProject: "Starta ditt projekt",
+  },
+};
+---
+
+<section aria-labelledby="workflow-heading" class="space-y-8">
+  <header class="space-y-2">
+    <h2
+      id="workflow-heading"
+      class="font-serif text-2xl text-stone-800 dark:text-stone-100"
+    >
+      <PixelarticonsHeart aria-hidden="true" class="mr-1 mb-1 inline-block" />
+      {translations[locale].heading}
+    </h2>
+    <p class="leading-relaxed text-stone-600 dark:text-stone-400">
+      {translations[locale].description}
+    </p>
+  </header>
+
+  <ol
+    role="list"
+    aria-label={translations[locale].stepsAriaLabel}
+    class="space-y-8"
+  >
+    {
+      workflowSteps.map((step) => (
+        <li aria-labelledby={`step-${step.step}-title`} class="group relative">
+          <div
+            aria-hidden="true"
+            class="absolute top-16 left-6 h-16 w-0.5 bg-stone-200 dark:bg-stone-700"
+          />
+
+          <div class="flex gap-8">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-stone-200 transition-colors group-hover:border-red-400 dark:border-stone-700 dark:bg-stone-800 dark:group-hover:bg-red-900/20">
+              <step.icon
+                aria-hidden="true"
+                class="h-5 w-5 text-stone-600 transition-colors group-hover:text-red-600 dark:text-stone-400 dark:group-hover:text-red-400"
+              />
+            </div>
+
+            <div class="mb-8 flex-1 space-y-4">
+              <header class="space-y-2">
+                <div class="flex items-center gap-4">
+                  <span class="text-xs font-medium tracking-wider text-stone-500 uppercase">
+                    {translations[locale].step} {step.step}
+                  </span>
+                  <span class="font-mono text-xs text-stone-500">
+                    {step.duration[locale]}
+                  </span>
+                </div>
+
+                <h3
+                  id={`step-${step.step}-title`}
+                  class="font-serif text-xl text-stone-800 transition-colors group-hover:text-red-700 dark:text-stone-100 dark:group-hover:text-red-400"
+                >
+                  {step.title[locale]}
+                </h3>
+              </header>
+
+              <p class="leading-relaxed text-stone-600 dark:text-stone-400">
+                {step.description[locale]}
+              </p>
+
+              <div>
+                <span class="text-xs font-medium tracking-wider text-stone-500 uppercase">
+                  {translations[locale].keyDeliverables}
+                </span>
+
+                <ul role="list" class="mt-1 flex flex-wrap gap-2">
+                  {step.deliverables[locale].map((deliverable) => (
+                    <li class="rounded-full bg-stone-100 px-3 py-1 text-xs text-stone-700 dark:bg-stone-700 dark:text-stone-300">
+                      {deliverable}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <aside
+    aria-labelledby="cta-heading"
+    class="space-y-2 border border-stone-200 p-6 text-center dark:border-stone-700 dark:bg-stone-800"
+  >
+    <h3
+      id="cta-heading"
+      class="font-serif text-lg text-stone-800 dark:text-stone-100"
+    >
+      {translations[locale].readyToStart}
+    </h3>
+    <p class="text-sm text-stone-600 dark:text-stone-400">
+      {translations[locale].projectIntro}
+    </p>
+
+    <a
+      href="#project-form-section"
+      class="group mt-3 inline-flex items-center gap-1 bg-red-500 px-6 py-2 text-sm font-medium text-stone-100 transition active:scale-[0.97] active:opacity-50"
+    >
+      {translations[locale].startYourProject}
+      <PixelarticonsArrowRight
+        aria-hidden="true"
+        class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      />
+    </a>
+  </aside>
+</section>

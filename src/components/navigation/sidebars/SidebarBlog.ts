@@ -1,13 +1,9 @@
 import { getCollection } from "astro:content";
 
-export interface BlogStats {
-  totalPosts: number;
-  totalWords: string;
-  totalReadTime: string;
-}
-
-export async function calculateBlogStats(): Promise<BlogStats> {
-  const allPosts = await getCollection("blogCollection");
+export async function calculateBlogStats(locale: "en" | "sv") {
+  const allPosts = await getCollection("blogCollection", ({ id }) =>
+    id.startsWith(locale),
+  );
   const publishedPosts = allPosts.filter((post) => !post.data.draft);
   const totalPosts = publishedPosts.length;
 
@@ -38,16 +34,9 @@ export async function calculateBlogStats(): Promise<BlogStats> {
     totalReadTime = `${minutes}m`;
   }
 
-  let formattedTotalWords: string;
-  if (totalWords >= 1000) {
-    formattedTotalWords = `${Math.ceil(totalWords / 1000)}k`;
-  } else {
-    formattedTotalWords = totalWords.toString();
-  }
-
   return {
     totalPosts,
-    totalWords: formattedTotalWords,
+    totalWords,
     totalReadTime,
   };
 }

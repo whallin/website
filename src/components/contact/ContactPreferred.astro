@@ -81,7 +81,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
         <PixelarticonsHeart aria-hidden="true" class="mr-1 mb-1 inline-block" />
         {translations[locale].heading}
       </h2>
-      <p class="leading-relaxed text-stone-500">
+      <p class="leading-relaxed text-stone-600 dark:text-stone-400">
         {translations[locale].description}
       </p>
     </header>
@@ -109,7 +109,9 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
                 <h3 class="font-serif text-xl">{method.name[locale]}</h3>
               </a>
 
-              <p class="text-stone-500">{method.description[locale]}</p>
+              <p class="text-stone-600 dark:text-stone-400">
+                {method.description[locale]}
+              </p>
 
               <a
                 href={method.url}

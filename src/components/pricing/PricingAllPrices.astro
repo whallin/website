@@ -1,0 +1,348 @@
+---
+import PixelarticonsFlag from "../icons/PixelarticonsFlag.astro";
+import PixelarticonsBriefcase from "../icons/PixelarticonsBriefcase.astro";
+import PixelarticonsHeart from "../icons/PixelarticonsHeart.astro";
+import PixelarticonsClock from "../icons/PixelarticonsClock.astro";
+
+const pricingData = [
+  {
+    category: "Brand Identity",
+    icon: PixelarticonsFlag,
+    description: "Complete brand identity solutions from concept to guidelines",
+    services: [
+      {
+        name: "Logo Design",
+        price: "$1,200",
+        description: "Custom logo with 3 concepts and unlimited revisions"
+      },
+      {
+        name: "Brand Guidelines",
+        price: "$800",
+        description: "Comprehensive style guide with usage examples"
+      },
+      {
+        name: "Business Cards",
+        price: "$300",
+        description: "Professional card design matching your brand"
+      },
+      {
+        name: "Letterhead & Stationery",
+        price: "$400",
+        description: "Complete stationery package with brand consistency"
+      }
+    ],
+    addOns: [
+      {
+        name: "Additional Logo Concepts",
+        price: "$200",
+        unit: "per concept"
+      },
+      {
+        name: "Brand Animation",
+        price: "$600",
+        unit: "per animation"
+      },
+      {
+        name: "Social Media Templates",
+        price: "$400",
+        unit: "set of 10"
+      }
+    ]
+  },
+  {
+    category: "Web Design & Development",
+    icon: PixelarticonsBriefcase,
+    description: "Custom websites and digital experiences",
+    services: [
+      {
+        name: "Landing Page",
+        price: "$2,400",
+        description: "Single page with responsive design and basic SEO"
+      },
+      {
+        name: "Business Website",
+        price: "$4,800",
+        description: "Multi-page site with CMS and contact forms"
+      },
+      {
+        name: "E-commerce Store",
+        price: "$8,000",
+        description: "Full online store with payment integration"
+      },
+      {
+        name: "Web Application",
+        price: "From $12,000",
+        description: "Custom web app development with advanced features"
+      }
+    ],
+    addOns: [
+      {
+        name: "Additional Pages",
+        price: "$400",
+        unit: "per page"
+      },
+      {
+        name: "Advanced Animations",
+        price: "$800",
+        unit: "per implementation"
+      },
+      {
+        name: "Third-party Integrations",
+        price: "$600",
+        unit: "per integration"
+      },
+      {
+        name: "Performance Optimization",
+        price: "$1,200",
+        unit: "one-time"
+      }
+    ]
+  },
+  {
+    category: "Photography",
+    icon: PixelarticonsHeart,
+    description: "Professional photography for products and commercial use",
+    services: [
+      {
+        name: "Product Photography",
+        price: "$200",
+        description: "Professional shots with basic retouching"
+      },
+      {
+        name: "Lifestyle Photography",
+        price: "$400",
+        description: "Products in use with styled environments"
+      },
+      {
+        name: "Business Portraits",
+        price: "$600",
+        description: "Professional headshots and team photos"
+      },
+      {
+        name: "Event Photography",
+        price: "$150",
+        description: "Corporate events and business functions"
+      }
+    ],
+    addOns: [
+      {
+        name: "Advanced Retouching",
+        price: "$50",
+        unit: "per image"
+      },
+      {
+        name: "Rush Delivery",
+        price: "$300",
+        unit: "24-48 hours"
+      },
+      {
+        name: "Additional Locations",
+        price: "$200",
+        unit: "per location"
+      },
+      {
+        name: "Raw File Access",
+        price: "$150",
+        unit: "per session"
+      }
+    ]
+  },
+  {
+    category: "Consultation & Strategy",
+    icon: PixelarticonsClock,
+    description: "Strategic guidance and creative direction",
+    services: [
+      {
+        name: "Creative Consultation",
+        price: "$200",
+        description: "Strategic guidance on creative direction and planning"
+      },
+      {
+        name: "Brand Strategy Session",
+        price: "$500",
+        description: "Comprehensive brand positioning and strategy workshop"
+      },
+      {
+        name: "Design Review",
+        price: "$150",
+        description: "Professional feedback on existing designs"
+      },
+      {
+        name: "Project Planning",
+        price: "$300",
+        description: "Detailed project roadmap and timeline creation"
+      }
+    ],
+    addOns: [
+      {
+        name: "Follow-up Sessions",
+        price: "$150",
+        unit: "per hour"
+      },
+      {
+        name: "Written Strategy Document",
+        price: "$400",
+        unit: "per document"
+      },
+      {
+        name: "Competitor Analysis",
+        price: "$600",
+        unit: "comprehensive report"
+      }
+    ]
+  }
+];
+
+const additionalFees = [
+  {
+    name: "Rush Delivery",
+    fee: "50% surcharge",
+    description: "For projects needed within 48 hours"
+  },
+  {
+    name: "Weekend Work",
+    fee: "$100/hour",
+    description: "Additional rate for weekend availability"
+  },
+  {
+    name: "Travel Expenses",
+    fee: "Cost + time",
+    description: "For on-site work beyond 25 miles"
+  },
+  {
+    name: "Revision Rounds",
+    fee: "$150/round",
+    description: "After 3 included revision rounds"
+  }
+];
+---
+
+<h1 class="text-4xl">
+    FIX THIS COMPONENT A LITTLE, I LOVE THE LAYOUT WITH THE BOXES AROUND EACH SERVICE, BUT THE FLEX SEEMS WEIRD WITH THE ADD-ONS AND EXTRAS.
+</h1>
+
+<section aria-labelledby="pricing-heading" class="space-y-12">
+  <div class="space-y-12">
+    {pricingData.map((category) => (
+      <article class="border border-stone-200 dark:border-stone-700">
+        <header class="border-b border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 p-6">
+          <div class="flex items-center gap-3 mb-2">
+            <category.icon 
+              aria-hidden="true" 
+              class="h-6 w-6 text-red-500 dark:text-red-400" 
+            />
+            <h3 class="font-serif text-xl text-stone-800 dark:text-stone-100">
+              {category.category}
+            </h3>
+          </div>
+          <p class="text-sm text-stone-600 dark:text-stone-400">
+            {category.description}
+          </p>
+        </header>
+
+        <div class="p-6">
+          <div class="grid gap-8 lg:grid-cols-2">
+            <!-- Main Services -->
+            <div>
+              <h4 class="font-medium text-stone-800 dark:text-stone-100 mb-4 text-sm uppercase tracking-wider">
+                Core Services
+              </h4>
+              <ul class="space-y-4" role="list">
+                {category.services.map((service) => (
+                  <li class="group border-l-2 border-stone-200 pl-4 transition-colors hover:border-red-400 dark:border-stone-600 dark:hover:border-red-400">
+                    <div class="flex justify-between items-start gap-4">
+                      <div class="flex-1">
+                        <h5 class="font-medium text-stone-800 dark:text-stone-100 group-hover:text-red-700 dark:group-hover:text-red-400 transition-colors">
+                          {service.name}
+                        </h5>
+                        <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">
+                          {service.description}
+                        </p>
+                      </div>
+                      <span class="font-mono text-sm font-medium text-stone-800 dark:text-stone-100 whitespace-nowrap">
+                        {service.price}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Add-ons -->
+            <div>
+              <h4 class="font-medium text-stone-800 dark:text-stone-100 mb-4 text-sm uppercase tracking-wider">
+                Add-ons & Extras
+              </h4>
+              <ul class="space-y-3" role="list">
+                {category.addOns.map((addon) => (
+                  <li class="flex justify-between items-center gap-4 py-2 border-b border-stone-100 dark:border-stone-700 last:border-b-0">
+                    <span class="text-sm text-stone-700 dark:text-stone-300">
+                      {addon.name}
+                    </span>
+                    <div class="text-right">
+                      <span class="font-mono text-sm font-medium text-stone-800 dark:text-stone-100 block">
+                        {addon.price}
+                      </span>
+                      <span class="text-xs text-stone-500 dark:text-stone-500">
+                        {addon.unit}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Additional Fees Section -->
+  <section aria-labelledby="additional-fees-heading" class="border border-stone-200 dark:border-stone-700">
+    <header class="border-b border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 p-6">
+      <h3 id="additional-fees-heading" class="font-serif text-xl text-stone-800 dark:text-stone-100 mb-2">
+        Additional Fees
+      </h3>
+      <p class="text-sm text-stone-600 dark:text-stone-400">
+        Additional charges that may apply depending on project requirements
+      </p>
+    </header>
+    
+    <div class="p-6">
+      <ul class="grid gap-4 sm:grid-cols-2" role="list">
+        {additionalFees.map((fee) => (
+          <li class="flex justify-between items-start gap-4 p-4 border border-stone-100 dark:border-stone-700 rounded">
+            <div class="flex-1">
+              <h4 class="font-medium text-stone-800 dark:text-stone-100 text-sm">
+                {fee.name}
+              </h4>
+              <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">
+                {fee.description}
+              </p>
+            </div>
+            <span class="font-mono text-sm font-medium text-red-600 dark:text-red-400 whitespace-nowrap">
+              {fee.fee}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <div class="text-center p-6 border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800">
+    <h3 class="font-serif text-lg text-stone-800 dark:text-stone-100 mb-2">
+      Need a custom quote?
+    </h3>
+    <p class="text-sm text-stone-600 dark:text-stone-400 mb-4">
+      Every project is unique. Get in touch for personalized pricing based on your specific needs.
+    </p>
+    <a 
+      href="/contact" 
+      class="inline-block px-6 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition-colors active:opacity-50"
+      aria-label="Contact for custom pricing quote"
+    >
+      Get Custom Quote
+    </a>
+  </div>
+</section>

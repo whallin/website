@@ -1,0 +1,31 @@
+---
+export const prerender = true;
+
+import ImgHeaderServices from "../../assets/header/headerServices.jpg";
+import SidebarServices from "../../components/navigation/sidebars/SidebarServices.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
+import ServicesAllServices from "../../components/services/ServicesAllServices.astro";
+import LayoutBase from "../../layouts/LayoutBase.astro";
+---
+
+<LayoutBase
+  title="Tjänster - Design, foto & media"
+  description="Professionella tjänster inom varumärkesdesign, reklamkampanjer, produktfotografi och webbutveckling. Komplett medieproduktion som engagerar och ger resultat."
+>
+  <SidebarServices slot="sidebar" />
+
+  <div slot="content" class="space-y-12">
+    <PageHeaderImg
+      headerImgSrc={ImgHeaderServices}
+      headerImgAlt=""
+      headingText="Mina tjänster"
+      headingItalic={false}
+      descriptionText="Från varumärkesdesign och reklamkampanjer till produktfotografi och videoupplevelser - jag hjälper till att planera, designa och leverera medieproduktioner som berör människor."
+      btnText="Kom igång"
+      btnHref="/hire"
+      btnAriaLabel="Få en tjänst på anställningssidan"
+    />
+
+    <ServicesAllServices />
+  </div>
+</LayoutBase>

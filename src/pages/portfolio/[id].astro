@@ -1,169 +1,137 @@
 ---
-import { Picture } from "astro:assets";
+export const prerender = true;
+
 import { getCollection, render } from "astro:content";
 import PixelarticonsCalendar from "../../components/icons/PixelarticonsCalendar.astro";
-import PixelarticonsClock from "../../components/icons/PixelarticonsClock.astro";
-import PixelarticonsFlag from "../../components/icons/PixelarticonsFlag.astro";
 import SidebarBase from "../../components/navigation/SidebarBase.astro";
+import PageHeaderImg from "../../components/PageHeaderImg.astro";
 import LayoutBase from "../../layouts/LayoutBase.astro";
-
-const { project } = Astro.props;
-const { Content } = await render(project);
-const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
+import { formatDate } from "../../utils/blog";
 
 export async function getStaticPaths() {
-  const projects = await getCollection(
+  const portfolioItems = await getCollection(
     "portfolioCollection",
-    ({ data, id }) => !data.draft && id.includes("sv/"),
+    ({ id }) => {
+      return id.startsWith("sv/");
+    },
   );
-  return projects.map((project) => {
-    const id = project.id.includes("/")
-      ? project.id.split("/").slice(1).join("/")
-      : project.id;
-    return {
-      params: { id },
-      props: { project },
-    };
-  });
+  return portfolioItems.map((item) => ({
+    params: { id: item.id.replace("sv/", "") },
+    props: { portfolioItem: item },
+  }));
 }
 
-const calculateReadTime = (content: string) => {
-  const wordCount = content.split(/\s+/).length;
-  return Math.ceil(wordCount / 200);
-};
+const { portfolioItem } = Astro.props;
+const { Content } = await render(portfolioItem);
 
-const formattedDate = new Date(project.data.publishedDate).toLocaleDateString(
-  locale,
-  {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  },
-);
+const formattedDate = formatDate(portfolioItem.data.publishedDate, "sv-SE");
 
-const articleSchema = {
+const schema = {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
   mainEntityOfPage: {
     "@type": "WebPage",
     "@id": Astro.url,
   },
-  headline: project.data.title,
-  description: project.data.description,
-  image: project.data.thumbnailImg.src,
-  author: {
+  headline: portfolioItem.data.title,
+  description: portfolioItem.data.description,
+  image: portfolioItem.data.thumbnailImg,
+  creator: {
     "@type": "Person",
     name: "William Hallin",
+    url: "https://hallin.media",
   },
   publisher: {
     "@type": "Organization",
     name: "HallinMedia",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://hallin.media/meta.png",
+    },
   },
-  datePublished: new Date(project.data.publishedDate).toISOString(),
-  dateModified: new Date(project.data.publishedDate).toISOString(),
-  genre: project.data.category,
+  datePublished: portfolioItem.data.publishedDate,
+  dateModified: portfolioItem.data.publishedDate,
+  genre: portfolioItem.data.category,
 };
 ---
 
-<LayoutBase schema={articleSchema} adId="portfolio-post">
+<LayoutBase
+  title={portfolioItem.data.title}
+  description={portfolioItem.data.description}
+  schema={schema}
+>
   <SidebarBase showLogo showReturn slot="sidebar">
     <div slot="content">
-      <div class="space-y-8">
-        <div class="space-y-2 text-xs">
-          <div class="flex items-center gap-1 text-stone-500">
-            <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
-            <span>
-              {calculateReadTime(project.body || "")}
-              min läsning
-            </span>
-          </div>
-
-          <time
-            datetime={project.data.publishedDate}
-            class="flex items-center gap-1 text-stone-500"
-          >
+      <aside
+        class="space-y-4 text-xs text-stone-500"
+        aria-label="Projektmetadata"
+      >
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
             <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
+            Publicerad
+          </span>
+          <time
+            datetime={portfolioItem.data.publishedDate}
+            class="font-mono text-stone-800 dark:text-stone-300"
+          >
             {formattedDate}
           </time>
         </div>
-
-        <div class="space-y-2">
-          <div class="flex items-center gap-1 text-stone-500">
-            <PixelarticonsFlag aria-hidden="true" class="h-4 w-4" />
-            <span class="text-sm"> Kategori </span>
-          </div>
-
-          <div
-            class="w-fit rounded-full bg-red-100 px-3 py-1 text-xs font-medium tracking-tight text-red-700 dark:bg-red-900/50 dark:text-red-400"
+        <div class="flex flex-col space-y-0.5">
+          <span class="mb-1 text-stone-500"> Kategori </span>
+          <span
+            class="font-mono text-xs font-medium tracking-wider text-red-400 uppercase"
           >
-            {project.data.category}
-          </div>
+            {portfolioItem.data.category}
+          </span>
         </div>
-      </div>
+      </aside>
     </div>
   </SidebarBase>
 
-  <main slot="content" class="max-w-none space-y-12">
-    <header class="mb-8 space-y-6">
-      <h1
-        class="font-serif text-3xl leading-tight text-stone-800 dark:text-stone-100"
+  <article slot="content" class="space-y-8">
+    <header>
+      <PageHeaderImg
+        headerImgSrc={portfolioItem.data.thumbnailImg}
+        headerImgAlt={portfolioItem.data.thumbnailImgAlt}
+        headingText={portfolioItem.data.title}
+        headingItalic={false}
+        descriptionText={portfolioItem.data.description}
+        showBtn={false}
+      />
+
+      <aside
+        class="mt-6 mb-12 flex flex-wrap gap-6 text-xs text-stone-500 md:hidden"
+        aria-label="Projektmetadata"
       >
-        {project.data.title}
-      </h1>
-
-      <p class="leading-relaxed text-stone-600 dark:text-stone-400">
-        {project.data.description}
-      </p>
-
-      <div class="flex flex-wrap items-center gap-2 text-stone-500 md:hidden">
-        <div class="flex flex-wrap items-center gap-1">
-          <PixelarticonsClock aria-hidden="true" class="h-4 w-4" />
-          <span class="text-sm">
-            {calculateReadTime(project.body || "")}
-            min läsning
+        <div class="space-y-0.5">
+          <span class="mb-1 flex items-center gap-1">
+            <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
+            Publicerad
+          </span>
+          <time
+            datetime={portfolioItem.data.publishedDate}
+            class="font-mono text-stone-800 dark:text-stone-300"
+          >
+            {formattedDate}
+          </time>
+        </div>
+        <div class="flex flex-col space-y-0.5">
+          <span class="mb-1 text-stone-500"> Kategori </span>
+          <span
+            class="font-mono text-xs font-medium tracking-wider text-red-400 uppercase"
+          >
+            {portfolioItem.data.category}
           </span>
         </div>
-
-        <span aria-hidden="true"> • </span>
-
-        <time
-          datetime={project.data.publishedDate}
-          class="flex flex-wrap items-center gap-1 text-sm"
-        >
-          <PixelarticonsCalendar aria-hidden="true" class="h-4 w-4" />
-          {formattedDate}
-        </time>
-
-        <span aria-hidden="true"> • </span>
-
-        <div class="flex flex-wrap items-center gap-1">
-          <PixelarticonsFlag aria-hidden="true" class="h-4 w-4" />
-          <span class="text-sm">
-            {project.data.category}
-          </span>
-        </div>
-      </div>
+      </aside>
     </header>
 
-    <figure class="mb-8 overflow-hidden">
-      <Picture
-        src={project.data.thumbnailImg}
-        alt={project.data.thumbnailImgAlt}
-        width={1200}
-        height={620}
-        quality={80}
-        formats={["avif"]}
-        layout="constrained"
-        fit="cover"
-        position="center"
-        class="aspect-video w-full select-none"
-      />
-    </figure>
-
-    <hr class="border-stone-300 dark:border-stone-700" />
-
-    <article class="prose prose-stone dark:prose-invert max-w-none">
+    <main
+      class="prose dark:prose-invert prose-stone prose-headings:font-serif prose-headings:font-medium prose-a:hover:bg-red-400 prose-a:hover:text-stone-100 prose-a:active:opacity-50 prose-a:decoration-dashed prose-a:decoration-from-font prose-a:underline-offset-2"
+    >
       <Content />
-    </article>
-  </main>
+    </main>
+  </article>
 </LayoutBase>

@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import ImgHeaderContact from "../assets/header/headerContact.jpg";
 import ContactElsewhere from "../components/contact/ContactElsewhere.astro";
 import ContactMessageForm from "../components/contact/ContactMessageForm.astro";
@@ -8,7 +10,10 @@ import PageHeaderImg from "../components/PageHeaderImg.astro";
 import LayoutBase from "../layouts/LayoutBase.astro";
 ---
 
-<LayoutBase>
+<LayoutBase
+  title="Kontakt - William Hallin"
+  description="Kom i kontakt med William Hallin för design, fotografi eller medieproduktion. Enkelt kontaktformulär och direkta kontaktvägar för ditt nästa projekt."
+>
   <SidebarContact slot="sidebar" />
 
   <div slot="content" class="space-y-12">

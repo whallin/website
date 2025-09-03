@@ -3,10 +3,11 @@ import { Image } from "astro:assets";
 import ImgFeaturedWorkAtlas from "../../assets/featuredwork/featuredwork-atlas.jpg";
 import ImgFeaturedWorkDud from "../../assets/featuredwork/featuredwork-dud.jpg";
 import ImgFeaturedWorkEclean from "../../assets/featuredwork/featuredwork-eclean.jpg";
+import ImgFeaturedWorkMrDagarna from "../../assets/featuredwork/featuredwork-mrdagarna.jpg";
 import ImgFeaturedWorkNewgent from "../../assets/featuredwork/featuredwork-newgent.jpg";
 import ImgFeaturedWorkRat from "../../assets/featuredwork/featuredwork-rat.jpg";
-import ImgFeaturedWorkSkift from "../../assets/featuredwork/featuredwork-skift.jpg";
 import ImgFeaturedWorkTrastockfestivalen from "../../assets/featuredwork/featuredwork-trastockfestivalen.jpg";
+import ImgFeaturedWorkWhsMedia from "../../assets/featuredwork/featuredwork-whsmedia.jpg";
 
 const translations = {
   en: {
@@ -62,18 +63,6 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
       class="max-h-72 flex-1 select-none"
     />
     <Image
-      src={ImgFeaturedWorkAtlas}
-      alt=""
-      width={520}
-      height={800}
-      format="avif"
-      quality={80}
-      layout="constrained"
-      fit="cover"
-      position="center"
-      class="max-h-72 flex-1 select-none"
-    />
-    <Image
       src={ImgFeaturedWorkRat}
       alt=""
       width={520}
@@ -86,7 +75,31 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
       class="max-h-72 flex-1 select-none"
     />
     <Image
-      src={ImgFeaturedWorkSkift}
+      src={ImgFeaturedWorkWhsMedia}
+      alt=""
+      width={520}
+      height={800}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkMrDagarna}
+      alt=""
+      width={600}
+      height={400}
+      format="avif"
+      quality={80}
+      layout="constrained"
+      fit="cover"
+      position="center"
+      class="max-h-72 flex-1 select-none"
+    />
+    <Image
+      src={ImgFeaturedWorkAtlas}
       alt=""
       width={520}
       height={800}

@@ -1,11 +1,16 @@
 ---
+export const prerender = true;
+
 import AdvertGallery from "../components/AdvertGallery.astro";
 import SidebarBase from "../components/navigation/SidebarBase.astro";
 import PageHeaderImg from "../components/PageHeaderImg.astro";
 import LayoutBase from "../layouts/LayoutBase.astro";
 ---
 
-<LayoutBase>
+<LayoutBase
+  title="Annonssamling"
+  description="Se alla kreativa annonser och reklamkampanjer av William Hallin. Inspirerande exempel på visuell marknadsföring och grafisk design."
+>
   <SidebarBase showLogo showReturn showNav slot="sidebar" />
 
   <div slot="content" class="space-y-12">
