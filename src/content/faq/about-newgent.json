@@ -1,0 +1,18 @@
+{
+  "categoryLabel": {
+    "en": "About Newgent",
+    "sv": "Om Newgent"
+  },
+  "items": [
+    {
+      "question": {
+        "en": "What is \"NWG Digital AB\"/\"Newgent\"?",
+        "sv": "Vad är \"NWG Digital AB\"/\"Newgent\"?"
+      },
+      "answer": {
+        "en": "NWG Digital AB, also known as Newgent or Newgent Digital, is my registered Swedish limited company (aktiebolag). It handles all administrative and financial aspects of my services, functioning like a creative service agency.<br><br>Most official documents, including invoices and contracts, will come from NWG Digital AB. This includes correspondence addresses and bank account details for payments.<br><br>You can learn more about Newgent Digital at <a href='https://newgent.digital/' target='_blank' rel='noopener noreferrer' class='text-red-400 underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-red-400 hover:text-stone-100 active:opacity-50'>www.newgent.digital</a>.",
+        "sv": "NWG Digital AB, även kallat för Newgent eller Newgent Digital, är mitt registrerade svenska aktiebolag. Det hanterar alla administrativa och finansiella aspekter av mina tjänster och fungerar som en kreativ servicebyrå.<br><br>De flesta officiella dokument, fakturor och avtal kommer från NWG Digital AB. Detta inkluderar korrespondensadresser och bankkontouppgifter för betalningar.<br><br>Du kan läsa mer om Newgent Digital på <a href='https://newgent.digital/' target='_blank' rel='noopener noreferrer' class='text-red-400 underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-red-400 hover:text-stone-100 active:opacity-50'>www.newgent.digital</a>."
+      }
+    }
+  ]
+}
