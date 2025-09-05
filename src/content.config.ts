@@ -160,6 +160,7 @@ const legalCollection = defineCollection({
   schema: z
     .object({
       title: z.string().min(1, "Title is required"),
+      description: z.string().min(1, "Description is required"),
       lastUpdated: z.string().datetime("Invalid date format"),
     })
     .strict(),
