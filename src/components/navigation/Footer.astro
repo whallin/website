@@ -36,6 +36,8 @@ const footerLinks = [
     links: [
       { href: "portfolio", label: { en: "Portfolio", sv: "Portfölj" } },
       { href: "hire", label: { en: "Hire William", sv: "Anlita William" } },
+      { href: "clients", label: { en: "Clients", sv: "Kunder" } },
+      { href: "licensing", label: { en: "Licensing", sv: "Licensiering" } },
     ],
   },
   {
@@ -44,7 +46,6 @@ const footerLinks = [
     links: [
       { href: "about", label: { en: "About me", sv: "Om mig" } },
       { href: "blog", label: { en: "Blog", sv: "Blogg" } },
-      { href: "clients", label: { en: "Clients", sv: "Kunder" } },
       { href: "contact", label: { en: "Contact me", sv: "Kontakta mig" } },
     ],
   },
@@ -53,8 +54,9 @@ const footerLinks = [
     category: { en: "Support", sv: "Support" },
     links: [
       { href: "faq", label: { en: "FAQ", sv: "FAQ" } },
-      { href: "licensing", label: { en: "Licensing", sv: "Licensiering" } },
       { href: "legal", label: { en: "Legal", sv: "Juridik" } },
+      { href: "legal/terms", label: { en: "Terms", sv: "Villkor" } },
+      { href: "legal/privacy", label: { en: "Privacy", sv: "Integritet" } },
     ],
   },
 ];
@@ -162,7 +164,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
         class="flex flex-col items-center gap-4 md:items-end"
       >
         <ul
-          class="flex flex-row flex-wrap items-center justify-center gap-4 text-stone-700 dark:text-stone-300"
+          class="flex flex-row flex-wrap items-center justify-end gap-4 text-stone-700 dark:text-stone-300"
         >
           {
             socialLinks.map((social) => (
