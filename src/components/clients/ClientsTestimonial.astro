@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 
 const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
 const { client } = Astro.props;
@@ -15,13 +15,13 @@ const { client } = Astro.props;
       "{client.data.testimonial.quote[locale]}"
     </p>
     <footer class="flex items-center gap-3">
-      <Picture
+      <Image
         src={client.data.testimonial.author.avatar}
         alt={client.data.name}
         width={42}
         height={42}
+        format="avif"
         quality={80}
-        formats={["avif"]}
         layout="constrained"
         fit="cover"
         position="center"

@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import PixelarticonsArrowRight from "../components/icons/PixelarticonsArrowRight.astro";
 
 const {
@@ -18,16 +18,18 @@ const {
 <article>
   {
     headerImgSrc && (
-      <Picture
+      <Image
         src={headerImgSrc}
         alt={headerImgAlt}
+        width={720}
+        height={300}
+        format="avif"
         quality={80}
-        formats={["avif"]}
         layout="full-width"
         fit="cover"
         position="center"
         transition:name="pageheader-img"
-        class="mb-8 max-h-48 select-none sm:max-h-72"
+        class="mb-8 select-none"
       />
     )
   }

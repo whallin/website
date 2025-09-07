@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -50,13 +50,13 @@ const ads = (await getCollection("adsCollection")).sort((a, b) => {
               class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
               aria-describedby={`desktop-label-${index}`}
             >
-              <Picture
+              <Image
                 src={ad.data.image.desktop}
                 alt={ad.data.alt[locale]}
                 width={250}
                 height={250}
+                format="avif"
                 quality={80}
-                formats={["avif"]}
                 layout="constrained"
                 fit="cover"
                 position="center"
@@ -82,13 +82,13 @@ const ads = (await getCollection("adsCollection")).sort((a, b) => {
               class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
               aria-describedby={`tablet-label-${index}`}
             >
-              <Picture
+              <Image
                 src={ad.data.image.tablet}
                 alt={ad.data.alt[locale]}
                 width={468}
                 height={60}
+                format="avif"
                 quality={80}
-                formats={["avif"]}
                 layout="constrained"
                 fit="cover"
                 position="center"
@@ -114,13 +114,13 @@ const ads = (await getCollection("adsCollection")).sort((a, b) => {
               class="block w-fit transition-opacity select-none hover:opacity-75 active:opacity-50"
               aria-describedby={`mobile-label-${index}`}
             >
-              <Picture
+              <Image
                 src={ad.data.image.mobile}
                 alt={ad.data.alt[locale]}
                 width={300}
                 height={50}
+                format="avif"
                 quality={80}
-                formats={["avif"]}
                 layout="constrained"
                 fit="cover"
                 position="center"

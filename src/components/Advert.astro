@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getNextAdId } from "./Advert";
@@ -55,37 +55,37 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
     aria-label={translations[locale].ariaLabelViewAd}
     class="transition-opacity select-none hover:opacity-75 active:opacity-50"
   >
-    <Picture
+    <Image
       src={selectedAd.data.image.desktop}
       alt={selectedAd.data.alt[locale]}
       width={250}
       height={250}
+      format="avif"
       quality={80}
-      formats={["avif"]}
       layout="constrained"
       fit="cover"
       position="center"
       class="hidden md:block"
     />
-    <Picture
+    <Image
       src={selectedAd.data.image.tablet}
       alt={selectedAd.data.alt[locale]}
       width={468}
       height={60}
+      format="avif"
       quality={80}
-      formats={["avif"]}
       layout="constrained"
       fit="cover"
       position="center"
       class="xs:block hidden md:hidden"
     />
-    <Picture
+    <Image
       src={selectedAd.data.image.mobile}
       alt={selectedAd.data.alt[locale]}
       width={300}
       height={50}
+      format="avif"
       quality={80}
-      formats={["avif"]}
       layout="constrained"
       fit="cover"
       position="center"
