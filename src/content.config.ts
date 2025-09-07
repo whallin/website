@@ -183,29 +183,6 @@ const portfolioCollection = defineCollection({
       .strict(),
 });
 
-const servicesCollection = defineCollection({
-  loader: glob({ pattern: "*.json", base: "./src/content/services" }),
-  schema: z
-    .object({
-      title: z.object({
-        en: z.string().min(1, "English title is required"),
-        sv: z.string().min(1, "Swedish title is required"),
-      }),
-      description: z.object({
-        en: z.string().min(1, "English description is required"),
-        sv: z.string().min(1, "Swedish description is required"),
-      }),
-      icon: z.string().min(1, "Icon name is required"),
-      featured: z.boolean().default(false),
-      category: z.object({
-        en: z.string().min(1, "English category is required"),
-        sv: z.string().min(1, "Swedish category is required"),
-      }),
-      order: z.number().min(0, "Order must be a positive number").default(0),
-    })
-    .strict(),
-});
-
 export const collections = {
   adsCollection,
   authorCollection,
@@ -214,5 +191,4 @@ export const collections = {
   faqCollection,
   legalCollection,
   portfolioCollection,
-  servicesCollection,
 };
