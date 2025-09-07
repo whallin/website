@@ -8,7 +8,6 @@ import PixelarticonsScriptText from "../icons/PixelarticonsScriptText.astro";
 import SimpleIconsGithub from "../icons/SimpleIconsGithub.astro";
 import SimpleIconsInstagram from "../icons/SimpleIconsInstagram.astro";
 import SimpleIconsLinkedIn from "../icons/SimpleIconsLinkedIn.astro";
-import SimpleIconsThreads from "../icons/SimpleIconsThreads.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 import ThemeSwitcher from "../ThemeSwitcher.astro";
 
@@ -19,19 +18,14 @@ const socialLinks = [
     icon: SimpleIconsInstagram,
   },
   {
-    href: "https://www.threads.com/@w.hlln",
-    label: "Threads",
-    icon: SimpleIconsThreads,
+    href: "https://www.linkedin.com/in/whallin/",
+    label: "LinkedIn",
+    icon: SimpleIconsLinkedIn,
   },
   {
     href: "https://github.com/whallin",
     label: "GitHub",
     icon: SimpleIconsGithub,
-  },
-  {
-    href: "https://www.linkedin.com/in/whallin/",
-    label: "LinkedIn",
-    icon: SimpleIconsLinkedIn,
   },
 ];
 
@@ -186,12 +180,9 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
               </li>
             ))
           }
-        </ul>
-
-        <div class="flex items-center gap-4">
-          <LanguageSwitcher />
           <ThemeSwitcher />
-        </div>
+          <LanguageSwitcher />
+        </ul>
       </nav>
     </div>
   </footer>
