@@ -35,7 +35,7 @@
     "@sentry/astro": "^10.14.0",
     "@tailwindcss/typography": "^0.5.18",
     "@tailwindcss/vite": "^4.1.13",
-    "astro": "^5.13.10",
+    "astro": "^5.14.1",
     "resend": "^6.1.0",
     "tailwindcss": "^4.1.13"
   },
