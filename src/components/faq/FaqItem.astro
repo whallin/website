@@ -10,12 +10,10 @@ interface Props {
 const { question, answer, category } = Astro.props;
 ---
 
-<details
-  class="group divide-y divide-stone-300 transition-opacity active:opacity-50 dark:divide-stone-700"
->
+<details class="group divide-y divide-stone-300 dark:divide-stone-700">
   <summary
     aria-expanded="false"
-    class="flex cursor-pointer items-center justify-between gap-4"
+    class="flex cursor-pointer items-center justify-between gap-4 transition-opacity group-active:opacity-50"
   >
     <div class="py-4">
       <span

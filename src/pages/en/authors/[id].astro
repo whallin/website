@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import AuthorBlogPosts from "../../../components/authors/AuthorBlogPosts.astro";
 import AuthorLinks from "../../../components/authors/AuthorLinks.astro";
@@ -55,13 +55,13 @@ const schema = {
   <main slot="content" class="space-y-12">
     <article class="space-y-6">
       <header class="space-y-6">
-        <Picture
+        <Image
           src={author.data.avatar}
           alt={author.data.name}
           width={64}
           height={64}
+          format="avif"
           quality={80}
-          formats={["avif"]}
           layout="constrained"
           fit="cover"
           position="center"

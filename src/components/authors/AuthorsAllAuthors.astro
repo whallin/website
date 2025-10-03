@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -20,13 +20,13 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
               aria-labelledby={`author-${author.id}`}
               class="group block space-y-1 transition-opacity active:opacity-50"
             >
-              <Picture
+              <Image
                 src={author.data.avatar}
                 alt={author.data.name}
                 width={48}
                 height={48}
+                format="avif"
                 quality={80}
-                formats={["avif"]}
                 layout="constrained"
                 fit="cover"
                 position="center"

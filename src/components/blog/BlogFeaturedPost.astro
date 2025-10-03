@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import {
@@ -61,13 +61,13 @@ const translations = {
           )}
           aria-label={`${translations[locale].ariaLabel}: ${featuredPost.data.title}`}
         >
-          <Picture
+          <Image
             src={featuredPost.data.thumbnailImg}
             alt={featuredPost.data.thumbnailImgAlt}
-            width={1200}
-            height={620}
+            width={720}
+            height={360}
+            format="avif"
             quality={80}
-            formats={["avif"]}
             layout="constrained"
             fit="cover"
             position="center"

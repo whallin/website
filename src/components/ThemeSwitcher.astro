@@ -21,7 +21,7 @@ const locale = (Astro.currentLocale as "en" | "sv") ?? "en";
   type="button"
   aria-label={translations[locale].ariaLabelToggle}
   title={translations[locale].title}
-  class="h-8 w-8 cursor-pointer rounded-md border border-stone-300 p-1.5 text-stone-700 transition hover:opacity-75 active:scale-90 dark:border-stone-700 dark:text-stone-300"
+  class="h-4 w-4 cursor-pointer text-stone-700 transition-opacity hover:opacity-75 active:opacity-50 dark:text-stone-300"
 >
   <PixelarticonsMoonStar aria-hidden="true" class="h-full w-full dark:hidden" />
   <PixelarticonsSunAlt

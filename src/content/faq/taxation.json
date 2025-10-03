@@ -1,0 +1,28 @@
+{
+  "categoryLabel": {
+    "en": "Taxes",
+    "sv": "Skatter"
+  },
+  "items": [
+    {
+      "question": {
+        "en": "Are prices displayed with or without VAT?",
+        "sv": "Visas priserna med eller utan moms?"
+      },
+      "answer": {
+        "en": "All listed prices are in SEK and exclude VAT (MOMS). My company, NWG Digital AB (Org.nr 559386-0066, VAT SE559386006601), is registered for VAT and F-tax with <a href='https://www.skatteverket.se/' target='_blank' rel='noopener noreferrer' class='text-red-400 underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-red-400 hover:text-stone-100 active:opacity-50'>Skatteverket</a> (the Swedish Tax Agency).",
+        "sv": "Alla angivna priser är i SEK och exkluderar moms. Mitt företag, NWG Digital AB (Org.nr 559386-0066, VAT SE559386006601), är registrerat för moms och F-skatt hos <a href='https://www.skatteverket.se/' target='_blank' rel='noopener noreferrer' class='text-red-400 underline decoration-dashed decoration-from-font underline-offset-2 hover:bg-red-400 hover:text-stone-100 active:opacity-50'>Skatteverket</a>."
+      }
+    },
+    {
+      "question": {
+        "en": "How is VAT calculated for my situation?",
+        "sv": "Hur beräknas momsen för min situation?"
+      },
+      "answer": {
+        "en": "VAT is applied based on the billing address and operation type:<br>• <strong>Swedish Businesses & Consumers:</strong> 25% Swedish VAT applies.<br>• <strong>EU Businesses (outside Sweden):</strong> 0% VAT (reverse charge applies if you provide a valid VAT ID).<br>• <strong>Non-EU Clients:</strong> Typically 0% VAT.<br><br>The correct VAT amount will always be specified on the invoice. For reverse charge, EU-based business clients need to provide a valid VAT ID.",
+        "sv": "Moms tillämpas baserat på faktureringsadressen och typen av verksamhet:<br>• <strong>Svenska företag och privatpersoner:</strong> 25 % svensk moms tillämpas.<br>• <strong>EU-företag (utanför Sverige):</strong> 0 % moms (omvänd skattskyldighet gäller om du anger ett giltigt moms-ID).<br>• <strong>Kunder utanför EU:</strong> Vanligtvis 0 % moms.<br><br>Korrekt momsbelopp specificeras alltid på fakturan. För omvänd skattskyldighet behöver EU-baserade företagskunder ange ett giltigt moms-ID."
+      }
+    }
+  ]
+}

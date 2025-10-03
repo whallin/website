@@ -23,7 +23,10 @@ const allLegalDocuments = await getCollection("legalCollection", ({ id }) => {
 ---
 
 <section aria-label={translations[locale].ariaLabel}>
-  <ul role="list" class="flex flex-col gap-4 divide-y divide-stone-300">
+  <ul
+    role="list"
+    class="flex flex-col gap-4 divide-y divide-stone-300 dark:divide-stone-700"
+  >
     {
       allLegalDocuments.map((document) => (
         <li class="pb-4">

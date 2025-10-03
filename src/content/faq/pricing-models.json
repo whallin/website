@@ -1,0 +1,48 @@
+{
+  "categoryLabel": {
+    "en": "Pricing Models",
+    "sv": "Prismodeller"
+  },
+  "items": [
+    {
+      "question": {
+        "en": "What are your pricing structures?",
+        "sv": "Vad har du för prisstrukturer?"
+      },
+      "answer": {
+        "en": "I primarily use two pricing models:<br>• <strong>Project-Based:</strong> A fixed fee for projects with defined scopes and milestones.<br>• <strong>Retainer-Based:</strong> A recurring fee for ongoing services and support.<br><br>Payments are processed securely via Stripe or bank transfer. For enterprise clients, traditional invoicing with custom payment terms can be arranged.",
+        "sv": "Jag använder huvudsakligen två prismodeller:<br>• <strong>Projektbaserat:</strong> Ett fast pris för projekt med definierad omfattning och milstolpar.<br>• <strong>Retainerbaserat:</strong> En återkommande avgift för löpande tjänster och support.<br><br>Betalningar behandlas säkert via Stripe eller banköverföring. För företagskunder erbjuds traditionell fakturering med anpassade betalningsvillkor."
+      }
+    },
+    {
+      "question": {
+        "en": "What currency are your prices in?",
+        "sv": "Vilken valuta anges dina priser i?"
+      },
+      "answer": {
+        "en": "All prices are in Swedish Krona (SEK). If you pay via Stripe with a non-SEK card or account, the amount will be converted to the local currency by your bank or card issuer at their exchange rates.",
+        "sv": "Alla priser anges i svenska kronor (SEK). Om du betalar via Stripe med ett kort eller konto i annan valuta än SEK, kommer beloppet att konverteras till den lokala valutan av din bank eller kortutgivare enligt deras växelkurser."
+      }
+    },
+    {
+      "question": {
+        "en": "What are your payment terms?",
+        "sv": "Vilka är dina betalningsvillkor?"
+      },
+      "answer": {
+        "en": "For most projects, payment is due after 20 days upon receipt of the invoice. For larger projects or retainer agreements, specific payment schedules (e.g., 30-day net) can be outlined in the project proposal or service agreement.",
+        "sv": "För de flesta projekt förfaller fakturan 20 dagar efter mottagandet av den. För större projekt eller retaineravtal kan specifika betalningsplaner (t.ex. 30 dagar netto) att specificeras i projektförslaget eller serviceavtalet."
+      }
+    },
+    {
+      "question": {
+        "en": "Do you require deposits or upfront payments?",
+        "sv": "Kräver du depositioner eller förskottsbetalningar?"
+      },
+      "answer": {
+        "en": "For new clients or larger projects, an upfront deposit (typically 25-50% of the total project cost) may be required to secure booking and initiate work. This will be clearly communicated in the project proposal.",
+        "sv": "För nya kunder eller större projekt kan en förskottsbetalning (vanligtvis 25-50 % av den totala projektkostnaden) krävas för att säkra bokningen och påbörja arbetet. Detta kommer att tydligt kommuniceras i projektförslaget."
+      }
+    }
+  ]
+}
